@@ -67,13 +67,17 @@ export default function WelcomePage() {
         totalSteps={steps.length}
       />
       <>
-        <Link to="/" className="mx-auto my-[40px]">
-          <img src={LogoWL} alt="Proxymed logo" />
+        <Link to="/" className="mx-auto my-4 sm:my-[40px]">
+          <img
+            src={LogoWL}
+            alt="Proxymed logo"
+            className="max-w-[200px] sm:max-w-none"
+          />
         </Link>
         {step}
       </>
 
-      <div className="mx-auto my-6 flex gap-4">
+      <div className="mx-auto my-4 flex flex-col gap-2 px-4 sm:my-6 sm:flex-row sm:gap-4">
         <Button onClick={openRegisterOnboardingModal} type="button">
           Open register onboarding modal
         </Button>
@@ -83,25 +87,27 @@ export default function WelcomePage() {
       </div>
 
       {isFirstStep ? (
-        <>
-          <button
-            type="button"
-            onClick={nextStep}
-            className="mx-auto w-[624px] cursor-pointer rounded-xl bg-[#4272DD] py-4 text-center text-xl text-white"
-          >
-            Get started
-          </button>
-          <div className="mt-[46px]">
+        <div>
+          <div className="w-full px-4">
+            <button
+              type="button"
+              onClick={nextStep}
+              className="mx-auto w-full max-w-[624px] cursor-pointer rounded-xl bg-[#4272DD] px-4 py-4 text-center text-lg text-white sm:text-xl"
+            >
+              Get started
+            </button>
+          </div>
+          <div className="mt-4 sm:mt-[46px]">
             <Marquee images={marqueeImages} />
           </div>
-        </>
+        </div>
       ) : (
-        <div className="mx-auto flex w-full items-center justify-between px-6 py-4">
+        <div className="mx-auto flex w-full items-center justify-between px-4 py-4 sm:px-6">
           {!isFirstStep && (
             <button
               type="button"
               onClick={previousStep}
-              className="inline-block h-[57px] w-[144px] cursor-pointer rounded-2xl border-[1px] border-solid border-[#DCDCDE] bg-transparent px-6 py-3 text-center text-lg text-[#7F8493] shadow-[0px_1px_2px_0px_#0000001A]"
+              className="h-[48px] w-[120px] cursor-pointer rounded-2xl border-[1px] border-solid border-[#DCDCDE] bg-transparent px-4 py-2 text-center text-base text-[#7F8493] shadow-[0px_1px_2px_0px_#0000001A] sm:h-[57px] sm:w-[144px] sm:px-6 sm:py-3 sm:text-lg"
             >
               Back
             </button>
@@ -109,7 +115,7 @@ export default function WelcomePage() {
           <button
             type="button"
             onClick={nextStep}
-            className="inline-block h-[57px] w-[144px] cursor-pointer rounded-2xl bg-[#4272DD] px-6 py-3 text-center text-lg text-white shadow-[0px_1px_2px_0px_#0000001A]"
+            className="h-[48px] w-[120px] cursor-pointer rounded-2xl bg-[#4272DD] px-4 py-2 text-center text-base text-white shadow-[0px_1px_2px_0px_#0000001A] sm:h-[57px] sm:w-[144px] sm:px-6 sm:py-3 sm:text-lg"
           >
             {!isFirstStep && !isLastStep ? "Continue" : "Schedule Appointment"}
           </button>
