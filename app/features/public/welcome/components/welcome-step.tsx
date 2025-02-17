@@ -5,13 +5,13 @@ export function WelcomeStep() {
         <h2 className="mb-4 text-[28px] font-bold leading-tight text-[#1E293B] sm:text-[32px] md:text-[40px] md:leading-[44px]">
           Explore weight loss plans.
         </h2>
-        <p className="text-lg sm:text-xl text-[#516178]">
+        <p className="text-lg text-[#516178] sm:text-xl">
           Learn about treatment options based on your goals, habits, and health
           history.
         </p>
       </div>
       <div className="mb-4 w-full max-w-[624px]">
-        <p className="text-sm sm:text-base text-[#516178]">
+        <p className="text-justify text-sm text-[#516178] sm:text-base">
           By clicking Get started, you agree that Proxymed may use your
           responses to personalize your experience and other purposes as
           described in our Privacy Policy. Responses prior to account creation

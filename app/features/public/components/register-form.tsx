@@ -20,12 +20,21 @@ import {
 } from "~/components/ui/select";
 
 import { cities, genders, states } from "../data/countries";
-import SelectWithSearch from "./select-with-search";
+import { useAuthModal } from "../welcome/store/use-auth-modal";
 import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form";
+import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
+import SelectWithSearch from "./select-with-search";
 
 export function RegisterForm() {
   const id = useId();
   const { nextStep } = useOnboardingFormStore();
+  const { open: openAuthModal } = useAuthModal();
+  const { close } = useOnboardingModal();
+
+  function handleLogin() {
+    close();
+    openAuthModal();
+  }
 
   return (
     <DialogContent>
@@ -161,9 +170,13 @@ export function RegisterForm() {
 
       <p className="text-center text-xs text-muted-foreground">
         Already have an account?{" "}
-        <a className="underline hover:no-underline" href="#">
+        <button
+          type="button"
+          className="underline hover:no-underline"
+          onClick={handleLogin}
+        >
           Log in
-        </a>
+        </button>
       </p>
     </DialogContent>
   );

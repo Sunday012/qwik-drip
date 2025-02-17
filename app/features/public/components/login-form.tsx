@@ -13,10 +13,19 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 
 import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
+import { useAuthModal } from "../welcome/store/use-auth-modal";
+import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
 
 export function LoginForm() {
   const id = useId();
   const { nextStep } = useAuthFormStore();
+  const { open: openRegisterOnboardingModal } = useOnboardingModal();
+  const { close } = useAuthModal();
+
+  function handleRegister() {
+    close();
+    openRegisterOnboardingModal();
+  }
 
   return (
     <DialogContent>
@@ -65,9 +74,13 @@ export function LoginForm() {
 
       <p className="text-center text-xs text-muted-foreground">
         Don’t have an account?{" "}
-        <a className="underline hover:no-underline" href="#">
+        <button
+          type="button"
+          className="underline hover:no-underline"
+          onClick={handleRegister}
+        >
           Sign up
-        </a>
+        </button>
       </p>
     </DialogContent>
   );

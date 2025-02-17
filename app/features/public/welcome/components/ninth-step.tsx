@@ -1,4 +1,6 @@
-import FormWrapper from "./form-wrapper";
+import { FormWrapper } from "./form-wrapper";
+import { RadioOption } from "./radio-option";
+import { CustomInput } from "./custom-input";
 
 type UserData = {
   reason: string;
@@ -16,130 +18,58 @@ export function NinthStep({
 }: UserFormProps) {
   return (
     <FormWrapper title="What's your reason for losing weight?" subheading="">
-      <label
-        htmlFor="improve_health"
-        className={`flex w-full cursor-pointer flex-row-reverse items-start justify-between rounded-lg border-[1px] border-solid p-4 transition-colors duration-300 ease-in-out ${
-          reason === "improve_health"
-            ? "border-[#4272DD]"
-            : "border-[rgba(0,0,0,0.1)]"
-        }`}
-      >
-        <input
-          type="radio"
-          name="reason"
-          id="improve_health"
-          value="improve_health"
-          className="peer mr-2 mt-1 h-6 w-6 text-blue-500 focus:ring-blue-500"
-          autoFocus
-          onChange={(e) => updateFields({ reason: e.target.value })}
-          required
-          checked={reason === "improve_health"}
-        />
-        <p className="text-left text-lg text-[#7F8493] transition-colors duration-200 ease-in-out peer-checked:text-[#363840]">
-          Improve overall health
-        </p>
-      </label>
+      <RadioOption
+        id="improve_health"
+        label="Improve overall health"
+        value="improve_health"
+        checked={reason === "improve_health"}
+        onChange={(value) => updateFields({ reason: value })}
+        name="reason"
+        autoFocus
+      />
 
-      <label
-        htmlFor="boost_confidence"
-        className={`flex w-full cursor-pointer flex-row-reverse items-start justify-between rounded-lg border-[1px] border-solid p-4 transition-colors duration-300 ease-in-out ${
-          reason === "boost_confidence"
-            ? "border-[#4272DD]"
-            : "border-[rgba(0,0,0,0.1)]"
-        }`}
-      >
-        <input
-          type="radio"
-          name="reason"
-          id="boost_confidence"
-          value="boost_confidence"
-          className="peer mr-2 mt-1 h-6 w-6 text-blue-500 focus:ring-blue-500"
-          onChange={(e) => updateFields({ reason: e.target.value })}
-          required
-          checked={reason === "boost_confidence"}
-        />
-        <p className="text-left text-lg text-[#7F8493] transition-colors duration-200 ease-in-out peer-checked:text-[#363840]">
-          Boost self-confidence and appearance
-        </p>
-      </label>
+      <RadioOption
+        id="boost_confidence"
+        label="Boost self-confidence and appearance"
+        value="boost_confidence"
+        checked={reason === "boost_confidence"}
+        onChange={(value) => updateFields({ reason: value })}
+        name="reason"
+      />
 
-      <label
-        htmlFor="manage_medical_condition"
-        className={`flex w-full cursor-pointer flex-row-reverse items-start justify-between rounded-lg border-[1px] border-solid p-4 transition-colors duration-300 ease-in-out ${
-          reason === "manage_medical_condition"
-            ? "border-[#4272DD]"
-            : "border-[rgba(0,0,0,0.1)]"
-        }`}
-      >
-        <input
-          type="radio"
-          name="reason"
-          id="manage_medical_condition"
-          value="manage_medical_condition"
-          className="peer mr-2 mt-1 h-6 w-6 text-blue-500 focus:ring-blue-500"
-          onChange={(e) => updateFields({ reason: e.target.value })}
-          required
-          checked={reason === "manage_medical_condition"}
-        />
-        <p className="text-left text-lg text-[#7F8493] transition-colors duration-200 ease-in-out peer-checked:text-[#363840]">
-          Manage a medical condition
-        </p>
-      </label>
+      <RadioOption
+        id="manage_medical_condition"
+        label="Manage a medical condition"
+        value="manage_medical_condition"
+        checked={reason === "manage_medical_condition"}
+        onChange={(value) => updateFields({ reason: value })}
+        name="reason"
+      />
 
-      <label
-        htmlFor="prep_for_event"
-        className={`flex w-full cursor-pointer flex-row-reverse items-start justify-between rounded-lg border-[1px] border-solid p-4 transition-colors duration-300 ease-in-out ${
-          reason === "prep_for_event"
-            ? "border-[#4272DD]"
-            : "border-[rgba(0,0,0,0.1)]"
-        }`}
-      >
-        <input
-          type="radio"
-          name="reason"
-          id="prep_for_event"
-          value="prep_for_event"
-          className="peer mr-2 mt-1 h-6 w-6 text-blue-500 focus:ring-blue-500"
-          onChange={(e) => updateFields({ reason: e.target.value })}
-          required
-          checked={reason === "prep_for_event"}
-        />
-        <p className="text-left text-lg text-[#7F8493] transition-colors duration-200 ease-in-out peer-checked:text-[#363840]">
-          Prepare for a specific event (e.g., wedding, surgery)
-        </p>
-      </label>
+      <RadioOption
+        id="prep_for_event"
+        label="Prepare for a specific event (e.g., wedding, surgery)"
+        value="prep_for_event"
+        checked={reason === "prep_for_event"}
+        onChange={(value) => updateFields({ reason: value })}
+        name="reason"
+      />
 
-      <label
-        htmlFor="other"
-        className={`flex w-full cursor-pointer flex-row-reverse items-start justify-between rounded-lg border-[1px] border-solid p-4 transition-colors duration-300 ease-in-out ${
-          reason === "other" ? "border-[#4272DD]" : "border-[rgba(0,0,0,0.1)]"
-        }`}
-      >
-        <input
-          type="radio"
-          name="reason"
-          id="other"
-          value="other"
-          className="peer mr-2 mt-1 h-6 w-6 text-blue-500 focus:ring-blue-500"
-          onChange={(e) => updateFields({ reason: e.target.value })}
-          required
-          checked={reason === "other"}
-        />
-        <p className="text-left text-lg text-[#7F8493] transition-colors duration-200 ease-in-out peer-checked:text-[#363840]">
-          Other
-        </p>
-      </label>
+      <RadioOption
+        id="other"
+        label="Other"
+        value="other"
+        checked={reason === "other"}
+        onChange={(value) => updateFields({ reason: value })}
+        name="reason"
+      />
 
-      {/* Conditionally render input field if "Other" is selected */}
       {reason === "other" && (
-        <div className="w-full">
-          <textarea
-            placeholder="Please specify"
-            className="placeholder:font-paragraph w-full rounded-lg border-[1px] border-solid border-[rgba(0,0,0,0.1)] p-4 placeholder:text-lg placeholder:text-[#7F8493] focus:border-[#4272DD] focus:outline-none"
-            value={otherReason || ""}
-            onChange={(e) => updateFields({ otherReason: e.target.value })}
-          />
-        </div>
+        <CustomInput
+          value={otherReason || ""}
+          onChange={(value) => updateFields({ otherReason: value })}
+          placeholder="Please specify"
+        />
       )}
     </FormWrapper>
   );

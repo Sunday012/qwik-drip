@@ -7,7 +7,7 @@ type OnboardingModalStore = {
 };
 
 export const useOnboardingModal = create<OnboardingModalStore>((set) => ({
-  isOpen: true,
+  isOpen: false,
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
 }));

@@ -3,7 +3,7 @@ import { useId } from "react";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 
-import FormWrapper from "./form-wrapper";
+import { FormWrapper } from "./form-wrapper";
 
 type UserData = {
   goalWeight: string;
