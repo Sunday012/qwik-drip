@@ -16,7 +16,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as publicPublicImport } from './routes/(public)/_public'
 import { Route as publicPublicIndexImport } from './routes/(public)/_public/index'
 import { Route as publicPublicWelcomeImport } from './routes/(public)/_public/welcome'
-import { Route as publicPublicGetStartedImport } from './routes/(public)/_public/get-started'
 
 // Create Virtual Routes
 
@@ -46,12 +45,6 @@ const publicPublicWelcomeRoute = publicPublicWelcomeImport.update({
   getParentRoute: () => publicPublicRoute,
 } as any)
 
-const publicPublicGetStartedRoute = publicPublicGetStartedImport.update({
-  id: '/get-started',
-  path: '/get-started',
-  getParentRoute: () => publicPublicRoute,
-} as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -69,13 +62,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof publicPublicImport
       parentRoute: typeof publicRoute
-    }
-    '/(public)/_public/get-started': {
-      id: '/(public)/_public/get-started'
-      path: '/get-started'
-      fullPath: '/get-started'
-      preLoaderRoute: typeof publicPublicGetStartedImport
-      parentRoute: typeof publicPublicImport
     }
     '/(public)/_public/welcome': {
       id: '/(public)/_public/welcome'
@@ -97,13 +83,11 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface publicPublicRouteChildren {
-  publicPublicGetStartedRoute: typeof publicPublicGetStartedRoute
   publicPublicWelcomeRoute: typeof publicPublicWelcomeRoute
   publicPublicIndexRoute: typeof publicPublicIndexRoute
 }
 
 const publicPublicRouteChildren: publicPublicRouteChildren = {
-  publicPublicGetStartedRoute: publicPublicGetStartedRoute,
   publicPublicWelcomeRoute: publicPublicWelcomeRoute,
   publicPublicIndexRoute: publicPublicIndexRoute,
 }
@@ -125,12 +109,10 @@ const publicRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '/': typeof publicPublicIndexRoute
-  '/get-started': typeof publicPublicGetStartedRoute
   '/welcome': typeof publicPublicWelcomeRoute
 }
 
 export interface FileRoutesByTo {
-  '/get-started': typeof publicPublicGetStartedRoute
   '/welcome': typeof publicPublicWelcomeRoute
   '/': typeof publicPublicIndexRoute
 }
@@ -139,21 +121,19 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/(public)': typeof publicRouteWithChildren
   '/(public)/_public': typeof publicPublicRouteWithChildren
-  '/(public)/_public/get-started': typeof publicPublicGetStartedRoute
   '/(public)/_public/welcome': typeof publicPublicWelcomeRoute
   '/(public)/_public/': typeof publicPublicIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/get-started' | '/welcome'
+  fullPaths: '/' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/get-started' | '/welcome' | '/'
+  to: '/welcome' | '/'
   id:
     | '__root__'
     | '/(public)'
     | '/(public)/_public'
-    | '/(public)/_public/get-started'
     | '/(public)/_public/welcome'
     | '/(public)/_public/'
   fileRoutesById: FileRoutesById
@@ -190,14 +170,9 @@ export const routeTree = rootRoute
       "filePath": "(public)/_public.tsx",
       "parent": "/(public)",
       "children": [
-        "/(public)/_public/get-started",
         "/(public)/_public/welcome",
         "/(public)/_public/"
       ]
-    },
-    "/(public)/_public/get-started": {
-      "filePath": "(public)/_public/get-started.tsx",
-      "parent": "/(public)/_public"
     },
     "/(public)/_public/welcome": {
       "filePath": "(public)/_public/welcome.tsx",

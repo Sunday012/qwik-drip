@@ -48,18 +48,26 @@ export function Testimonials() {
 function TestimonialCard({ data }: { data: Testimonial }) {
   return (
     <div
-      className="mb-5 w-full overflow-clip rounded-2xl border-[1px] border-solid border-[#C9C9CC] p-6 md:w-[320px]"
+      className="mb-5 w-[280px] overflow-clip rounded-2xl border-[1px] border-solid border-[#C9C9CC] p-4 sm:w-full sm:p-6 md:w-[320px]"
       key={data.id}
     >
-      <div className="mb-6 flex justify-between">
+      <div className="mb-4 flex items-start justify-between sm:mb-6">
         <div>
-          <img src={stars} alt="rating" className="mb-2 inline-block" />
-          <p>By John Doe</p>
+          <img
+            src={stars}
+            alt="rating"
+            className="mb-2 inline-block h-4 sm:h-5"
+          />
+          <p className="text-sm sm:text-base">By John Doe</p>
         </div>
-        <p className="text-right text-sm text-[#7F7D83]">4 hours ago</p>
+        <p className="text-right text-xs text-[#7F7D83] sm:text-sm">
+          4 hours ago
+        </p>
       </div>
-      <h3 className="mb-4 text-xl">Excellent</h3>
-      <p className="text-sm text-[#7F8493]">{data.text}</p>
+      <h3 className="mb-3 text-lg font-medium sm:mb-4 sm:text-xl">Excellent</h3>
+      <p className="line-clamp-4 text-xs text-[#7F8493] sm:text-sm">
+        {data.text}
+      </p>
     </div>
   );
 }
