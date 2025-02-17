@@ -77,14 +77,14 @@ export default function WelcomePage() {
         {step}
       </>
 
-      <div className="mx-auto my-4 flex flex-col gap-2 px-4 sm:my-6 sm:flex-row sm:gap-4">
+      {/* <div className="mx-auto my-4 flex flex-col gap-2 px-4 sm:my-6 sm:flex-row sm:gap-4">
         <Button onClick={openRegisterOnboardingModal} type="button">
           Open register onboarding modal
         </Button>
         <Button onClick={openLoginOnboardingModal} type="button">
           Open login onboarding modal
         </Button>
-      </div>
+      </div> */}
 
       {isFirstStep ? (
         <div>
@@ -102,7 +102,7 @@ export default function WelcomePage() {
           </div>
         </div>
       ) : (
-        <div className="mx-auto flex w-full items-center justify-between px-4 py-4 sm:px-6">
+        <div className="fixed bottom-0 left-0 right-0 z-50 mx-auto mt-8 flex w-full max-w-[700px] items-center justify-between px-4 py-4 sm:px-6">
           {!isFirstStep && (
             <button
               type="button"
@@ -112,13 +112,23 @@ export default function WelcomePage() {
               Back
             </button>
           )}
-          <button
-            type="button"
-            onClick={nextStep}
-            className="h-[48px] w-[120px] cursor-pointer rounded-2xl bg-[#4272DD] px-4 py-2 text-center text-base text-white shadow-[0px_1px_2px_0px_#0000001A] sm:h-[57px] sm:w-[144px] sm:px-6 sm:py-3 sm:text-lg"
-          >
-            {!isFirstStep && !isLastStep ? "Continue" : "Schedule Appointment"}
-          </button>
+          {!isFirstStep && !isLastStep ? (
+            <button
+              type="button"
+              onClick={nextStep}
+              className="h-[48px] w-full cursor-pointer rounded-2xl bg-[#4272DD] px-4 py-2 text-center text-base text-white shadow-[0px_1px_2px_0px_#0000001A] sm:h-[57px] sm:w-[144px] sm:px-8 sm:py-4 sm:text-lg"
+            >
+              Continue
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={nextStep}
+              className="h-[48px] w-full cursor-pointer rounded-2xl bg-[#4272DD] px-4 py-2 text-center text-base text-white shadow-[0px_1px_2px_0px_#0000001A] sm:h-[57px] sm:w-[261px] sm:px-8 sm:py-4 sm:text-lg"
+            >
+              Schedule Appointment
+            </button>
+          )}
         </div>
       )}
 
