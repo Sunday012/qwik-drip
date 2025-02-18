@@ -28,19 +28,21 @@ export function LoginForm() {
   }
 
   return (
-    <DialogContent>
+    <DialogContent className="max-w-[700px] rounded-[24px] px-[64px] pb-[60px] pt-[40px]">
       <div className="flex flex-col items-center gap-2">
         <div
-          className="flex size-20 shrink-0 items-center justify-center"
+          className="flex shrink-0 items-center justify-center"
           aria-hidden="true"
         >
-          <Link to="/" className="mx-auto my-[40px]">
+          <Link to="/" className="mx-auto mb-[24px]">
             <img src={LogoWL} alt="Proxymed logo" />
           </Link>
         </div>
         <DialogHeader>
-          <DialogTitle className="sm:text-center">Welcome back</DialogTitle>
-          <DialogDescription className="sm:text-center">
+          <DialogTitle className="text-center text-[40px] font-bold">
+            Welcome back
+          </DialogTitle>
+          <DialogDescription className="text-center text-lg">
             <p>
               Enter the email you registered with and we will send you a <br />{" "}
               6 digit code to login with
@@ -67,16 +69,22 @@ export function LoginForm() {
           </div>
         </div>
 
-        <Button type="button" className="w-full" onClick={nextStep}>
+        <Button
+          type="button"
+          className="h-[57px]"
+          fullWidth
+          size="xl"
+          onClick={nextStep}
+        >
           Continue
         </Button>
       </form>
 
-      <p className="text-center text-xs text-muted-foreground">
+      <p className="text-center text-base text-[#7F8493]">
         Don’t have an account?{" "}
         <button
           type="button"
-          className="underline hover:no-underline"
+          className="font-bold text-[#4272DD] underline hover:text-[#4272DD] hover:no-underline"
           onClick={handleRegister}
         >
           Sign up

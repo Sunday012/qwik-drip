@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
+import { Button } from "~/components/ui/button";
 import { LoginOnboardingModal } from "~/features/public/components/login-onboarding-modal";
 import { RegisterOnboardingModal } from "~/features/public/components/register-onboarding-modal";
 
@@ -20,12 +21,28 @@ import { ThirdStep } from "../components/third-step";
 import { WelcomeProgress } from "../components/welcome-progress";
 import { WelcomeStep } from "../components/welcome-step";
 import { useAuthModal } from "../store/use-auth-modal";
+import { useOnboardingModal } from "../store/use-onboarding-modal";
 import { useWelcomeFormStore } from "../store/use-welcome-form-store";
 import { useMultiStepForm } from "../utils/use-multi-step-form";
 
 export default function WelcomePage() {
   const { data, updateFields } = useWelcomeFormStore();
-  const { open: openLoginOnboardingModal } = useAuthModal();
+  const { open: openLoginOnboardingModal, close: closeLoginOnboardingModal } =
+    useAuthModal();
+  const {
+    open: openRegisterOnboardingModal,
+    close: closeRegisterOnboardingModal,
+  } = useOnboardingModal();
+
+  function handleLogin() {
+    closeRegisterOnboardingModal();
+    openLoginOnboardingModal();
+  }
+
+  function handleRegister() {
+    closeLoginOnboardingModal();
+    openRegisterOnboardingModal();
+  }
 
   const {
     steps,
@@ -73,6 +90,11 @@ export default function WelcomePage() {
         </Link>
         {step}
       </>
+
+      <div className="flex flex-col items-center gap-2">
+        <Button onClick={handleLogin}>Login</Button>
+        <Button onClick={handleRegister}>Register</Button>
+      </div>
 
       {isFirstStep ? (
         <>

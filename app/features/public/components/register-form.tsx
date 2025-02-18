@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
 import { Button } from "~/components/ui/button";
+import { Checkbox } from "~/components/ui/checkbox";
 import {
   DialogContent,
   DialogDescription,
@@ -37,19 +38,21 @@ export function RegisterForm() {
   }
 
   return (
-    <DialogContent>
+    <DialogContent className="max-w-[700px] rounded-[24px] px-[64px] py-[20px]">
       <div className="flex flex-col items-center gap-2">
         <div
-          className="flex size-20 shrink-0 items-center justify-center"
+          className="flex shrink-0 items-center justify-center"
           aria-hidden="true"
         >
-          <Link to="/" className="mx-auto my-[40px]">
-            <img src={LogoWL} alt="Proxymed logo" />
+          <Link to="/" className="mx-auto mb-[24px]">
+            <img src={LogoWL} alt="Proxymed logo" className="" />
           </Link>
         </div>
         <DialogHeader>
-          <DialogTitle className="sm:text-center">Register Now</DialogTitle>
-          <DialogDescription className="sm:text-center">
+          <DialogTitle className="text-center text-[40px] font-bold">
+            Register Now
+          </DialogTitle>
+          <DialogDescription className="text-center text-lg">
             Let's create an account for you, before you continue.
           </DialogDescription>
         </DialogHeader>
@@ -58,7 +61,7 @@ export function RegisterForm() {
       <form className="space-y-5">
         <div className="space-y-4">
           <div className="flex gap-4">
-            <div className="group relative">
+            <div className="group relative w-full">
               <Label
                 htmlFor={`${id}-first-name`}
                 className="absolute top-1/4 block -translate-y-1/2 cursor-text px-1 text-sm text-muted-foreground/70 transition-all group-focus-within:pointer-events-none group-focus-within:top-3 group-focus-within:translate-y-0 group-focus-within:cursor-default group-focus-within:text-xs group-focus-within:font-medium group-focus-within:text-foreground has-[+input:not(:placeholder-shown)]:pointer-events-none has-[+input:not(:placeholder-shown)]:top-3 has-[+input:not(:placeholder-shown)]:translate-y-0 has-[+input:not(:placeholder-shown)]:cursor-default has-[+input:not(:placeholder-shown)]:text-xs has-[+input:not(:placeholder-shown)]:font-medium has-[+input:not(:placeholder-shown)]:text-foreground"
@@ -75,7 +78,7 @@ export function RegisterForm() {
               />
             </div>
 
-            <div className="group relative">
+            <div className="group relative w-full">
               <Label
                 htmlFor={`${id}-last-name`}
                 className="absolute top-1/4 block -translate-y-1/2 cursor-text px-1 text-sm text-muted-foreground/70 transition-all group-focus-within:pointer-events-none group-focus-within:top-3 group-focus-within:translate-y-0 group-focus-within:cursor-default group-focus-within:text-xs group-focus-within:font-medium group-focus-within:text-foreground has-[+input:not(:placeholder-shown)]:pointer-events-none has-[+input:not(:placeholder-shown)]:top-3 has-[+input:not(:placeholder-shown)]:translate-y-0 has-[+input:not(:placeholder-shown)]:cursor-default has-[+input:not(:placeholder-shown)]:text-xs has-[+input:not(:placeholder-shown)]:font-medium has-[+input:not(:placeholder-shown)]:text-foreground"
@@ -109,13 +112,13 @@ export function RegisterForm() {
           </div>
 
           <div className="flex gap-4">
-            <div className="w-full space-y-2">
+            <div className="w-full">
               <SelectWithSearch label="State" items={states} />
             </div>
 
-            <div className="w-full space-y-2">
+            <div className="w-full">
               <Select>
-                <SelectTrigger id={`${id}-city`}>
+                <SelectTrigger id={`${id}-city`} className="rounded-[16px]">
                   <SelectValue placeholder="City" />
                 </SelectTrigger>
                 <SelectContent>
@@ -129,17 +132,18 @@ export function RegisterForm() {
             </div>
           </div>
           <div className="flex gap-4">
-            <div className="w-full space-y-2">
+            <div className="w-full">
               <Input
                 id={`${id}-name`}
                 placeholder="Date of Birth"
                 type="text"
                 required
+                className="rounded-[16px]"
               />
             </div>
-            <div className="w-full space-y-2">
+            <div className="w-full">
               <Select>
-                <SelectTrigger id={`${id}-gender`}>
+                <SelectTrigger id={`${id}-gender`} className="rounded-[16px]">
                   <SelectValue placeholder="Gender" />
                 </SelectTrigger>
                 <SelectContent>
@@ -153,26 +157,44 @@ export function RegisterForm() {
             </div>
           </div>
         </div>
-        <p className="text-center text-xs text-muted-foreground">
-          I agree with Proxymed{" "}
-          <a className="underline hover:no-underline" href="#">
-            Terms of service
-          </a>{" "}
-          and{" "}
-          <a className="underline hover:no-underline" href="#">
-            Privacy policy
-          </a>
-        </p>
-        <Button type="button" className="w-full" onClick={nextStep}>
-          Sign up
+        <div className="flex items-center gap-2">
+          <Checkbox id={id} />
+          <Label htmlFor={id} className="text-center text-xs text-[#7F8493]">
+            I agree to the{" "}
+            <a
+              className="font-medium text-[#363840] underline hover:no-underline"
+              href="#"
+              target="_blank"
+            >
+              Terms of service
+            </a>{" "}
+            and{" "}
+            <a
+              className="font-medium text-[#363840] underline hover:no-underline"
+              href="#"
+              target="_blank"
+            >
+              Privacy policy
+            </a>
+          </Label>
+        </div>
+
+        <Button
+          type="button"
+          className="h-[57px]"
+          fullWidth
+          size="xl"
+          onClick={nextStep}
+        >
+          Register
         </Button>
       </form>
 
-      <p className="text-center text-xs text-muted-foreground">
+      <p className="text-center text-xs text-[#7F8493]">
         Already have an account?{" "}
         <button
           type="button"
-          className="underline hover:no-underline"
+          className="font-semibold text-[#4272DD] underline hover:no-underline"
           onClick={handleLogin}
         >
           Log in
