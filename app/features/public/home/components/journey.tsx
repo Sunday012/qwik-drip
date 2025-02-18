@@ -10,16 +10,16 @@ export function Journey() {
   return (
     <div className="pb-[5%] pt-[10%]">
       <div className="mx-auto w-full px-[5%] text-center lg:w-1/2 lg:px-[6%]">
-        <h2 className="mb-4 text-[32px] font-bold text-[#363840] sm:text-[56px] sm:leading-[60px]">
-          Your Path To Healthy Weight Loss
+        <h2 className="mb-4 text-[24px] font-bold leading-[25.92px] text-[#363840] sm:text-[40px] sm:leading-[43.2px] lg:text-[56px] lg:leading-[60.48px]">
+          Your Path To Healthy <br /> Weight Loss
         </h2>
-        <p className="text-sm text-[#7F8493] sm:text-lg">
+        <p className="text-sm leading-[19.6px] text-[#7F8493] sm:text-base sm:leading-[25.6px] lg:text-lg lg:leading-[28.8px]">
           Our board certified professionals are dedicated to providing the best
           medical care.
         </p>
       </div>
 
-      <div className="relative flex flex-wrap justify-between px-[5%] pt-[2.5%] lg:px-[6%]">
+      <div className="relative mt-[32px] flex flex-wrap justify-between px-[5%] pt-[2.5%] lg:px-[6%]">
         <div className="absolute left-[16.5%] z-0 hidden h-[4px] w-[67%] bg-gray-200 sm:top-[37%] sm:block xl:top-[37%]"></div>
         {programTimelineData.map((data) => (
           <div
@@ -52,7 +52,7 @@ export function Journey() {
         </div>
       </div>
 
-      <div className="relative mx-[5%] rounded-[56px] bg-[url(/images/success_img.webp)] bg-center bg-no-repeat sm:bg-cover lg:mx-[6%]">
+      <div className="relative mx-[5%] mt-[80px] rounded-[56px] bg-[url(/images/success_img.webp)] bg-center bg-no-repeat sm:bg-cover lg:mx-[6%]">
         <div className="absolute left-0 top-0 h-full w-full rounded-[56px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_39.79%,rgba(0,0,0,0.52)_98.58%)]"></div>
         <div className="flex flex-col flex-wrap items-end justify-between gap-5 p-[3.5%]">
           {timelineData.map((data) => (
@@ -115,13 +115,16 @@ export function Journey() {
             </div>
           </div>
         </div>
-        <Marquee images={marqueeImages} className="z-[1]" />
+        <Marquee
+          images={marqueeImages}
+          className="h-[120px] sm:h-[232px] lg:z-[1] lg:h-[400px]"
+        />
       </div>
 
       {/*   What's Included In The Program */}
       <div className="pt-[30%] sm:pt-[10%]">
         <div className="flex flex-col items-center gap-4 px-4 text-center sm:gap-6 sm:px-0">
-          <h2 className="text-[24px] font-bold leading-[1.2] text-[#363840] sm:text-[32px] sm:leading-[60px] md:text-[56px]">
+          <h2 className="text-[24px] font-bold leading-[1.2] text-[#363840] sm:text-[40px] sm:leading-[60px] md:text-[56px]">
             What's Included In The Program
           </h2>
           <p className="lg:w-3/7 w-full text-sm text-[#7F8493] sm:w-10/12 sm:text-lg">

@@ -58,7 +58,7 @@ export function FAQ() {
         </p>
       </div>
 
-      <Accordion type="single" collapsible className="w-full" defaultValue="3">
+      <Accordion type="single" collapsible className="w-full">
         {faqs.map((item) => (
           <AccordionItem
             value={item.id}

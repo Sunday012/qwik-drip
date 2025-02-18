@@ -25,7 +25,7 @@ export function RadioOption({
     <Label
       htmlFor={id}
       className={cn(
-        "flex w-full cursor-pointer flex-row-reverse items-center justify-between rounded-lg border-[1px] border-solid p-3 shadow-[0px_1px_3px_0px_#1D0D680D_0px_5px_5px_0px_#1D0D680A_0px_12px_7px_0px_#1D0D6808] transition-colors duration-300 ease-in-out",
+        "flex h-[80px] w-full cursor-pointer flex-row-reverse items-center justify-between gap-[24px] rounded-[16px] border-[1px] border-solid p-[24px] shadow-[0px_1px_3px_0px_#1D0D680D_0px_5px_5px_0px_#1D0D680A_0px_12px_7px_0px_#1D0D6808] transition-colors duration-300 ease-in-out",
         checked ? "border-[#4272DD]" : "border-[rgba(0,0,0,0.1)]",
       )}
     >

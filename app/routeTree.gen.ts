@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as publicPublicImport } from './routes/(public)/_public'
 import { Route as publicPublicIndexImport } from './routes/(public)/_public/index'
 import { Route as publicPublicWelcomeImport } from './routes/(public)/_public/welcome'
+import { Route as publicPublicCalendlyImport } from './routes/(public)/_public/calendly'
 
 // Create Virtual Routes
 
@@ -45,6 +46,12 @@ const publicPublicWelcomeRoute = publicPublicWelcomeImport.update({
   getParentRoute: () => publicPublicRoute,
 } as any)
 
+const publicPublicCalendlyRoute = publicPublicCalendlyImport.update({
+  id: '/calendly',
+  path: '/calendly',
+  getParentRoute: () => publicPublicRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -62,6 +69,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof publicPublicImport
       parentRoute: typeof publicRoute
+    }
+    '/(public)/_public/calendly': {
+      id: '/(public)/_public/calendly'
+      path: '/calendly'
+      fullPath: '/calendly'
+      preLoaderRoute: typeof publicPublicCalendlyImport
+      parentRoute: typeof publicPublicImport
     }
     '/(public)/_public/welcome': {
       id: '/(public)/_public/welcome'
@@ -83,11 +97,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface publicPublicRouteChildren {
+  publicPublicCalendlyRoute: typeof publicPublicCalendlyRoute
   publicPublicWelcomeRoute: typeof publicPublicWelcomeRoute
   publicPublicIndexRoute: typeof publicPublicIndexRoute
 }
 
 const publicPublicRouteChildren: publicPublicRouteChildren = {
+  publicPublicCalendlyRoute: publicPublicCalendlyRoute,
   publicPublicWelcomeRoute: publicPublicWelcomeRoute,
   publicPublicIndexRoute: publicPublicIndexRoute,
 }
@@ -109,10 +125,12 @@ const publicRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '/': typeof publicPublicIndexRoute
+  '/calendly': typeof publicPublicCalendlyRoute
   '/welcome': typeof publicPublicWelcomeRoute
 }
 
 export interface FileRoutesByTo {
+  '/calendly': typeof publicPublicCalendlyRoute
   '/welcome': typeof publicPublicWelcomeRoute
   '/': typeof publicPublicIndexRoute
 }
@@ -121,19 +139,21 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/(public)': typeof publicRouteWithChildren
   '/(public)/_public': typeof publicPublicRouteWithChildren
+  '/(public)/_public/calendly': typeof publicPublicCalendlyRoute
   '/(public)/_public/welcome': typeof publicPublicWelcomeRoute
   '/(public)/_public/': typeof publicPublicIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/welcome'
+  fullPaths: '/' | '/calendly' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/welcome' | '/'
+  to: '/calendly' | '/welcome' | '/'
   id:
     | '__root__'
     | '/(public)'
     | '/(public)/_public'
+    | '/(public)/_public/calendly'
     | '/(public)/_public/welcome'
     | '/(public)/_public/'
   fileRoutesById: FileRoutesById
@@ -170,9 +190,14 @@ export const routeTree = rootRoute
       "filePath": "(public)/_public.tsx",
       "parent": "/(public)",
       "children": [
+        "/(public)/_public/calendly",
         "/(public)/_public/welcome",
         "/(public)/_public/"
       ]
+    },
+    "/(public)/_public/calendly": {
+      "filePath": "(public)/_public/calendly.tsx",
+      "parent": "/(public)/_public"
     },
     "/(public)/_public/welcome": {
       "filePath": "(public)/_public/welcome.tsx",
