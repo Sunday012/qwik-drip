@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
 import {
@@ -9,17 +8,16 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 
-import { useVerifyOTPMutation } from "../api/mutations";
 import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form-store";
-import OTPForm from "./otp-form";
+import { OTPForm } from "./otp-form";
 
 export function RegisterVerifyOTP() {
-  // const { nextStep } = useOnboardingFormStore();
+  const { setEmail, email } = useOnboardingFormStore();
+  const navigate = useNavigate();
 
-  const [otp, setOtp] = useState("");
-
-  function handleNextStep() {
-    // nextStep?.();
+  function nextStep() {
+    setEmail("");
+    navigate({ to: "/appointment" });
   }
 
   return (
@@ -40,13 +38,13 @@ export function RegisterVerifyOTP() {
           <DialogDescription className="text-center text-[18px] font-normal">
             <p>
               We sent a 6 digit OTP to{" "}
-              <span className="font-medium">Maurice48@gmail.com</span>
+              <span className="font-medium">{email}</span>
             </p>
             <p>Please input it below to proceed.</p>
           </DialogDescription>
         </DialogHeader>
       </div>
-      <OTPForm nextStep={handleNextStep} />
+      <OTPForm nextStep={nextStep} email={email} />
     </DialogContent>
   );
 }

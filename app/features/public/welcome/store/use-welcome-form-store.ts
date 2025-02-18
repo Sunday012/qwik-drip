@@ -56,7 +56,7 @@ export const useWelcomeFormStore = create<WelcomeFormStoreType>()(
       clearFields: () => set({ ...initialState }),
     }),
     {
-      name: "welcome-form",
+      name: "welcome-form-storage",
       storage: createJSONStorage(() => localPersistStorage),
     },
   ),

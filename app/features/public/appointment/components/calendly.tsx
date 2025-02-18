@@ -1,11 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 
-export const Route = createFileRoute("/(public)/_public/calendly")({
-  component: RouteComponent,
-});
+const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL;
 
-function RouteComponent() {
+export function Calendly() {
   useCalendlyEventListener({
     onProfilePageViewed: () => console.log("onProfilePageViewed"),
     onDateAndTimeSelected: () => console.log("onDateAndTimeSelected"),
@@ -17,16 +14,16 @@ function RouteComponent() {
   return (
     <InlineWidget
       styles={{
-        height: "1000px",
+        height: "768px",
       }}
       pageSettings={{
         backgroundColor: "ffffff",
         hideEventTypeDetails: false,
         hideLandingPageDetails: false,
-        primaryColor: "00a2ff",
+        primaryColor: "4272DD",
         textColor: "4d5055",
       }}
-      url="https://calendly.com/dr-u-e-ekong/weight-loss-consultation-1"
+      url={CALENDLY_URL}
     />
   );
 }

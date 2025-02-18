@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
 import {
@@ -9,10 +9,16 @@ import {
 } from "~/components/ui/dialog";
 
 import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
-import OTPForm from "./otp-form";
+import {OTPForm} from "./otp-form";
 
-export function LoginVerifyOTP({ nextStep }: { nextStep?: () => void }) {
-  // const { nextStep } = useAuthFormStore();
+export function LoginVerifyOTP() {
+  const { setEmail, email } = useAuthFormStore();
+  const navigate = useNavigate();
+
+  function nextStep() {
+    setEmail("");
+    navigate({ to: "/appointment" });
+  }
 
   return (
     <DialogContent className="max-h-[528px] max-w-[687px] rounded-[24px]">
@@ -32,13 +38,13 @@ export function LoginVerifyOTP({ nextStep }: { nextStep?: () => void }) {
           <DialogDescription className="text-center text-[18px] font-normal">
             <p>
               We sent a 6 digit OTP to{" "}
-              <span className="font-medium">Maurice48@gmail.com</span>
+              <span className="font-medium">{email}</span>
             </p>
             <p>Please input it below to proceed.</p>
           </DialogDescription>
         </DialogHeader>
       </div>
-      <OTPForm nextStep={nextStep} />
+      <OTPForm nextStep={nextStep} email={email} />
     </DialogContent>
   );
 }

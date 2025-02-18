@@ -15,7 +15,7 @@ export function FormWrapper({ title, subheading, children }: FormWrapperProps) {
         </h2>
         {subheading && <p className="text-lg text-[#7F8493]">{subheading}</p>}
       </div>
-      <div className="mb-10 flex w-full flex-col items-center justify-center gap-6 text-center">
+      <div className="mb-10 flex w-full flex-col items-center justify-center gap-6 overflow-hidden overflow-y-auto text-center">
         {children}
       </div>
     </section>

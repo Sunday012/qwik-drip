@@ -20,7 +20,9 @@ import { TenthStep } from "../components/tenth-step";
 import { ThirdStep } from "../components/third-step";
 import { WelcomeProgress } from "../components/welcome-progress";
 import { WelcomeStep } from "../components/welcome-step";
+import useAuthFormStore from "../store/use-auth-form-store";
 import { useAuthModal } from "../store/use-auth-modal";
+import useOnboardingFormStore from "../store/use-onboarding-form-store";
 import { useOnboardingModal } from "../store/use-onboarding-modal";
 import { useWelcomeFormStore } from "../store/use-welcome-form-store";
 import { useMultiStepForm } from "../utils/use-multi-step-form";
@@ -33,14 +35,20 @@ export default function WelcomePage() {
     open: openRegisterOnboardingModal,
     close: closeRegisterOnboardingModal,
   } = useOnboardingModal();
+  const { setStep: setAuthStep } = useAuthFormStore();
+  const { setStep: setOnboardingStep } = useOnboardingFormStore();
 
   function handleLogin() {
     console.log("WelcomePage", { data });
+    setOnboardingStep(1);
+    setAuthStep(1);
     closeRegisterOnboardingModal();
     openLoginOnboardingModal();
   }
 
   function handleRegister() {
+    setOnboardingStep(1);
+    setAuthStep(1);
     closeLoginOnboardingModal();
     openRegisterOnboardingModal();
   }
@@ -93,11 +101,6 @@ export default function WelcomePage() {
           {step}
         </>
 
-        {/* <div className="flex flex-col items-center gap-2">
-        <Button onClick={handleLogin}>Login</Button>
-        <Button onClick={handleRegister}>Register</Button>
-      </div> */}
-
         {isFirstStep ? (
           <>
             <div className="mx-auto w-full max-w-[624px] px-4">
@@ -114,8 +117,8 @@ export default function WelcomePage() {
             </div>
           </>
         ) : (
-          <div className="absolute bottom-0 left-0 right-0">
-            <div className="mx-auto mt-8 flex w-full max-w-[700px] items-center justify-between px-4 py-4 sm:px-6">
+          <div className="absolute bottom-0 left-0 right-0 z-10 border border-t border-t-[#0000001A] bg-white shadow-[0px_-2px_10px_0px_#00000014]">
+            <div className="mx-auto flex w-full max-w-[700px] items-center justify-between px-4 py-3 sm:px-6">
               {!isFirstStep && (
                 <button
                   type="button"

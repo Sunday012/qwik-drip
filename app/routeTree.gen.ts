@@ -16,7 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as publicPublicImport } from './routes/(public)/_public'
 import { Route as publicPublicIndexImport } from './routes/(public)/_public/index'
 import { Route as publicPublicWelcomeImport } from './routes/(public)/_public/welcome'
-import { Route as publicPublicCalendlyImport } from './routes/(public)/_public/calendly'
+import { Route as publicPublicAppointmentImport } from './routes/(public)/_public/appointment'
 
 // Create Virtual Routes
 
@@ -46,9 +46,9 @@ const publicPublicWelcomeRoute = publicPublicWelcomeImport.update({
   getParentRoute: () => publicPublicRoute,
 } as any)
 
-const publicPublicCalendlyRoute = publicPublicCalendlyImport.update({
-  id: '/calendly',
-  path: '/calendly',
+const publicPublicAppointmentRoute = publicPublicAppointmentImport.update({
+  id: '/appointment',
+  path: '/appointment',
   getParentRoute: () => publicPublicRoute,
 } as any)
 
@@ -70,11 +70,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicPublicImport
       parentRoute: typeof publicRoute
     }
-    '/(public)/_public/calendly': {
-      id: '/(public)/_public/calendly'
-      path: '/calendly'
-      fullPath: '/calendly'
-      preLoaderRoute: typeof publicPublicCalendlyImport
+    '/(public)/_public/appointment': {
+      id: '/(public)/_public/appointment'
+      path: '/appointment'
+      fullPath: '/appointment'
+      preLoaderRoute: typeof publicPublicAppointmentImport
       parentRoute: typeof publicPublicImport
     }
     '/(public)/_public/welcome': {
@@ -97,13 +97,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface publicPublicRouteChildren {
-  publicPublicCalendlyRoute: typeof publicPublicCalendlyRoute
+  publicPublicAppointmentRoute: typeof publicPublicAppointmentRoute
   publicPublicWelcomeRoute: typeof publicPublicWelcomeRoute
   publicPublicIndexRoute: typeof publicPublicIndexRoute
 }
 
 const publicPublicRouteChildren: publicPublicRouteChildren = {
-  publicPublicCalendlyRoute: publicPublicCalendlyRoute,
+  publicPublicAppointmentRoute: publicPublicAppointmentRoute,
   publicPublicWelcomeRoute: publicPublicWelcomeRoute,
   publicPublicIndexRoute: publicPublicIndexRoute,
 }
@@ -125,12 +125,12 @@ const publicRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '/': typeof publicPublicIndexRoute
-  '/calendly': typeof publicPublicCalendlyRoute
+  '/appointment': typeof publicPublicAppointmentRoute
   '/welcome': typeof publicPublicWelcomeRoute
 }
 
 export interface FileRoutesByTo {
-  '/calendly': typeof publicPublicCalendlyRoute
+  '/appointment': typeof publicPublicAppointmentRoute
   '/welcome': typeof publicPublicWelcomeRoute
   '/': typeof publicPublicIndexRoute
 }
@@ -139,21 +139,21 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/(public)': typeof publicRouteWithChildren
   '/(public)/_public': typeof publicPublicRouteWithChildren
-  '/(public)/_public/calendly': typeof publicPublicCalendlyRoute
+  '/(public)/_public/appointment': typeof publicPublicAppointmentRoute
   '/(public)/_public/welcome': typeof publicPublicWelcomeRoute
   '/(public)/_public/': typeof publicPublicIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calendly' | '/welcome'
+  fullPaths: '/' | '/appointment' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/calendly' | '/welcome' | '/'
+  to: '/appointment' | '/welcome' | '/'
   id:
     | '__root__'
     | '/(public)'
     | '/(public)/_public'
-    | '/(public)/_public/calendly'
+    | '/(public)/_public/appointment'
     | '/(public)/_public/welcome'
     | '/(public)/_public/'
   fileRoutesById: FileRoutesById
@@ -190,13 +190,13 @@ export const routeTree = rootRoute
       "filePath": "(public)/_public.tsx",
       "parent": "/(public)",
       "children": [
-        "/(public)/_public/calendly",
+        "/(public)/_public/appointment",
         "/(public)/_public/welcome",
         "/(public)/_public/"
       ]
     },
-    "/(public)/_public/calendly": {
-      "filePath": "(public)/_public/calendly.tsx",
+    "/(public)/_public/appointment": {
+      "filePath": "(public)/_public/appointment.tsx",
       "parent": "/(public)/_public"
     },
     "/(public)/_public/welcome": {

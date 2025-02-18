@@ -11,7 +11,7 @@ type CreatePatientVariables = {
     email: string;
     first_name: string;
     last_name: string;
-    phone: string;
+    phone?: string;
     date_of_birth: string;
     gender: string;
     city: string;
@@ -30,7 +30,7 @@ export const useCreatePatientMutation = createMutation<
 >({
   mutationFn: async (variables) => {
     return httpClient
-      .post("/USER-send-registration-otp", variables)
+      .post("/create-patient", variables)
       .then((res) => res.data as CreatePatientResponse);
   },
 });
@@ -46,7 +46,7 @@ export const useSendRegisterOTPMutation = createMutation<
 >({
   mutationFn: async (variables) => {
     return httpClient
-      .post("/USER-send-registration-otp", variables)
+      .post("/send-registration-otp", variables)
       .then((res) => res.data as Response);
   },
 });
@@ -58,7 +58,7 @@ export const useSendLoginOTPMutation = createMutation<
 >({
   mutationFn: async (variables) => {
     return httpClient
-      .post("/USER-send-login-otp", variables)
+      .post("/send-login-otp", variables)
       .then((res) => res.data as Response);
   },
 });
@@ -75,7 +75,7 @@ export const useVerifyOTPMutation = createMutation<
 >({
   mutationFn: async (variables) => {
     return httpClient
-      .post("/USER-verify-otp", variables)
+      .post("/verify-otp", variables)
       .then((res) => res.data as Response);
   },
 });

@@ -17,13 +17,12 @@ import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
 import { useAuthModal } from "../welcome/store/use-auth-modal";
 import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
 
-export function LoginForm({ nextStep }: { nextStep?: () => void }) {
+export function LoginForm() {
   const id = useId();
-  // const { nextStep } = useAuthFormStore();
+  const { setStep, email, setEmail } = useAuthFormStore();
   const { open: openRegisterOnboardingModal } = useOnboardingModal();
   const { close } = useAuthModal();
   const { mutate: sendLoginOTP, isPending } = useSendLoginOTPMutation();
-  const [email, setEmail] = useState("");
 
   function handleRegister() {
     close();
@@ -32,11 +31,11 @@ export function LoginForm({ nextStep }: { nextStep?: () => void }) {
 
   function handleLogin() {
     sendLoginOTP(
-      { email: email ?? "amaitariphilip@gmail.com" },
+      { email: email },
       {
         onSuccess: () => {
           console.log("Success");
-          nextStep?.();
+          setStep(2);
         },
         onError: () => {
           console.log("Error");
@@ -94,7 +93,7 @@ export function LoginForm({ nextStep }: { nextStep?: () => void }) {
           fullWidth
           size="xl"
           onClick={handleLogin}
-          disabled={isPending}
+          disabled={isPending || !email}
         >
           Continue
         </Button>

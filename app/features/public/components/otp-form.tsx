@@ -10,7 +10,13 @@ import {
   useVerifyOTPMutation,
 } from "../api/mutations";
 
-export default function OTPForm({ nextStep }: { nextStep?: () => void }) {
+export function OTPForm({
+  nextStep,
+  email,
+}: {
+  nextStep?: () => void;
+  email: string;
+}) {
   const [value, setValue] = useState("");
   const [hasGuessed, setHasGuessed] = useState<undefined | boolean>(undefined);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,14 +46,13 @@ export default function OTPForm({ nextStep }: { nextStep?: () => void }) {
     setResendCountdown(30);
     sendOTPMutation(
       {
-        email: "",
+        email,
       },
       {
         onSuccess() {
           toast({
             description: "Email verification sent",
           });
-
           const countdownInterval = setInterval(() => {
             setResendCountdown((prev) => {
               if (prev <= 1) {
@@ -68,16 +73,22 @@ export default function OTPForm({ nextStep }: { nextStep?: () => void }) {
     );
   };
 
-  async function onSubmit(e?: React.FormEvent<HTMLFormElement>) {
-    e?.preventDefault?.();
-
-    inputRef.current?.select();
-    await new Promise((r) => setTimeout(r, 1_00));
-
-    setValue("");
-    setTimeout(() => {
-      inputRef.current?.blur();
-    }, 20);
+  function handleSubmit() {
+    verifyOTPMutation(
+      {
+        email: email,
+        otp_code: value,
+      },
+      {
+        onSuccess() {
+          setValue("");
+          nextStep?.();
+        },
+        onError() {
+          setHasGuessed(false);
+        },
+      },
+    );
   }
 
   return (
@@ -98,11 +109,16 @@ export default function OTPForm({ nextStep }: { nextStep?: () => void }) {
               ))}
             </div>
           )}
-          onComplete={onSubmit}
+          // onComplete={handleSubmit}
         />
       </div>
       <div className="mx-auto mb-[24px] mt-[40px] flex w-[559px] items-center justify-center">
-        <Button size="xl" fullWidth>
+        <Button
+          size="xl"
+          fullWidth
+          disabled={verifyOTPMutationPending || !value}
+          onClick={handleSubmit}
+        >
           Confirm
         </Button>
       </div>

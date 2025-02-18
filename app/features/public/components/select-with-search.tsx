@@ -22,16 +22,20 @@ import { cn } from "~/lib/utils";
 export default function SelectWithSearch({
   label,
   items,
+  selectedValue,
+  onSelect,
 }: {
   label: string;
   items: {
     value: string;
     label: string;
   }[];
+  selectedValue: string;
+  onSelect: (value: string) => void;
 }) {
   const id = useId();
   const [open, setOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
+  
 
   return (
     <div className="space-y-2">
@@ -44,9 +48,9 @@ export default function SelectWithSearch({
             aria-expanded={open}
             className="w-full justify-between bg-background px-3 font-normal outline-offset-0 hover:bg-background focus-visible:border-ring focus-visible:outline-[3px] focus-visible:outline-ring/20"
           >
-            <span className={cn("truncate", !value && "text-muted-foreground")}>
-              {value
-                ? items.find((item) => item.value === value)?.label
+            <span className={cn("truncate", !selectedValue && "text-muted-foreground")}>
+              {selectedValue
+                ? items.find((item) => item.value === selectedValue)?.label
                 : `Select ${label}`}
             </span>
             <ChevronDown
@@ -71,12 +75,12 @@ export default function SelectWithSearch({
                     key={item.value}
                     value={item.value}
                     onSelect={(currentValue) => {
-                      setValue(currentValue === value ? "" : currentValue);
+                      onSelect(currentValue === selectedValue ? "" : currentValue);
                       setOpen(false);
                     }}
                   >
                     {item.label}
-                    {value === item.value && (
+                    {selectedValue === item.value && (
                       <Check size={16} strokeWidth={2} className="ml-auto" />
                     )}
                   </CommandItem>

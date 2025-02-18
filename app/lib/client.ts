@@ -5,8 +5,10 @@ export interface ErrorResponse {
   message: string;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const axiosInstance = axios.create({
-  baseURL: "https://api.prxy.health",
+  baseURL: API_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
