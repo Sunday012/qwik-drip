@@ -5,16 +5,19 @@ import { Button } from "~/components/ui/button";
 import { toast } from "~/hooks/use-toast";
 import { cn } from "~/lib/utils";
 
-import { useSendOTPMutation, useVerifyOTPMutation } from "../api/mutations";
+import {
+  useSendLoginOTPMutation,
+  useVerifyOTPMutation,
+} from "../api/mutations";
 
-export default function OTPForm({ nextStep }: { nextStep: () => void }) {
+export default function OTPForm({ nextStep }: { nextStep?: () => void }) {
   const [value, setValue] = useState("");
   const [hasGuessed, setHasGuessed] = useState<undefined | boolean>(undefined);
   const inputRef = useRef<HTMLInputElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [resendCountdown, setResendCountdown] = useState(30);
 
-  const { mutate: sendOTPMutation, isPending } = useSendOTPMutation();
+  const { mutate: sendOTPMutation, isPending } = useSendLoginOTPMutation();
   const { mutate: verifyOTPMutation, isPending: verifyOTPMutationPending } =
     useVerifyOTPMutation();
 

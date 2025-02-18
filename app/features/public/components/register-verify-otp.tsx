@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
@@ -8,11 +9,18 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 
-import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form";
+import { useVerifyOTPMutation } from "../api/mutations";
+import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form-store";
 import OTPForm from "./otp-form";
 
 export function RegisterVerifyOTP() {
-  const { nextStep } = useOnboardingFormStore();
+  // const { nextStep } = useOnboardingFormStore();
+
+  const [otp, setOtp] = useState("");
+
+  function handleNextStep() {
+    // nextStep?.();
+  }
 
   return (
     <DialogContent className="max-h-[528px] max-w-[687px] rounded-[24px]">
@@ -38,7 +46,7 @@ export function RegisterVerifyOTP() {
           </DialogDescription>
         </DialogHeader>
       </div>
-      <OTPForm nextStep={nextStep} />
+      <OTPForm nextStep={handleNextStep} />
     </DialogContent>
   );
 }

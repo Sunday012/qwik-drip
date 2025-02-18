@@ -36,9 +36,14 @@ export function useOnboardingForm(steps: React.ReactElement[]) {
   const { currentStepIndex, nextStep, previousStep, goToStep, setSteps } =
     store;
 
+  const memoizedSteps = React.useMemo(() => steps, [steps]);
+
   React.useEffect(() => {
-    setSteps(steps);
-  }, [steps, setSteps]);
+    // Only update store if steps have changed
+    if (memoizedSteps !== store.steps) {
+      setSteps(memoizedSteps);
+    }
+  }, [memoizedSteps, store.steps, setSteps]);
 
   return {
     currentStepIndex,

@@ -8,11 +8,18 @@ import { LoginVerifyOTP } from "./login-verify-otp";
 export function LoginOnboardingModal() {
   const { isOpen, close } = useAuthModal();
 
-  const { step } = useMultiStepForm([<LoginForm />, <LoginVerifyOTP />]);
+  const { currentStepIndex, nextStep } = useMultiStepForm([
+    <LoginForm />,
+    <LoginVerifyOTP />,
+  ]);
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      {step}
+      {currentStepIndex === 0 ? (
+        <LoginForm nextStep={nextStep} />
+      ) : (
+        <LoginVerifyOTP nextStep={nextStep} />
+      )}
     </Dialog>
   );
 }

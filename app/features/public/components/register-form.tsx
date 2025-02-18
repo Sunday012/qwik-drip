@@ -20,9 +20,10 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 
+import { useCreatePatientMutation } from "../api/mutations";
 import { cities, genders, states } from "../data/countries";
 import { useAuthModal } from "../welcome/store/use-auth-modal";
-import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form";
+import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form-store";
 import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
 import SelectWithSearch from "./select-with-search";
 
@@ -35,6 +36,34 @@ export function RegisterForm() {
   function handleLogin() {
     close();
     openAuthModal();
+  }
+
+  const { mutate: createPatient, isPending } = useCreatePatientMutation();
+
+  function handleRegister() {
+    createPatient(
+      {
+        user_details: {
+          email: "amaitariphilip@gmail.com",
+          first_name: "Amaitari",
+          last_name: "Philip",
+          phone: "09123456789",
+          date_of_birth: "2025-01-01",
+          gender: "male",
+          city: "Lagos",
+          state: "Lagos",
+        },
+      },
+      {
+        onSuccess: () => {
+          console.log("Success");
+          nextStep?.();
+        },
+        onError: () => {
+          console.log("Error");
+        },
+      },
+    );
   }
 
   return (
@@ -184,7 +213,8 @@ export function RegisterForm() {
           className="h-[57px]"
           fullWidth
           size="xl"
-          onClick={nextStep}
+          onClick={handleRegister}
+          disabled={isPending}
         >
           Register
         </Button>

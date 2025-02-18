@@ -6,7 +6,7 @@ export interface ErrorResponse {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://api.prxy.health",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

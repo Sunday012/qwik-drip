@@ -15,7 +15,7 @@ import {
 import { toast } from "~/hooks/use-toast";
 import { cn } from "~/lib/utils";
 
-import { useSendOTPMutation, useVerifyOTPMutation } from "../api/mutations";
+import { useSendLoginOTPMutation, useVerifyOTPMutation } from "../api/mutations";
 
 const CORRECT_CODE = "6548";
 
@@ -26,7 +26,7 @@ export default function VerifyAccount() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [resendCountdown, setResendCountdown] = useState(30);
 
-  const { mutate: sendOTPMutation, isPending } = useSendOTPMutation();
+  const { mutate: sendOTPMutation, isPending } = useSendLoginOTPMutation();
   const { mutate: verifyOTPMutation, isPending: verifyOTPMutationPending } =
     useVerifyOTPMutation();
 

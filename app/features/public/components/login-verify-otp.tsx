@@ -11,8 +11,8 @@ import {
 import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
 import OTPForm from "./otp-form";
 
-export function LoginVerifyOTP() {
-  const { nextStep } = useAuthFormStore();
+export function LoginVerifyOTP({ nextStep }: { nextStep?: () => void }) {
+  // const { nextStep } = useAuthFormStore();
 
   return (
     <DialogContent className="max-h-[528px] max-w-[687px] rounded-[24px]">

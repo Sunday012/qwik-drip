@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
@@ -12,21 +12,38 @@ import {
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 
+import { useSendLoginOTPMutation } from "../api/mutations";
 import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
 import { useAuthModal } from "../welcome/store/use-auth-modal";
 import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
 
-export function LoginForm() {
+export function LoginForm({ nextStep }: { nextStep?: () => void }) {
   const id = useId();
-  const { nextStep } = useAuthFormStore();
+  // const { nextStep } = useAuthFormStore();
   const { open: openRegisterOnboardingModal } = useOnboardingModal();
   const { close } = useAuthModal();
+  const { mutate: sendLoginOTP, isPending } = useSendLoginOTPMutation();
+  const [email, setEmail] = useState("");
 
   function handleRegister() {
     close();
     openRegisterOnboardingModal();
   }
 
+  function handleLogin() {
+    sendLoginOTP(
+      { email: email ?? "amaitariphilip@gmail.com" },
+      {
+        onSuccess: () => {
+          console.log("Success");
+          nextStep?.();
+        },
+        onError: () => {
+          console.log("Error");
+        },
+      },
+    );
+  }
   return (
     <DialogContent className="max-w-[700px] rounded-[24px] px-[64px] pb-[60px] pt-[40px]">
       <div className="flex flex-col items-center gap-2">
@@ -61,6 +78,8 @@ export function LoginForm() {
               <span className="inline-flex bg-transparent px-2">Email</span>
             </Label>
             <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               id={`${id}-email`}
               type="email"
               placeholder=""
@@ -74,7 +93,8 @@ export function LoginForm() {
           className="h-[57px]"
           fullWidth
           size="xl"
-          onClick={nextStep}
+          onClick={handleLogin}
+          disabled={isPending}
         >
           Continue
         </Button>

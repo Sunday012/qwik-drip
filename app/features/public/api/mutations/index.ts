@@ -4,28 +4,34 @@ import { createMutation } from "react-query-kit";
 import type { ErrorResponse } from "~/lib/client";
 import { httpClient } from "~/lib/client";
 
-type OauthValues = {
-  firebase_authentication_token: string;
-  email: string;
-  name: string;
-  profile_photo_url: string;
+import { Response } from "../type";
+
+type CreatePatientVariables = {
+  user_details: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone: string;
+    date_of_birth: string;
+    gender: string;
+    city: string;
+    state: string;
+  };
 };
 
-export type OauthResponse = {
-  message: string;
-  parent_id: string;
-  is_new_user: boolean;
+type CreatePatientResponse = Response & {
+  user_id: string;
 };
 
-export const useOauthMutation = createMutation<
-  OauthResponse,
-  OauthValues,
+export const useCreatePatientMutation = createMutation<
+  CreatePatientResponse,
+  CreatePatientVariables,
   AxiosError<ErrorResponse>
 >({
   mutationFn: async (variables) => {
     return httpClient
-      .post("/auth/oauth", variables)
-      .then((res) => res.data as OauthResponse);
+      .post("/USER-send-registration-otp", variables)
+      .then((res) => res.data as CreatePatientResponse);
   },
 });
 
@@ -33,65 +39,43 @@ type OTPVariables = {
   email: string;
 };
 
-type OTPResponse = {
-  message: string;
-};
-
-export const useSendOTPMutation = createMutation<
-  OTPResponse,
+export const useSendRegisterOTPMutation = createMutation<
+  Response,
   OTPVariables,
   AxiosError<ErrorResponse>
 >({
   mutationFn: async (variables) => {
     return httpClient
-      .post("/auth/send-otp", variables)
-      .then((res) => res.data as OTPResponse);
+      .post("/USER-send-registration-otp", variables)
+      .then((res) => res.data as Response);
+  },
+});
+
+export const useSendLoginOTPMutation = createMutation<
+  Response,
+  OTPVariables,
+  AxiosError<ErrorResponse>
+>({
+  mutationFn: async (variables) => {
+    return httpClient
+      .post("/USER-send-login-otp", variables)
+      .then((res) => res.data as Response);
   },
 });
 
 type VerifyOTPVariables = {
   email: string;
-  otp: string;
-};
-
-type VerifyEmailOtpVariables = {
-  email: string;
-  otp: string;
-  user_id: string;
-};
-
-type VerifyOTPResponse = {
-  message: string;
-  session: string;
-  user_id: string;
-  is_new_user: boolean;
-  security?: {
-    last_updated: number;
-    security_answer: string;
-    security_question: string;
-  };
+  otp_code: string;
 };
 
 export const useVerifyOTPMutation = createMutation<
-  VerifyOTPResponse,
+  Response,
   VerifyOTPVariables,
   AxiosError<ErrorResponse>
 >({
   mutationFn: async (variables) => {
     return httpClient
-      .post("/auth/verify-otp", variables)
-      .then((res) => res.data as VerifyOTPResponse);
-  },
-});
-
-export const useVerifyEmailOTPMutation = createMutation<
-  VerifyOTPResponse,
-  VerifyEmailOtpVariables,
-  AxiosError<ErrorResponse>
->({
-  mutationFn: async (variables) => {
-    return httpClient
-      .post("/parents/change-email", variables)
-      .then((res) => res.data as VerifyOTPResponse);
+      .post("/USER-verify-otp", variables)
+      .then((res) => res.data as Response);
   },
 });

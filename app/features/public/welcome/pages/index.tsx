@@ -35,6 +35,7 @@ export default function WelcomePage() {
   } = useOnboardingModal();
 
   function handleLogin() {
+    console.log("WelcomePage", { data });
     closeRegisterOnboardingModal();
     openLoginOnboardingModal();
   }
@@ -135,7 +136,7 @@ export default function WelcomePage() {
               ) : (
                 <button
                   type="button"
-                  onClick={openLoginOnboardingModal}
+                  onClick={handleLogin}
                   className="h-[48px] w-full cursor-pointer rounded-2xl bg-[#4272DD] px-4 py-2 text-center text-base text-white shadow-[0px_1px_2px_0px_#0000001A] sm:h-[57px] sm:w-[261px] sm:px-8 sm:py-4 sm:text-lg"
                 >
                   Schedule Appointment
