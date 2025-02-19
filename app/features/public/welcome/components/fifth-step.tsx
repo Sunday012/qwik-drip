@@ -19,19 +19,13 @@ export function FifthStep({ goalWeight, updateFields }: UserFormProps) {
   return (
     <FormWrapper title="What is your goal weight?" subheading="">
       <div className="w-full space-y-2">
-        {/* <Label
-          htmlFor={`${id}-weight`}
-          className="mb-4 flex self-start text-left text-lg text-[#7F8493] transition-colors duration-200 ease-in-out peer-checked:text-[#363840]"
-        >
-          Enter your current weight
-        </Label> */}
         <div className="flex rounded-lg shadow-sm shadow-black/5">
           <Input
             id={`${id}-weight`}
             type="text"
             name="goal_weight"
             value={goalWeight || ""}
-            className="peer -me-px h-[80px] w-11/12 rounded-e-none p-4 shadow-none"
+            className="peer -me-px h-[40px] w-11/12 rounded-e-none p-4 shadow-none sm:h-[60px] lg:h-[80px] lg:w-11/12"
             autoFocus
             onChange={(e) => updateFields({ goalWeight: e.target.value })}
             required
@@ -40,6 +34,11 @@ export function FifthStep({ goalWeight, updateFields }: UserFormProps) {
             KG
           </span>
         </div>
+      </div>
+      <div className="mt-[40px]">
+        <p className="text-blue-500 underline">
+          I’m not sure; I’d like guidance.
+        </p>
       </div>
     </FormWrapper>
   );

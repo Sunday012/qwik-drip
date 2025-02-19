@@ -41,18 +41,6 @@ export function FourthStep({ weight, updateFields }: UserFormProps) {
             KG
           </span>
         </div>
-        <div className="mt-4">
-          Not sure? Use this{" "}
-          <a
-            href="https://www.calculator.net/bmi-calculator.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 underline"
-          >
-            BMI Calculator
-          </a>{" "}
-          to find out.
-        </div>
       </div>
     </FormWrapper>
   );

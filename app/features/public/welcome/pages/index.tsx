@@ -66,11 +66,11 @@ export default function WelcomePage() {
       >
         <WelcomeProgress currentStep={step} totalSteps={13} />
         <>
-          <Link to="/" className="mx-auto my-4 sm:my-[40px]">
+          <Link to="/" className="mx-auto my-2 md:my-3 lg:my-4">
             <img
               src={LogoWL}
               alt="Proxymed logo"
-              className="max-w-[200px] sm:max-w-none"
+              className="max-w-[160px] md:max-w-[180px] lg:max-w-[200px] xl:max-w-none"
             />
           </Link>
           {step === 0 && <WelcomeStep />}
@@ -90,39 +90,39 @@ export default function WelcomePage() {
 
         {isFirstStep ? (
           <>
-            <div className="mx-auto w-full max-w-[624px] px-4">
+            <div className="mx-auto w-full px-4 sm:max-w-[524px] lg:max-w-[624px]">
               <button
                 type="button"
                 onClick={nextStep}
-                className="mx-auto w-full cursor-pointer rounded-xl bg-[#4272DD] px-4 py-4 text-center text-lg text-white sm:text-xl"
+                className="mx-auto w-full cursor-pointer rounded-xl bg-[#4272DD] px-3 py-3 text-center text-base sm:px-4 sm:py-4 sm:text-lg lg:text-xl"
               >
                 Get started
               </button>
             </div>
-            <div className="mt-4 sm:mt-[46px]">
+            <div className="mt-3 sm:mt-4 lg:mt-[46px]">
               <Marquee images={marqueeImages} />
             </div>
           </>
         ) : isLastStep ? (
           <>
-            <div className="mx-auto flex items-center justify-center mb-[40px] w-full max-w-[702px] p-[32px] rounded-b-[16px] border border-[#2222221A] border-t-0">
+            <div className="mx-auto flex items-center justify-center mb-6 w-full p-4 rounded-b-[16px] border border-[#2222221A] border-t-0 sm:mb-8 sm:p-6 lg:mb-[40px] lg:max-w-[702px] lg:p-[32px]">
               <button
                 type="button"
                 onClick={handleCompleted}
-                className="mx-auto w-full max-w-[538px] cursor-pointer rounded-xl bg-[#4272DD] px-4 py-4 text-center text-lg text-white sm:text-xl"
+                className="mx-auto w-full cursor-pointer rounded-xl bg-[#4272DD] px-3 py-3 text-base sm:max-w-[438px] sm:px-4 sm:py-4 sm:text-lg lg:max-w-[538px] lg:text-xl"
               >
                 Okay
               </button>
             </div>
           </>
         ) : (
-          <div className="absolute bottom-0 left-0 right-0 z-10 border border-t border-t-[#0000001A] bg-white shadow-[0px_-2px_10px_0px_#00000014]">
-            <div className="mx-auto flex w-full max-w-[624px] items-center justify-between px-6 py-4 sm:px-8 sm:py-2 md:w-[608px]">
+          <div className="fixed bottom-0 left-0 right-0 z-10 border border-t border-t-[#0000001A] bg-white shadow-[0px_-2px_10px_0px_#00000014]">
+            <div className="mx-auto flex w-full items-center justify-between px-4 py-3 sm:max-w-[524px] sm:px-6 sm:py-4 lg:max-w-[624px] lg:px-8 lg:py-2">
               <Button
                 type="button"
                 variant="outline"
                 onClick={previousStep}
-                className="h-[48px] w-[120px] cursor-pointer rounded-2xl border-[1px] border-solid border-[#DCDCDE] bg-transparent px-4 py-2 text-center text-base text-[#7F8493] shadow-[0px_1px_2px_0px_#0000001A] sm:h-[57px] sm:w-[144px] sm:px-6 sm:py-3 sm:text-lg"
+                className="h-[40px] w-[120px] cursor-pointer rounded-2xl border-[1px] border-solid border-[#DCDCDE] bg-transparent px-3 py-2 text-sm text-[#7F8493] shadow-[0px_1px_2px_0px_#0000001A] sm:h-[48px] sm:w-[120px] sm:px-4 sm:text-base lg:h-[57px] lg:w-[144px] lg:px-6 lg:py-3 lg:text-lg"
               >
                 Back
               </Button>
@@ -130,8 +130,8 @@ export default function WelcomePage() {
                 type="button"
                 onClick={step === 10 ? handleLogin : nextStep}
                 className={cn(
-                  "h-[48px] w-full cursor-pointer rounded-2xl bg-[#4272DD] px-4 py-2 text-center text-base text-white shadow-[0px_1px_2px_0px_#0000001A] sm:h-[57px] sm:w-[144px] sm:px-8 sm:py-4 sm:text-lg",
-                  step === 10 && "sm:w-[261px]",
+                  "h-[40px] w-[120px] cursor-pointer rounded-2xl bg-[#4272DD] px-3 py-2 text-sm text-white shadow-[0px_1px_2px_0px_#0000001A] sm:h-[48px] sm:w-[120px] sm:px-4 sm:text-base lg:h-[57px] lg:w-[144px] lg:px-8 lg:py-4 lg:text-lg",
+                  step === 10 && "sm:w-[220px] lg:w-[261px]",
                 )}
               >
                 {step === 10 ? "Schedule Appointment" : "Continue"}
