@@ -1,6 +1,6 @@
 import { FormWrapper } from "./form-wrapper";
 import { RadioOption } from "./radio-option";
-import { CustomInput } from "./custom-input";
+import { TextareaInput } from "./textarea-input";
 
 type UserData = {
   mostWeight: string;
@@ -68,7 +68,7 @@ export function SixthStep({
       />
 
       {mostWeight === "other" && (
-        <CustomInput
+        <TextareaInput
           value={otherMostWeight || ""}
           onChange={(value) => updateFields({ otherMostWeight: value })}
           placeholder="Please specify"

@@ -1,4 +1,4 @@
-import { CustomInput } from "./custom-input";
+import { TextareaInput } from "./textarea-input";
 import { FormWrapper } from "./form-wrapper";
 import { RadioOption } from "./radio-option";
 
@@ -56,7 +56,7 @@ export function FirstStep({
       />
 
       {gender === "other" && (
-        <CustomInput
+        <TextareaInput
           value={otherGender || ""}
           onChange={(value) => updateFields({ otherGender: value })}
         />

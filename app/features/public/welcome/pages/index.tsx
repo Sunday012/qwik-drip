@@ -3,11 +3,12 @@ import { Link, useNavigate } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
 import { Button } from "~/components/ui/button";
-import { LoginOnboardingModal } from "~/features/public/components/login-onboarding-modal";
-import { RegisterOnboardingModal } from "~/features/public/components/register-onboarding-modal";
+import { LoginModal } from "~/features/public/components/login-modal";
+import { RegisterModal } from "~/features/public/components/register-modal";
 import { cn } from "~/lib/utils";
 
 import { Marquee } from "../../components/marquee";
+import { OnboardingModal } from "../../components/onboarding-modal";
 import { marqueeImages } from "../../data/marquee";
 import { AppointmentStep } from "../components/appointment";
 import { EighthStep } from "../components/eighth-step";
@@ -25,28 +26,26 @@ import { WelcomeProgress } from "../components/welcome-progress";
 import { WelcomeStep } from "../components/welcome-step";
 import useAuthFormStore from "../store/use-auth-form-store";
 import { useAuthModal } from "../store/use-auth-modal";
-import useOnboardingFormStore from "../store/use-onboarding-form-store";
+import useRegisterFormStore from "../store/use-onboarding-form-store";
 import { useOnboardingModal } from "../store/use-onboarding-modal";
 import { useWelcomeFormStore } from "../store/use-welcome-form-store";
 
 export default function WelcomePage() {
   const { data, updateFields, step, nextStep, previousStep, clearFields } =
     useWelcomeFormStore();
-  const { open: openLoginOnboardingModal } = useAuthModal();
-  const { close: closeRegisterOnboardingModal } = useOnboardingModal();
+  const { open: openOnboardingModal } = useOnboardingModal();
   const { setStep: setAuthStep } = useAuthFormStore();
-  const { setStep: setOnboardingStep } = useOnboardingFormStore();
+  const { setStep: setRegisterStep } = useRegisterFormStore();
   const navigate = useNavigate();
 
   function handleLogin() {
-    setOnboardingStep(1);
+    setRegisterStep(1);
     setAuthStep(1);
-    closeRegisterOnboardingModal();
-    openLoginOnboardingModal();
+    openOnboardingModal();
   }
 
   function handleCompleted() {
-    clearFields()
+    clearFields();
     navigate({ to: "/" });
   }
 
@@ -105,7 +104,7 @@ export default function WelcomePage() {
           </>
         ) : isLastStep ? (
           <>
-            <div className="mx-auto flex items-center justify-center mb-6 w-full p-4 rounded-b-[16px] border border-[#2222221A] border-t-0 sm:mb-8 sm:p-6 lg:mb-[40px] lg:max-w-[702px] lg:p-[32px]">
+            <div className="mx-auto mb-6 flex w-full items-center justify-center rounded-b-[16px] border border-t-0 border-[#2222221A] p-4 sm:mb-8 sm:p-6 lg:mb-[40px] lg:max-w-[702px] lg:p-[32px]">
               <button
                 type="button"
                 onClick={handleCompleted}
@@ -140,8 +139,9 @@ export default function WelcomePage() {
           </div>
         )}
 
-        <RegisterOnboardingModal />
-        <LoginOnboardingModal />
+        <RegisterModal />
+        <LoginModal />
+        <OnboardingModal />
       </form>
     </div>
   );

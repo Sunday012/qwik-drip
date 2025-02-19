@@ -8,23 +8,25 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 
+import { useAuthModal } from "../welcome/store/use-auth-modal";
 import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form-store";
+import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
+import useRegisterFormStore from "../welcome/store/use-register-form-store";
+import { useRegisterModal } from "../welcome/store/use-register-modal";
 import { useWelcomeFormStore } from "../welcome/store/use-welcome-form-store";
 import { OTPForm } from "./otp-form";
-import { useAuthModal } from "../welcome/store/use-auth-modal";
-import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
 
 export function RegisterVerifyOTP() {
-  const { setEmail, email } = useOnboardingFormStore();
+  const { setEmail, email } = useRegisterFormStore();
   const { nextStep } = useWelcomeFormStore();
   const { close: closeAuthModal } = useAuthModal();
-  const { close: closeRegisterOnboardingModal } = useOnboardingModal();
+  const { close: closeRegisterModal } = useRegisterModal();
 
   function handleNextStep() {
     setEmail("");
     nextStep();
     closeAuthModal();
-    closeRegisterOnboardingModal();
+    closeRegisterModal();
   }
 
   return (

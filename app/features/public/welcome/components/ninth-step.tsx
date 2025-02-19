@@ -1,6 +1,6 @@
 import { FormWrapper } from "./form-wrapper";
 import { RadioOption } from "./radio-option";
-import { CustomInput } from "./custom-input";
+import { TextareaInput } from "./textarea-input";
 
 type UserData = {
   reason: string;
@@ -65,7 +65,7 @@ export function NinthStep({
       />
 
       {reason === "other" && (
-        <CustomInput
+        <TextareaInput
           value={otherReason || ""}
           onChange={(value) => updateFields({ otherReason: value })}
           placeholder="Please specify"

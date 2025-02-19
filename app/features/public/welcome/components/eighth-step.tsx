@@ -1,6 +1,6 @@
 import { FormWrapper } from "./form-wrapper";
 import { RadioOption } from "./radio-option";
-import { CustomInput } from "./custom-input";
+import { TextareaInput } from "./textarea-input";
 
 type UserData = {
     medication: string,
@@ -26,7 +26,7 @@ export function EighthStep({medication, otherMedication, updateFields}: UserForm
       />
 
       {medication === "yes_medications" && (
-        <CustomInput
+        <TextareaInput
           value={otherMedication || ""}
           onChange={(value) => updateFields({ otherMedication: value })}
           placeholder="Please specify"

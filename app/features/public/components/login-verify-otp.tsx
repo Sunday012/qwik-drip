@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
 import {
@@ -9,24 +9,23 @@ import {
 } from "~/components/ui/dialog";
 
 import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
-import { useWelcomeFormStore } from "../welcome/store/use-welcome-form-store";
-import { OTPForm } from "./otp-form";
 import { useAuthModal } from "../welcome/store/use-auth-modal";
 import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
+import { useRegisterModal } from "../welcome/store/use-register-modal";
+import { useWelcomeFormStore } from "../welcome/store/use-welcome-form-store";
+import { OTPForm } from "./otp-form";
 
 export function LoginVerifyOTP() {
   const { setEmail, email } = useAuthFormStore();
   const { nextStep } = useWelcomeFormStore();
   const { close: closeAuthModal } = useAuthModal();
-  const { close: closeRegisterOnboardingModal } = useOnboardingModal();
-
+  const { close: closeRegisterModal } = useRegisterModal();
 
   function handleNextStep() {
     setEmail("");
     nextStep();
     closeAuthModal();
-    closeRegisterOnboardingModal();
-   
+    closeRegisterModal();
   }
 
   return (

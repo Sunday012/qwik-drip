@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { OTPInput, SlotProps } from "input-otp";
-import { CircleAlert } from "lucide-react";
+import { CircleAlert, LoaderCircle } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import { toast } from "~/hooks/use-toast";
@@ -114,7 +114,7 @@ export function OTPForm({
               ))}
             </div>
           )}
-          // onComplete={handleSubmit}
+          onComplete={handleSubmit}
         />
       </div>
       <div>
@@ -136,9 +136,17 @@ export function OTPForm({
         <Button
           size="xl"
           fullWidth
-          disabled={verifyOTPMutationPending || !value}
+          disabled={verifyOTPMutationPending || isPending || !value}
           onClick={handleSubmit}
         >
+          {verifyOTPMutationPending && (
+            <LoaderCircle
+              className="-ms-1 me-2 animate-spin"
+              size={16}
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+          )}
           Confirm
         </Button>
       </div>

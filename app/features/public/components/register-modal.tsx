@@ -1,14 +1,14 @@
 import { Dialog } from "~/components/ui/dialog";
 
-import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form-store";
-import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
+import { useRegisterFormStore } from "../welcome/store/use-register-form-store";
+import { useRegisterModal } from "../welcome/store/use-register-modal";
 import { RegisterForm } from "./register-form";
 import { RegisterVerifyOTP } from "./register-verify-otp";
 
-export function RegisterOnboardingModal() {
-  const { isOpen, close } = useOnboardingModal();
+export function RegisterModal() {
+  const { isOpen, close } = useRegisterModal();
 
-  const { step } = useOnboardingFormStore();
+  const { step } = useRegisterFormStore();
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>

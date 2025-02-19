@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { LoaderCircle } from "lucide-react";
 
 import LogoWL from "~/assets/logo_wl.svg";
 import { Button } from "~/components/ui/button";
@@ -11,22 +12,24 @@ import {
 } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { cn } from "~/lib/utils";
 
 import { useSendLoginOTPMutation } from "../api/mutations";
 import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
 import { useAuthModal } from "../welcome/store/use-auth-modal";
 import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
+import { useRegisterModal } from "../welcome/store/use-register-modal";
 
 export function LoginForm() {
   const id = useId();
   const { setStep, email, setEmail } = useAuthFormStore();
-  const { open: openRegisterOnboardingModal } = useOnboardingModal();
+  const { open: openRegisterModal } = useRegisterModal();
   const { close } = useAuthModal();
   const { mutate: sendLoginOTP, isPending } = useSendLoginOTPMutation();
 
   function handleRegister() {
     close();
-    openRegisterOnboardingModal();
+    openRegisterModal();
   }
 
   function handleLogin() {
@@ -34,7 +37,6 @@ export function LoginForm() {
       { email: email },
       {
         onSuccess: () => {
-          console.log("Success");
           setStep(2);
         },
         onError: () => {
@@ -44,63 +46,63 @@ export function LoginForm() {
     );
   }
   return (
-    <DialogContent className="max-w-[700px] rounded-[24px] px-[64px] pb-[60px] pt-[40px]">
+    <DialogContent className="max-w-sm rounded-[24px] px-4 pb-8 pt-6 sm:px-8 sm:pb-10 sm:pt-8 md:max-w-xl lg:px-[64px] lg:pb-[60px] lg:pt-[40px] xl:max-w-[700px]">
       <div className="flex flex-col items-center gap-2">
         <div
           className="flex shrink-0 items-center justify-center"
           aria-hidden="true"
         >
-          <Link to="/" className="mx-auto mb-[24px]">
-            <img src={LogoWL} alt="Proxymed logo" />
+          <Link to="/" className="mx-auto mb-4 sm:mb-6 lg:mb-[24px]">
+            <img src={LogoWL} alt="Proxymed logo" className="w-32 sm:w-auto" />
           </Link>
         </div>
         <DialogHeader>
-          <DialogTitle className="text-center text-[40px] font-bold">
+          <DialogTitle className="text-center text-2xl font-bold sm:text-3xl lg:text-[40px]">
             Welcome back
           </DialogTitle>
-          <DialogDescription className="text-center text-lg">
+          <DialogDescription className="text-center text-base sm:text-lg">
             <p>
-              Enter the email you registered with and we will send you a <br />{" "}
-              6 digit code to login with
+              Enter the email you registered with and we will send you a 6 digit
+              code to login with
             </p>
           </DialogDescription>
         </DialogHeader>
       </div>
 
-      <form className="space-y-5">
-        <div className="space-y-4">
-          <div className="group relative rounded-lg border border-input bg-background shadow-sm shadow-black/5 transition-shadow focus-within:border-ring focus-within:outline-none focus-within:ring-[3px] focus-within:ring-ring/20 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50 [&:has(input:is(:disabled))_*]:pointer-events-none">
-            <Label
-              htmlFor={`${id}-email`}
-              className="absolute top-1/4 block -translate-y-1/2 cursor-text px-1 text-sm text-muted-foreground/70 transition-all group-focus-within:pointer-events-none group-focus-within:top-3 group-focus-within:translate-y-0 group-focus-within:cursor-default group-focus-within:text-xs group-focus-within:font-medium group-focus-within:text-foreground has-[+input:not(:placeholder-shown)]:pointer-events-none has-[+input:not(:placeholder-shown)]:top-3 has-[+input:not(:placeholder-shown)]:translate-y-0 has-[+input:not(:placeholder-shown)]:cursor-default has-[+input:not(:placeholder-shown)]:text-xs has-[+input:not(:placeholder-shown)]:font-medium has-[+input:not(:placeholder-shown)]:text-foreground"
-            >
-              <span className="inline-flex bg-transparent px-2">Email</span>
-            </Label>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              id={`${id}-email`}
-              type="email"
-              placeholder=""
-              className="h-[55px] transition-all duration-200 group-focus-within:h-[57px] group-focus-within:pt-2 has-[input:not(:placeholder-shown)]:h-[57px] has-[input:not(:placeholder-shown)]:pt-2"
-            />
-          </div>
+      <form className="space-y-4 sm:space-y-5">
+        <div className={cn("relative w-full rounded-lg bg-background")}>
+          <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            id={`${id}-email`}
+            type="email"
+            placeholder="Email"
+            className="h-12 sm:h-[50px] xl:h-[55px]"
+          />
         </div>
 
         <Button
           type="button"
-          className="h-[57px]"
+          className="h-12 sm:h-[50px] lg:h-[57px]"
           fullWidth
           size="xl"
           onClick={handleLogin}
           disabled={isPending || !email}
         >
+          {isPending && (
+            <LoaderCircle
+              className="-ms-1 me-2 animate-spin"
+              size={16}
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+          )}
           Continue
         </Button>
       </form>
 
-      <p className="text-center text-base text-[#7F8493]">
-        Don’t have an account?{" "}
+      <p className="text-center text-sm text-[#7F8493] sm:text-base">
+        Don't have an account?{" "}
         <button
           type="button"
           className="font-bold text-[#4272DD] underline hover:text-[#4272DD] hover:no-underline"
