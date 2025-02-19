@@ -65,7 +65,7 @@ export default function WelcomePage() {
       >
         <WelcomeProgress currentStep={step} totalSteps={13} />
         <>
-          <Link to="/" className="mx-auto my-2 md:my-3 lg:my-4">
+          <Link to="/" className="mx-auto my-6 md:mt-[40px] lg:mt-[50px] xl:mt-[60px]">
             <img
               src={LogoWL}
               alt="Proxymed logo"

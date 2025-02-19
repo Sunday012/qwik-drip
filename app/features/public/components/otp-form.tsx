@@ -28,7 +28,6 @@ export function OTPForm({
   const {
     mutate: verifyOTPMutation,
     isPending: verifyOTPMutationPending,
-    error,
     isError,
   } = useVerifyOTPMutation();
 
