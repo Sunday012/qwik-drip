@@ -1,52 +1,21 @@
-// TODO: Add all nigeria states
-
+// TODO: Add all usa states
 export const states = [
-  { value: "AB", label: "Abia" },
-  { value: "AD", label: "Adamawa" },
-  { value: "AK", label: "Akwa Ibom" },
-  { value: "AN", label: "Anambra" },
-  { value: "BA", label: "Bauchi" },
-  { value: "BY", label: "Bayelsa" },
-  { value: "BE", label: "Benue" },
-  { value: "BO", label: "Borno" },
-  { value: "CR", label: "Cross River" },
-  { value: "DE", label: "Delta" },
-  { value: "EB", label: "Ebonyi" },
-  { value: "ED", label: "Edo" },
-  { value: "EK", label: "Ekiti" },
-  { value: "EN", label: "Enugu" },
-  { value: "GO", label: "Gombe" },
-  { value: "IM", label: "Imo" },
-  { value: "JI", label: "Jigawa" },
-  { value: "KD", label: "Kaduna" },
-  { value: "KE", label: "Kebbi" },
-  { value: "KO", label: "Kogi" },
-  { value: "KW", label: "Kwara" },
-  { value: "LA", label: "Lagos" },
-  { value: "NA", label: "Nassarawa" },
-  { value: "NI", label: "Niger" },
-  { value: "OG", label: "Ogun" },
-  { value: "ON", label: "Ondo" },
-  { value: "OS", label: "Osun" },
-  { value: "OY", label: "Oyo" },
-  { value: "PL", label: "Plateau" },
-  { value: "RI", label: "Rivers" },
-  { value: "SO", label: "Sokoto" },
-  { value: "TA", label: "Taraba" },
-  { value: "YO", label: "Yobe" },
-  { value: "ZA", label: "Zamfara" },
- 
+  { value: "AL", label: "Alabama" },
+  { value: "AK", label: "Alaska" },
+  { value: "AZ", label: "Arizona" },
+  { value: "AR", label: "Arkansas" },
+  { value: "CA", label: "California" },
+  { value: "CO", label: "Colorado" },
 ];
 
-// TODO: Add all nigeria cities
+// TODO: Add all us cities
 export const cities = [
-  { value: "AB-ABI", label: "Aba" },
-  { value: "AB-UYO", label: "Uyo" },
-  { value: "AB-ENUGU", label: "Enugu" },
-  { value: "AB-AWKA", label: "Awka" },
-  { value: "AB-ANAMBRA", label: "Anambra" },
-  { value: "AB-ASABA", label: "Asaba" },
-  { value: "AB-BENIN", label: "Benin" },
+  { value: "AL", label: "Alabama" },
+  { value: "AK", label: "Alaska" },
+  { value: "AZ", label: "Arizona" },
+  { value: "AR", label: "Arkansas" },
+  { value: "CA", label: "California" },
+  { value: "CO", label: "Colorado" },
 ];
 
 export const genders = [

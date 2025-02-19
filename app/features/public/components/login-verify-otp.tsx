@@ -9,15 +9,24 @@ import {
 } from "~/components/ui/dialog";
 
 import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
-import {OTPForm} from "./otp-form";
+import { useWelcomeFormStore } from "../welcome/store/use-welcome-form-store";
+import { OTPForm } from "./otp-form";
+import { useAuthModal } from "../welcome/store/use-auth-modal";
+import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
 
 export function LoginVerifyOTP() {
   const { setEmail, email } = useAuthFormStore();
-  const navigate = useNavigate();
+  const { nextStep } = useWelcomeFormStore();
+  const { close: closeAuthModal } = useAuthModal();
+  const { close: closeRegisterOnboardingModal } = useOnboardingModal();
 
-  function nextStep() {
+
+  function handleNextStep() {
     setEmail("");
-    navigate({ to: "/appointment" });
+    nextStep();
+    closeAuthModal();
+    closeRegisterOnboardingModal();
+   
   }
 
   return (
@@ -44,7 +53,7 @@ export function LoginVerifyOTP() {
           </DialogDescription>
         </DialogHeader>
       </div>
-      <OTPForm nextStep={nextStep} email={email} />
+      <OTPForm nextStep={handleNextStep} email={email} />
     </DialogContent>
   );
 }

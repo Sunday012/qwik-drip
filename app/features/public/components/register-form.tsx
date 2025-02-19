@@ -244,19 +244,19 @@ export function RegisterForm() {
           <div className="flex gap-4">
             <div className="w-full">
               <div className="group relative">
-                <Label
+                {/* <Label
                   htmlFor={`${id}-date-of-birth`}
                   className="absolute top-1/4 block -translate-y-1/2 cursor-text px-1 text-sm text-muted-foreground/70 transition-all group-focus-within:pointer-events-none group-focus-within:top-3 group-focus-within:translate-y-0 group-focus-within:cursor-default group-focus-within:text-xs group-focus-within:font-medium group-focus-within:text-foreground has-[+input:not(:placeholder-shown)]:pointer-events-none has-[+input:not(:placeholder-shown)]:top-3 has-[+input:not(:placeholder-shown)]:translate-y-0 has-[+input:not(:placeholder-shown)]:cursor-default has-[+input:not(:placeholder-shown)]:text-xs has-[+input:not(:placeholder-shown)]:font-medium has-[+input:not(:placeholder-shown)]:text-foreground"
                 >
                   <span className="inline-flex bg-transparent px-2">
                     Date of Birth
                   </span>
-                </Label>
+                </Label> */}
                 <Input
                   {...register("date_of_birth")}
                   id={`${id}-date-of-birth`}
                   type="date"
-                  className="h-[55px] rounded-[16px] transition-all duration-200 group-focus-within:h-[57px] group-focus-within:pt-2 has-[input:not(:placeholder-shown)]:h-[57px] has-[input:not(:placeholder-shown)]:pt-2"
+                  className="h-[28px] rounded-[16px] transition-all duration-200 group-focus-within:h-[28px] group-focus-within:pt-2 has-[input:not(:placeholder-shown)]:h-[57px] has-[input:not(:placeholder-shown)]:pt-2"
                 />
                 {errors.date_of_birth && (
                   <p className="mt-1 text-xs text-red-500">
