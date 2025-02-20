@@ -96,42 +96,38 @@ export function OTPForm({
   }
 
   return (
-    <div>
-      <div className="flex justify-center px-[64px] pb-[16px] pt-[24px]">
-        <OTPInput
-          id="confirmation-code"
-          ref={inputRef}
-          value={value}
-          onChange={setValue}
-          containerClassName="flex items-center gap-3 has-[:disabled]:opacity-50"
-          maxLength={6}
-          onFocus={() => setHasGuessed(undefined)}
-          render={({ slots }) => (
-            <div className="flex gap-2">
-              {slots.map((slot, idx) => (
-                <Slot key={idx} {...slot} isError={isError} />
-              ))}
-            </div>
-          )}
-          onComplete={handleSubmit}
-        />
-      </div>
-      <div>
-        {isError && (
-          <div className="flex items-center justify-center rounded-lg px-4 py-3 text-red-600">
-            <p className="text-sm">
-              <CircleAlert
-                className="-mt-0.5 me-3 inline-flex opacity-60"
-                size={16}
-                strokeWidth={2}
-                aria-hidden="true"
-              />
-              The OTP you entered is invalid
-            </p>
+    <div className="w-full space-y-4">
+      <OTPInput
+        id="confirmation-code"
+        ref={inputRef}
+        value={value}
+        onChange={setValue}
+        containerClassName="flex items-center gap-3 has-[:disabled]:opacity-50"
+        maxLength={6}
+        onFocus={() => setHasGuessed(undefined)}
+        render={({ slots }) => (
+          <div className="flex gap-2">
+            {slots.map((slot, idx) => (
+              <Slot key={idx} {...slot} isError={isError} />
+            ))}
           </div>
         )}
-      </div>
-      <div className="mx-auto mb-[24px] mt-[40px] flex w-[559px] items-center justify-center">
+        onComplete={handleSubmit}
+      />
+      {isError && (
+        <div className="flex items-center justify-center rounded-lg px-4 py-3 text-red-600">
+          <p className="text-sm">
+            <CircleAlert
+              className="-mt-0.5 me-3 inline-flex opacity-60"
+              size={16}
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+            The OTP you entered is invalid
+          </p>
+        </div>
+      )}
+      <div className="">
         <Button
           size="xl"
           fullWidth
@@ -179,7 +175,7 @@ function Slot(
   return (
     <div
       className={cn(
-        "flex h-[55px] w-[80px] items-center justify-center rounded-2xl border border-input bg-background font-medium text-foreground shadow-sm shadow-black/5 transition-shadow",
+        "flex h-[50px] w-[50px] items-center justify-center rounded-2xl border border-input bg-background font-medium text-foreground shadow-sm shadow-black/5 transition-shadow sm:h-[55px] sm:w-[80px]",
         { "z-10 border border-ring ring-[3px] ring-ring/20": props.isActive },
         {
           "z-10 border-[1.4px] border-[#E12121] bg-[#FEEBEB] ring-[1.4px] ring-[#E12121]":

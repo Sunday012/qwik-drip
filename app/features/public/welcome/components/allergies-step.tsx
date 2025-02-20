@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 import { RadioOption } from "./radio-option";
 
 const allergiesSchema = z.object({
@@ -33,7 +33,7 @@ export function AllergiesStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormWrapper title="Do you have any allergies?" subheading="">
+    <FormContainer title="Do you have any allergies?" subheading="">
       <RadioOption
         id="yes_medications"
         label="Yes, to specific medications"
@@ -69,6 +69,6 @@ export function AllergiesStep({ defaultValues, updateFields }: UserFormProps) {
         onChange={handleChange}
         name="allergies"
       />
-    </FormWrapper>
+    </FormContainer>
   );
 }

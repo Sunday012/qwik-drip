@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 import { RadioOption } from "./radio-option";
 import { TextareaInput } from "./textarea-input";
 
@@ -41,7 +41,7 @@ export function WeightStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormWrapper
+    <FormContainer
       title="What part of your body holds the most weight?"
       subheading=""
     >
@@ -93,6 +93,6 @@ export function WeightStep({ defaultValues, updateFields }: UserFormProps) {
           placeholder="Please specify"
         />
       )}
-    </FormWrapper>
+    </FormContainer>
   );
 }

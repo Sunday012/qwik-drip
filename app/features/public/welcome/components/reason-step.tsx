@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 import { RadioOption } from "./radio-option";
 import { TextareaInput } from "./textarea-input";
 
@@ -41,7 +41,7 @@ export function ReasonStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormWrapper title="What's your reason for losing weight?" subheading="">
+    <FormContainer title="What's your reason for losing weight?" subheading="">
       <RadioOption
         id="improve_health"
         label="Improve overall health"
@@ -94,6 +94,6 @@ export function ReasonStep({ defaultValues, updateFields }: UserFormProps) {
           placeholder="Please specify"
         />
       )}
-    </FormWrapper>
+    </FormContainer>
   );
 }

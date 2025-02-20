@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 import { RadioOption } from "./radio-option";
 
 const healthConditionSchema = z.object({
@@ -39,7 +39,7 @@ export function ConditionStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormWrapper
+    <FormContainer
       title="Do you have any of these health conditions?"
       subheading=""
     >
@@ -105,6 +105,6 @@ export function ConditionStep({ defaultValues, updateFields }: UserFormProps) {
         onChange={handleChange}
         checked={watchedHealthCondition === "none"}
       />
-    </FormWrapper>
+    </FormContainer>
   );
 }

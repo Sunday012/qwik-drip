@@ -58,11 +58,11 @@ export default function WelcomePage() {
 
   return (
     <div className="relative h-full w-full">
+      <WelcomeProgress currentStep={step} totalSteps={13} />
       <form
         onSubmit={onSubmit}
-        className="relative flex h-full w-full flex-col justify-between"
+        className="relative flex h-full w-full flex-col justify-between px-4"
       >
-        <WelcomeProgress currentStep={step} totalSteps={13} />
         <>
           <Link
             to="/"
@@ -112,13 +112,13 @@ export default function WelcomePage() {
         {isFirstStep ? (
           <>
             <div className="mx-auto w-full px-4 sm:max-w-[524px] lg:max-w-[624px]">
-              <button
+              <Button
                 type="button"
                 onClick={nextStep}
                 className="mx-auto w-full cursor-pointer rounded-xl bg-[#4272DD] px-3 py-3 text-center text-base sm:px-4 sm:py-4 sm:text-lg lg:text-xl"
               >
                 Get started
-              </button>
+              </Button>
             </div>
             <div className="mt-3 sm:mt-4 lg:mt-[46px]">
               <Marquee images={marqueeImages} />
@@ -127,13 +127,13 @@ export default function WelcomePage() {
         ) : isLastStep ? (
           <>
             <div className="mx-auto mb-6 flex w-full items-center justify-center rounded-b-[16px] border border-t-0 border-[#2222221A] p-4 sm:mb-8 sm:p-6 lg:mb-[40px] lg:max-w-[702px] lg:p-[32px]">
-              <button
+              <Button
                 type="button"
                 onClick={handleCompleted}
-                className="mx-auto w-full cursor-pointer rounded-xl bg-[#4272DD] px-3 py-3 text-base sm:max-w-[438px] sm:px-4 sm:py-4 sm:text-lg lg:max-w-[538px] lg:text-xl"
+                className="mx-auto w-full cursor-pointer text-[#FFFFFF] rounded-xl bg-[#4272DD] px-3 py-3 text-center text-base sm:max-w-[438px] sm:px-4 sm:py-4 sm:text-lg lg:max-w-[538px] lg:text-xl"
               >
                 Okay
-              </button>
+              </Button>
             </div>
           </>
         ) : (

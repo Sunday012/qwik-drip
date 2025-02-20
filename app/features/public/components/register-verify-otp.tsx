@@ -30,21 +30,21 @@ export function RegisterVerifyOTP() {
   }
 
   return (
-    <DialogContent className="max-h-[528px] max-w-[687px] rounded-[24px]">
+    <DialogContent className="max-w-sm rounded-[24px] px-4 pb-8 pt-6 sm:px-8 sm:pb-10 sm:pt-8 md:max-w-xl lg:px-[64px] lg:pb-[60px] lg:pt-[40px] xl:max-w-[700px]">
       <div className="flex flex-col items-center">
         <div
-          className="flex h-[43px] w-[130px] items-center justify-center"
+          className="flex shrink-0 items-center justify-center"
           aria-hidden="true"
         >
-          <Link to="/" className="mx-auto my-[24px]">
-            <img src={LogoWL} alt="Proxymed logo" />
+          <Link to="/" className="mx-auto mb-4 lg:mb-[24px]">
+            <img src={LogoWL} alt="Proxymed logo" className="w-32 lg:w-auto" />
           </Link>
         </div>
         <DialogHeader>
-          <DialogTitle className="text-center text-[40px] font-bold">
+          <DialogTitle className="text-center text-2xl font-bold sm:text-3xl lg:text-[40px]">
             Verify your account
           </DialogTitle>
-          <DialogDescription className="text-center text-[18px] font-normal">
+          <DialogDescription className="text-center text-base lg:text-lg">
             <p>
               We sent a 6 digit OTP to{" "}
               <span className="font-medium">{email}</span>
@@ -52,8 +52,8 @@ export function RegisterVerifyOTP() {
             <p>Please input it below to proceed.</p>
           </DialogDescription>
         </DialogHeader>
+        <OTPForm nextStep={handleNextStep} email={email} />
       </div>
-      <OTPForm nextStep={handleNextStep} email={email} />
     </DialogContent>
   );
 }

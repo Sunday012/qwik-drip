@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 import { RadioOption } from "./radio-option";
 import { TextareaInput } from "./textarea-input";
 
@@ -20,7 +20,12 @@ type UserFormProps = {
 };
 
 export function GenderStep({ defaultValues, updateFields }: UserFormProps) {
-  const { setValue, watch } = useForm<GenderFormData>({
+  const {
+    setValue,
+    watch,
+    formState: { errors },
+    register,
+  } = useForm<GenderFormData>({
     resolver: zodResolver(genderSchema),
     defaultValues: defaultValues || {
       gender: undefined,
@@ -31,17 +36,21 @@ export function GenderStep({ defaultValues, updateFields }: UserFormProps) {
   const selectedGender = watch("gender");
 
   const handleChange = (value: string) => {
-    setValue("gender", value as GenderFormData["gender"]);
+    setValue("gender", value as GenderFormData["gender"], {
+      shouldValidate: true,
+    });
     updateFields({ gender: value as GenderFormData["gender"] });
   };
 
   const handleOtherChange = (value: string) => {
-    setValue("otherGender", value);
+    setValue("otherGender", value, {
+      shouldValidate: true,
+    });
     updateFields({ otherGender: value });
   };
 
   return (
-    <FormWrapper title="What's your gender?" subheading="">
+    <FormContainer title="What's your gender?" subheading="">
       <RadioOption
         id="male"
         label="Male"
@@ -76,11 +85,19 @@ export function GenderStep({ defaultValues, updateFields }: UserFormProps) {
       />
 
       {selectedGender === "other" && (
-        <TextareaInput
-          value={watch("otherGender") || ""}
-          onChange={handleOtherChange}
-        />
+        <>
+          <TextareaInput
+            value={watch("otherGender") || ""}
+            onChange={handleOtherChange}
+            // error={errors.otherGender?.message}
+          />
+          {errors.gender && (
+            <span className="text-sm text-red-500">
+              {errors.otherGender?.message}
+            </span>
+          )}
+        </>
       )}
-    </FormWrapper>
+    </FormContainer>
   );
 }

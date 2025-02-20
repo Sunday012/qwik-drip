@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 import { RadioOption } from "./radio-option";
 
 const ageSchema = z.object({
@@ -34,7 +34,7 @@ export function AgeStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormWrapper title="How old are you?" subheading="">
+    <FormContainer title="How old are you?" subheading="">
       <RadioOption
         id="18_24"
         label="18-24"
@@ -75,6 +75,6 @@ export function AgeStep({ defaultValues, updateFields }: UserFormProps) {
         onChange={handleChange}
         name="age"
       />
-    </FormWrapper>
+    </FormContainer>
   );
 }

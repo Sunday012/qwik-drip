@@ -1,6 +1,19 @@
 import { z } from "zod";
 
 export const welcomeFormSchema = z.object({
+  gender: z.enum(["male", "female", "non_binary", "other"], {
+    required_error: "Please select a gender",
+  }),
+  otherGender: z
+    .string()
+    .optional()
+    .transform((v) => v || undefined)
+    .refine((val) => {
+      if (val === "other") {
+        return val && val.length > 0;
+      }
+      return true;
+    }, "Please specify your gender"),
   age: z.enum(["18_24", "25_34", "35_44", "45_54", "55+"]),
   allergies: z.enum([
     "yes_medications",
@@ -26,17 +39,6 @@ export const welcomeFormSchema = z.object({
     "depression_anxiety",
     "none",
   ]),
-  gender: z.enum(["male", "female", "non_binary", "other"]),
-  otherGender: z
-    .string()
-    .optional()
-    .nullable()
-    .refine((val) => {
-      if (val === "") return false;
-      return true;
-    }, "Please specify your gender")
-    .optional(),
-
   goalWeight: z
     .string()
     .min(1, "Goal Weight is required")
@@ -54,7 +56,7 @@ export const welcomeFormSchema = z.object({
     "eat_frequently_throughout_the_day",
     "my_eating_pattern_varies",
   ]),
-  medication: z.enum(["yes_medications", "no_allergies"]),
+  medication: z.enum(["yes_medications", "no_medications"]),
   otherMedication: z
     .string()
     .optional()

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 import { RadioOption } from "./radio-option";
 
 export const mealStepSchema = z.object({
@@ -42,7 +42,7 @@ export function MealStep({ defaultValues, updateFields }: MealFormProps) {
   };
 
   return (
-    <FormWrapper title="How often do you eat in a day?" subheading="">
+    <FormContainer title="How often do you eat in a day?" subheading="">
       <RadioOption
         id="1_2meals"
         label="1-2 meals"
@@ -88,6 +88,6 @@ export function MealStep({ defaultValues, updateFields }: MealFormProps) {
         onChange={handleChange}
         name="meal"
       />
-    </FormWrapper>
+    </FormContainer>
   );
 }

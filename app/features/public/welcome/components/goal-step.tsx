@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Input } from "~/components/ui/input";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 
 const goalSchema = z.object({
   goalWeight: welcomeFormSchema.shape.goalWeight,
@@ -36,7 +36,7 @@ export function GoalStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormWrapper title="What is your goal weight?" subheading="">
+    <FormContainer title="What is your goal weight?" subheading="">
       <div className="w-full space-y-2">
         <div className="flex rounded-lg shadow-sm shadow-black/5">
           <Input
@@ -58,6 +58,6 @@ export function GoalStep({ defaultValues, updateFields }: UserFormProps) {
           I'm not sure; I'd like guidance.
         </p>
       </div>
-    </FormWrapper>
+    </FormContainer>
   );
 }

@@ -7,7 +7,7 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 
 const weightSchema = z.object({
   weight: welcomeFormSchema.shape.weight,
@@ -41,7 +41,7 @@ export function BmiStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormWrapper title="How much do you weigh currently?" subheading="">
+    <FormContainer title="How much do you weigh currently?" subheading="">
       <div className="w-full space-y-2">
         <Label
           htmlFor={`${id}-weight`}
@@ -53,10 +53,10 @@ export function BmiStep({ defaultValues, updateFields }: UserFormProps) {
           <Input
             id={`${id}-weight`}
             type="text"
-            name="weight"
+            name="goalWeight"
             value={weightValue || ""}
             onChange={(e) => handleChange(e.target.value)}
-            className="peer -me-px h-[80px] w-11/12 rounded-e-none p-4 shadow-none"
+            className="peer -me-px h-[40px] w-11/12 rounded-e-none p-4 shadow-none sm:h-[60px] lg:h-[80px] lg:w-11/12"
             autoFocus
           />
           <span className="z-10 inline-flex items-center rounded-e-lg border border-input px-3 text-sm text-[#363840]">
@@ -67,6 +67,6 @@ export function BmiStep({ defaultValues, updateFields }: UserFormProps) {
           <p className="text-sm text-red-500">{errors.weight.message}</p>
         )}
       </div>
-    </FormWrapper>
+    </FormContainer>
   );
 }

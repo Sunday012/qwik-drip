@@ -14,7 +14,7 @@ type FormWrapperProps = {
   image?: string;
 };
 
-export function FormWrapper({
+export function FormContainer({
   title,
   subheading,
   children,

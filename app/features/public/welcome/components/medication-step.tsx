@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { welcomeFormSchema } from "../schema";
-import { FormWrapper } from "./form-wrapper";
+import { FormContainer } from "./form-container";
 import { RadioOption } from "./radio-option";
 import { TextareaInput } from "./textarea-input";
 
@@ -20,7 +20,13 @@ type UserFormProps = {
 };
 
 export function MedicationStep({ defaultValues, updateFields }: UserFormProps) {
-  const { register, watch, setValue } = useForm<MedicationData>({
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<MedicationData>({
     resolver: zodResolver(medicationSchema),
     defaultValues: defaultValues || {
       medication: undefined,
@@ -30,45 +36,65 @@ export function MedicationStep({ defaultValues, updateFields }: UserFormProps) {
 
   const currentMedication = watch("medication");
 
+  const onSubmit = (data: MedicationData) => {
+    updateFields(data);
+  };
+
   const handleChange = (value: string) => {
-    setValue("medication", value as MedicationData["medication"]);
+    setValue("medication", value as MedicationData["medication"], {
+      shouldValidate: true,
+    });
     updateFields({ medication: value as MedicationData["medication"] });
   };
 
   const handleOtherChange = (value: string) => {
-    setValue("otherMedication", value);
+    setValue("otherMedication", value, { shouldValidate: true });
     updateFields({ otherMedication: value });
   };
 
   return (
-    <FormWrapper title="Are you currently on any medication?" subheading="">
-      <form className="flex w-full flex-col space-y-4">
+    <FormContainer title="Are you currently on any medication?" subheading="">
+      <form
+        className="flex w-full flex-col space-y-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <RadioOption
           id="yes_medications"
           label="Yes"
-          name="medication"
+          {...register("medication")}
           value="yes_medications"
           onChange={handleChange}
           checked={currentMedication === "yes_medications"}
         />
 
         {currentMedication === "yes_medications" && (
-          <TextareaInput
-            onChange={handleOtherChange}
-            value={watch("otherMedication") || ""}
-            placeholder="Please specify"
-          />
+          <div>
+            <TextareaInput
+              onChange={handleOtherChange}
+              value={watch("otherMedication") || ""}
+              placeholder="Please specify"
+            />
+            {errors.otherMedication && (
+              <p className="mt-1 text-sm text-red-500">
+                {errors.otherMedication.message}
+              </p>
+            )}
+          </div>
         )}
 
         <RadioOption
           id="no_allergies"
           label="No"
-          name="medication"
-          value="no_allergies"
+          {...register("medication")}
+          value="no_medications"
           onChange={handleChange}
-          checked={currentMedication === "no_allergies"}
+          checked={currentMedication === "no_medications"}
         />
+
+        {errors.medication && (
+          <p className="text-sm text-red-500">{errors.medication.message}</p>
+        )}
       </form>
-    </FormWrapper>
+    </FormContainer>
   );
 }
