@@ -42,7 +42,7 @@ export function MedicationStep({ defaultValues, updateFields }: UserFormProps) {
 
   return (
     <FormWrapper title="Are you currently on any medication?" subheading="">
-      <form>
+      <form className="flex w-full flex-col space-y-4">
         <RadioOption
           id="yes_medications"
           label="Yes"
