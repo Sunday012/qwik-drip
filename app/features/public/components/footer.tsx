@@ -11,7 +11,7 @@ import Logo from "~/assets/logo.png";
 
 export function Footer() {
   return (
-    <footer className="bg-[#121315] px-[5%] py-[8%] text-[#F0F5F4] sm:px-[10%] sm:py-[5%]">
+    <footer className="bg-[#121315] px-[5%] py-[8%] text-[#F0F5F4] sm:px-[6%] sm:py-[5%] md:px-[10%] md:py-[5%]">
       <div className="flex flex-col flex-wrap justify-between gap-8 sm:flex-row sm:gap-10">
         <div className="w-full sm:w-6/12">
           <div className="mb-4">
@@ -90,10 +90,10 @@ export function Footer() {
         </div>
       </div>
       <div className="mt-[8%] flex flex-col justify-between gap-4 text-base sm:mt-[10%] sm:flex-row sm:gap-5 sm:text-xl">
-        <p className="text-center sm:text-left">
+        <p className="text-center sm:text-sm sm:text-left">
           © 2024 Dr Essien, Inc. All rights reserved.
         </p>
-        <p className="text-center sm:text-right">
+        <p className="text-center sm:text-sm sm:text-right">
           <Link to="/">Privacy Policy</Link> |{" "}
           <Link to="/">Terms & Conditions</Link>
         </p>

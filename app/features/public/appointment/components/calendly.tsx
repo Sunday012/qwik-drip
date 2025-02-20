@@ -1,17 +1,19 @@
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 
+import { useEventStore } from "~/features/public/welcome/store/use-event-store";
+
 const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL;
 
 export function Calendly() {
+  const { setEvent, setInvitee } = useEventStore();
+
   useCalendlyEventListener({
-    onProfilePageViewed: (e) =>
-      console.log("onProfilePageViewed", e.data.payload),
-    onDateAndTimeSelected: (e) =>
-      console.log("onDateAndTimeSelected", e.data.payload),
-    onEventTypeViewed: (e) => console.log("onEventTypeViewed", e.data.payload),
-    onEventScheduled: (e) => console.log("onEventScheduled", e.data.payload),
-    onPageHeightResize: (e) =>
-      console.log("onPageHeightResize", e.data.payload),
+    onEventScheduled: (e) => {
+      console.log("onEventScheduled", e.data.payload);
+
+      setEvent(e.data.payload.event.uri);
+      setInvitee(e.data.payload.invitee.uri);
+    },
   });
 
   return (

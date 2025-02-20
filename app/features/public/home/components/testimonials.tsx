@@ -48,7 +48,7 @@ export function Testimonials() {
 function TestimonialCard({ data }: { data: Testimonial }) {
   return (
     <div
-      className="mb-5 w-[280px] overflow-clip rounded-2xl border-[1px] border-solid border-[#C9C9CC] p-4 sm:w-full sm:p-6 md:w-[320px]"
+      className="mb-5 w-[280px] overflow-clip rounded-2xl border-[1px] border-solid border-[#C9C9CC] p-4 sm:p-6 md:w-[320px]"
       key={data.id}
     >
       <div className="mb-4 flex items-start justify-between sm:mb-6">

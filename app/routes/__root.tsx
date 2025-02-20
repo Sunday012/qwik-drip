@@ -1,17 +1,15 @@
-import {
-  Outlet,
-  createRootRouteWithContext,
-} from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
+import * as React from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Meta, Scripts } from "@tanstack/start";
-import * as React from "react";
-import type { QueryClient } from "@tanstack/react-query";
+
 import { DefaultCatchBoundary } from "~/components/default-catch-boundary";
 import { NotFound } from "~/components/not-found";
-import { seo } from "~/utils/seo";
+import { TailwindIndicator } from "~/components/tailwind-indicator";
 import appCss from "~/styles/app.css?url";
-
+import { seo } from "~/utils/seo";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -80,8 +78,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-        {/* <ReactQueryDevtools buttonPosition="bottom-left" /> */}
-        {/* <TanStackRouterDevtools position="bottom-right" /> */}
+        <TailwindIndicator />
+        <ReactQueryDevtools buttonPosition="bottom-left" />
+        <TanStackRouterDevtools position="top-left" />
         <Scripts />
       </body>
     </html>
