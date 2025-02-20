@@ -117,12 +117,12 @@ export function Journey() {
         </div>
         <Marquee
           images={marqueeImages}
-          className="h-[120px] sm:h-[232px] lg:z-[1] lg:h-[400px]"
+          className="h-[20px] sm:h-[232px] lg:z-[1] lg:h-[400px] mt-[40px]"
         />
       </div>
 
       {/*   What's Included In The Program */}
-      <div className="pt-[30%] sm:pt-[10%]">
+      <div className="pt-[30%] mt-[300px]  sm:pt-[10%] sm:mt-[20%]">
         <div className="flex flex-col items-center gap-4 px-4 text-center sm:gap-6 sm:px-0">
           <h2 className="text-[24px] font-bold leading-[1.2] text-[#363840] sm:text-[40px] sm:leading-[60px] md:text-[56px]">
             What's Included In The Program

@@ -115,6 +115,7 @@ export default function WelcomePage() {
               <Button
                 type="button"
                 onClick={nextStep}
+                size={"xl"}
                 className="mx-auto w-full cursor-pointer rounded-xl bg-[#4272DD] px-3 py-3 text-center text-base sm:px-4 sm:py-4 sm:text-lg lg:text-xl"
               >
                 Get started
@@ -129,8 +130,9 @@ export default function WelcomePage() {
             <div className="mx-auto mb-6 flex w-full items-center justify-center rounded-b-[16px] border border-t-0 border-[#2222221A] p-4 sm:mb-8 sm:p-6 lg:mb-[40px] lg:max-w-[702px] lg:p-[32px]">
               <Button
                 type="button"
+                size={"xl"}
                 onClick={handleCompleted}
-                className="mx-auto w-full cursor-pointer text-[#FFFFFF] rounded-xl bg-[#4272DD] px-3 py-3 text-center text-base sm:max-w-[438px] sm:px-4 sm:py-4 sm:text-lg lg:max-w-[538px] lg:text-xl"
+                className="mx-auto w-full cursor-pointer rounded-xl bg-[#4272DD] px-3 py-3 text-center text-base text-[#FFFFFF] sm:max-w-[438px] sm:px-4 sm:py-4 sm:text-lg lg:max-w-[538px] lg:text-xl"
               >
                 Okay
               </Button>

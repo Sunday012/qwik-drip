@@ -4,11 +4,14 @@ const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL;
 
 export function Calendly() {
   useCalendlyEventListener({
-    onProfilePageViewed: () => console.log("onProfilePageViewed"),
-    onDateAndTimeSelected: () => console.log("onDateAndTimeSelected"),
-    onEventTypeViewed: () => console.log("onEventTypeViewed"),
-    onEventScheduled: (e) => console.log(e.data.payload),
-    onPageHeightResize: (e) => console.log(e.data.payload.height),
+    onProfilePageViewed: (e) =>
+      console.log("onProfilePageViewed", e.data.payload),
+    onDateAndTimeSelected: (e) =>
+      console.log("onDateAndTimeSelected", e.data.payload),
+    onEventTypeViewed: (e) => console.log("onEventTypeViewed", e.data.payload),
+    onEventScheduled: (e) => console.log("onEventScheduled", e.data.payload),
+    onPageHeightResize: (e) =>
+      console.log("onPageHeightResize", e.data.payload),
   });
 
   return (
