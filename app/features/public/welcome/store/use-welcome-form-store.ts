@@ -3,52 +3,20 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 import { localPersistStorage } from "~/lib/persist-storage";
 
-type FormData = {
-  gender: string;
-  otherGender: string;
-  age: string;
-  meal: string;
-  weight: string;
-  goalWeight: string;
-  mostWeight: string;
-  otherMostWeight: string;
-  healthCondition: string;
-  medication: string;
-  otherMedication: string;
-  reason: string;
-  otherReason: string;
-  allergies: string;
-};
-
-const INITIAL_DATA: FormData = {
-  gender: "",
-  otherGender: "",
-  age: "",
-  meal: "",
-  weight: "",
-  otherMostWeight: "",
-  goalWeight: "",
-  mostWeight: "",
-  healthCondition: "",
-  medication: "",
-  otherMedication: "",
-  reason: "",
-  otherReason: "",
-  allergies: "",
-};
+import { WelcomeFormSchema } from "../schema";
 
 type WelcomeFormStoreType = {
-  data: FormData;
+  data: WelcomeFormSchema;
   step: number;
   setStep: (step: number) => void;
   nextStep: () => void;
   previousStep: () => void;
-  updateFields: (fields: Partial<FormData>) => void;
+  updateFields: (fields: Partial<WelcomeFormSchema>) => void;
   clearFields: () => void;
 };
 
 const initialState = {
-  data: INITIAL_DATA,
+  data: {} as WelcomeFormSchema,
   step: 0,
 };
 

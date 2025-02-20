@@ -10,24 +10,23 @@ import { cn } from "~/lib/utils";
 import { Marquee } from "../../components/marquee";
 import { OnboardingModal } from "../../components/onboarding-modal";
 import { marqueeImages } from "../../data/marquee";
+import { AgeStep } from "../components/age-step";
+import { AllergiesStep } from "../components/allergies-step";
 import { AppointmentStep } from "../components/appointment";
-import { EighthStep } from "../components/eighth-step";
-import { FifthStep } from "../components/fifth-step";
-import { FirstStep } from "../components/first-step";
-import { FourthStep } from "../components/fourth-step";
-import { NinthStep } from "../components/ninth-step";
+import { BmiStep } from "../components/bmi-step";
+import { ConditionStep } from "../components/condition-step";
+import { GenderStep } from "../components/gender-step";
+import { GoalStep } from "../components/goal-step";
+import { MealStep } from "../components/meal-step";
+import { MedicationStep } from "../components/medication-step";
 import { PaymentStep } from "../components/payment";
-import { SecondStep } from "../components/second-step";
-import { SeventhStep } from "../components/seventh-step";
-import { SixthStep } from "../components/sixth-step";
-import { TenthStep } from "../components/tenth-step";
-import { ThirdStep } from "../components/third-step";
+import { ReasonStep } from "../components/reason-step";
+import { WeightStep } from "../components/weight-step";
 import { WelcomeProgress } from "../components/welcome-progress";
 import { WelcomeStep } from "../components/welcome-step";
-import useAuthFormStore from "../store/use-auth-form-store";
-import { useAuthModal } from "../store/use-auth-modal";
-import useRegisterFormStore from "../store/use-onboarding-form-store";
+import { useAuthFormStore } from "../store/use-auth-form-store";
 import { useOnboardingModal } from "../store/use-onboarding-modal";
+import { useRegisterFormStore } from "../store/use-register-form-store";
 import { useWelcomeFormStore } from "../store/use-welcome-form-store";
 
 export default function WelcomePage() {
@@ -65,7 +64,10 @@ export default function WelcomePage() {
       >
         <WelcomeProgress currentStep={step} totalSteps={13} />
         <>
-          <Link to="/" className="mx-auto my-6 md:mt-[40px] lg:mt-[50px] xl:mt-[60px]">
+          <Link
+            to="/"
+            className="mx-auto my-6 md:mt-[40px] lg:mt-[50px] xl:mt-[60px]"
+          >
             <img
               src={LogoWL}
               alt="Proxymed logo"
@@ -73,16 +75,36 @@ export default function WelcomePage() {
             />
           </Link>
           {step === 0 && <WelcomeStep />}
-          {step === 1 && <FirstStep {...data} updateFields={updateFields} />}
-          {step === 2 && <SecondStep {...data} updateFields={updateFields} />}
-          {step === 3 && <ThirdStep {...data} updateFields={updateFields} />}
-          {step === 4 && <FourthStep {...data} updateFields={updateFields} />}
-          {step === 5 && <FifthStep {...data} updateFields={updateFields} />}
-          {step === 6 && <SixthStep {...data} updateFields={updateFields} />}
-          {step === 7 && <SeventhStep {...data} updateFields={updateFields} />}
-          {step === 8 && <EighthStep {...data} updateFields={updateFields} />}
-          {step === 9 && <NinthStep {...data} updateFields={updateFields} />}
-          {step === 10 && <TenthStep {...data} updateFields={updateFields} />}
+          {step === 1 && (
+            <GenderStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 2 && (
+            <AgeStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 3 && (
+            <MealStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 4 && (
+            <BmiStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 5 && (
+            <GoalStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 6 && (
+            <WeightStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 7 && (
+            <ConditionStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 8 && (
+            <MedicationStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 9 && (
+            <ReasonStep defaultValues={data} updateFields={updateFields} />
+          )}
+          {step === 10 && (
+            <AllergiesStep defaultValues={data} updateFields={updateFields} />
+          )}
           {step === 11 && <AppointmentStep />}
           {step === 12 && <PaymentStep />}
         </>
@@ -130,7 +152,7 @@ export default function WelcomePage() {
                 onClick={step === 10 ? handleLogin : nextStep}
                 className={cn(
                   "h-[40px] w-[120px] cursor-pointer rounded-2xl bg-[#4272DD] px-3 py-2 text-sm text-white shadow-[0px_1px_2px_0px_#0000001A] sm:h-[48px] sm:w-[120px] sm:px-4 sm:text-base lg:h-[57px] lg:w-[144px] lg:px-8 lg:py-4 lg:text-lg",
-                  step === 10 && "sm:w-[220px] lg:w-[261px]",
+                  step === 10 && "w-[200px] sm:w-[220px] lg:w-[261px]",
                 )}
               >
                 {step === 10 ? "Schedule Appointment" : "Continue"}
