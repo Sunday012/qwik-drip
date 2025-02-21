@@ -2,7 +2,7 @@ import { programData } from "../../data/program";
 
 export function Program() {
   return (
-    <div className="mt-[300px] sm:mt-[0%] sm:py-[80px]">
+    <div className="mt-[300px] py-[80px] sm:mt-[0%] sm:py-[80px]">
       <div className="flex flex-col items-center gap-4 px-4 text-center sm:gap-6 sm:px-0">
         <h2 className="text-[24px] font-bold leading-[1.2] text-[#363840] sm:text-[40px] sm:leading-[60px] md:text-[56px]">
           What's Included In The Program

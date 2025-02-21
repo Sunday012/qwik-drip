@@ -2,7 +2,7 @@ import { programTimelineData, timelineData } from "../../data/timeline";
 
 export function Journey() {
   return (
-    <div className="py-[80px]">
+    <div className="py-[60px] sm:py-[60px] lg:py-[80px]">
       <div className="mx-auto w-full px-[5%] text-center lg:w-[576px] lg:px-[1%]">
         <h2 className="mb-4 text-[24px] font-bold leading-[25.92px] text-[#363840] sm:text-[40px] sm:leading-[43.2px] lg:text-[56px] lg:leading-[60.48px]">
           Your Path To Healthy <br /> Weight Loss

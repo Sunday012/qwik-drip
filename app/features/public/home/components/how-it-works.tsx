@@ -2,12 +2,12 @@ import { achieveData } from "../../data/achieve";
 
 export function HowItWorks() {
   return (
-    <div className="py-[10%]">
+    <div className="py-[40px] sm:py-[10%]">
       <div className="flex flex-col items-center gap-4 px-4 text-center sm:gap-6 sm:px-0">
         <h2 className="text-[28px] font-bold leading-[1.2] text-[#363840] sm:text-[32px] sm:leading-[60px] md:text-[56px]">
           How It Works
         </h2>
-        <p className="w-10/12 text-base text-[#7F8493] sm:text-lg lg:w-1/2">
+        <p className="text-sm py-6 text-[#7F8493] sm:text-lg lg:w-1/2">
           Our primary goal is to empower you on your weight loss journey. We are
           dedicated to providing personalized, evidence-based solutions that
           promote sustainable health and well-being.

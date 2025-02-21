@@ -49,7 +49,7 @@ export const faqs = [
 export function FAQ() {
   return (
     <section className="px-[5%] pb-[8%] pt-[8%] sm:pb-[5%] sm:pt-[5%] lg:px-[10%]">
-      <div className="relative flex flex-col items-center justify-center gap-4 py-[3%] text-center sm:gap-6">
+      <div className="relative my-6 flex flex-col items-center justify-center gap-4 py-[3%] text-center sm:gap-6">
         <h2 className="text-[28px] font-bold leading-[1.2] text-[#252529] sm:text-[40px] sm:leading-[56px] md:w-2/3 lg:w-1/2">
           Common Questions
         </h2>

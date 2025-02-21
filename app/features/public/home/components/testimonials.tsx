@@ -7,19 +7,19 @@ import { Testimonial } from "../../types";
 
 export function Testimonials() {
   return (
-    <section className="px-[5%] lg:px-[7%]">
+    <section className="px-[5%] py-[40px] sm:py-[60px] lg:py-[80px] lg:px-[7%]">
       <div className="relative flex flex-col items-center justify-center gap-6 py-[3%] text-center">
         <h2 className="sm:leading-11 w-1/2 text-[32px] font-bold leading-9 text-[#252529] sm:text-[56px]">
           Testimonials
         </h2>
-        <p className="text-[#7F8493] md:w-11/12 lg:w-[55%]">
+        <p className="text-[#7F8493] mt-6 md:w-11/12 lg:w-[55%]">
           Discover how our program has transformed the lives of countless
           individuals. Read inspiring testimonials from our clients who have
           achieved their weight loss goals and improved their health.
         </p>
         <Link
           to="/"
-          className="border-blue inline-block rounded-[444px] border-[1px] border-solid px-8 py-4 font-bold text-[#1E6BB6]"
+          className="border-blue my-6 inline-block rounded-[444px] border-[1px] border-solid px-8 py-4 font-bold text-[#1E6BB6]"
         >
           WRITE A REVIEW
         </Link>
