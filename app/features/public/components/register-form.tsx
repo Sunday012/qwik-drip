@@ -1,15 +1,12 @@
 import { useId } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { parseDate } from "@internationalized/date";
 import { Link } from "@tanstack/react-router";
-import { format } from "date-fns";
-import { CalendarIcon, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import LogoWL from "~/assets/logo_wl.svg";
 import { Button } from "~/components/ui/button";
-import { Calendar } from "~/components/ui/calendar";
 import { Checkbox } from "~/components/ui/checkbox";
 import {
   DialogContent,
@@ -17,29 +14,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
 import { cn } from "~/lib/utils";
 
 import {
@@ -48,12 +24,8 @@ import {
 } from "../api/mutations";
 import { cities, genders, states } from "../data/countries";
 import { useAuthModal } from "../welcome/store/use-auth-modal";
-import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form-store";
-import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
 import useRegisterFormStore from "../welcome/store/use-register-form-store";
 import { useRegisterModal } from "../welcome/store/use-register-modal";
-import { FormDate } from "./inputs/form-date";
-import { FormInput } from "./inputs/form-input";
 import FormSelect from "./select";
 import SelectWithSearch from "./select-with-search";
 
@@ -226,8 +198,9 @@ export function RegisterForm() {
                 <Input
                   {...register("date_of_birth")}
                   id={`${id}-date-of-birth`}
+                  placeholder="Date of birth"
                   type="date"
-                  className="h-9 rounded-[16px] transition-all duration-200 group-focus-within:h-9 group-focus-within:pt-2 has-[input:not(:placeholder-shown)]:h-9 has-[input:not(:placeholder-shown)]:pt-2"
+                  className="h-9 w-full rounded-[16px] transition-all duration-200 group-focus-within:h-9 group-focus-within:pt-2 has-[input:not(:placeholder-shown)]:h-9 has-[input:not(:placeholder-shown)]:pt-2"
                 />
                 {errors.date_of_birth && (
                   <p className="mt-1 text-xs text-red-500">

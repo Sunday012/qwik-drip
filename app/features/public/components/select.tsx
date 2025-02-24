@@ -1,6 +1,5 @@
 import { useId } from "react";
 
-import { Label } from "~/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -8,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { cn } from "~/lib/utils";
 
 export default function FormSelect({
   label,
@@ -28,7 +28,10 @@ export default function FormSelect({
           id={id}
           className="w-full rounded-[16px] bg-background px-3 font-normal outline-offset-0 hover:bg-background focus-visible:border-ring focus-visible:outline-[3px] focus-visible:outline-ring/20"
         >
-          <SelectValue placeholder={label} />
+          <SelectValue
+            placeholder={label}
+            className={cn(!selectedValue && "text-muted-foreground")}
+          />
         </SelectTrigger>
         <SelectContent>
           {items.map((item) => (
