@@ -1,63 +1,76 @@
 import { useId } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { z } from "zod";
 
 import { Input } from "~/components/ui/input";
 
-import { welcomeFormSchema } from "../schema";
-import { FormContainer } from "./form-container";
+import { WelcomeFormSchema, welcomeFormSchema } from "../schema";
+import { InputField } from "../types";
+import { FormContainer, WelcomeStepFormProps } from "./form/form-container";
 
-const goalSchema = z.object({
-  goalWeight: welcomeFormSchema.shape.goalWeight,
-});
-
-type FormData = z.infer<typeof goalSchema>;
-
-type UserFormProps = {
-  defaultValues?: FormData;
-  updateFields: (fields: Partial<FormData>) => void;
-};
-
-export function GoalStep({ defaultValues, updateFields }: UserFormProps) {
+export function GoalStep({ data, updateFields }: WelcomeStepFormProps) {
   const id = useId();
-  const { setValue, watch } = useForm<FormData>({
-    resolver: zodResolver(goalSchema),
-    defaultValues: defaultValues || {
-      goalWeight: undefined,
-    },
-  });
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext<WelcomeFormSchema>();
 
   const watchGoalWeight = watch("goalWeight");
 
   const handleChange = (value: string) => {
-    setValue("goalWeight", parseFloat(value) as FormData["goalWeight"]);
-    updateFields({ goalWeight: parseFloat(value) as FormData["goalWeight"] });
+    setValue(
+      "goalWeight",
+      parseFloat(value) as WelcomeFormSchema["goalWeight"],
+    );
+    updateFields({
+      goalWeight: parseFloat(value) as WelcomeFormSchema["goalWeight"],
+    });
   };
 
   return (
-    <FormContainer title="What is your goal weight?" subheading="">
-      <div className="w-full space-y-2">
-        <div className="flex rounded-lg shadow-sm shadow-black/5">
-          <Input
-            id={`${id}-weight`}
-            type="text"
-            name="goalWeight"
-            value={watchGoalWeight || ""}
-            onChange={(e) => handleChange(e.target.value)}
-            className="peer -me-px h-[40px] w-11/12 rounded-e-none p-4 shadow-none sm:h-[60px] lg:h-[80px] lg:w-11/12"
-            autoFocus
-          />
-          <span className="z-10 inline-flex items-center rounded-e-lg border border-input px-3 text-sm text-[#363840]">
-            KG
-          </span>
-        </div>
-      </div>
-      <div className="mt-[40px]">
-        <p className="text-blue-500 underline">
-          I'm not sure; I'd like guidance.
+    <FormContainer heading={data.heading} description={data.description}>
+      {errors.weight && (
+        <p className="my-2 text-right text-sm font-medium text-destructive sm:text-base">
+          {errors.weight?.message}
         </p>
-      </div>
+      )}
+      {data.form &&
+        (data.form as InputField[]).map((form) => {
+          const name = form.name as keyof WelcomeFormSchema;
+
+          const { type, placeholder } = form;
+
+          return (
+            <>
+              <div className="w-full space-y-2">
+                <div className="flex rounded-lg shadow-sm shadow-black/5">
+                  <Input
+                    id={`${id}-weight`}
+                    type={type}
+                    placeholder={placeholder}
+                    className="peer -me-px h-[40px] w-11/12 rounded-e-none p-4 shadow-none sm:h-[60px] lg:h-[80px] lg:w-11/12"
+                    {...register(name as keyof WelcomeFormSchema)}
+                  />
+                  <span className="z-10 inline-flex items-center rounded-e-lg border border-input px-3 text-sm text-[#363840]">
+                    KG
+                  </span>
+                </div>
+                {errors.goalWeight && (
+                  <p className="text-sm text-red-500">
+                    {errors.goalWeight.message}
+                  </p>
+                )}
+              </div>
+              <div className="mt-[40px]">
+                <p className="text-blue-500 underline">
+                  I'm not sure; I'd like guidance.
+                </p>
+              </div>
+            </>
+          );
+        })}
     </FormContainer>
   );
 }

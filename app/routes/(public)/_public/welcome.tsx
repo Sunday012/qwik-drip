@@ -1,20 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-
+import { fallback, zodValidator } from "@tanstack/zod-adapter";
+import { z } from "zod";
 
 import WelcomePage from "~/features/public/welcome/pages";
 
-export const Route = createFileRoute("/(public)/_public/welcome")({
-  // loader: async () => {
-  //   const event = await getEvent({
-  //     data: {
-  //       url: "https://calendly.com/john-doe/30min",
-  //     },
-  //   });
+const stepSearchSchema = z.object({
+  step: fallback(z.number(), 1).default(1),
+  submit: fallback(z.boolean(), false).default(false),
+});
 
-  //   return {
-  //     event,
-  //   };
-  // },
+export const Route = createFileRoute("/(public)/_public/welcome")({
+  validateSearch: zodValidator(stepSearchSchema),
   component: () => <WelcomePage />,
   errorComponent: ({ error }) => (
     <div

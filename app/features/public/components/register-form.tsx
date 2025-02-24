@@ -26,8 +26,7 @@ import { cities, genders, states } from "../data/countries";
 import { useAuthModal } from "../welcome/store/use-auth-modal";
 import useRegisterFormStore from "../welcome/store/use-register-form-store";
 import { useRegisterModal } from "../welcome/store/use-register-modal";
-import FormSelect from "./select";
-import SelectWithSearch from "./select-with-search";
+import { FormSelect } from "./form-select";
 
 const FormSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
@@ -156,11 +155,12 @@ export function RegisterForm() {
                 control={control}
                 name="state"
                 render={({ field }) => (
-                  <SelectWithSearch
+                  <FormSelect
                     label="State"
                     items={states}
                     selectedValue={field.value}
                     onSelect={field.onChange}
+                    showSearch={true}
                   />
                 )}
               />
@@ -181,12 +181,13 @@ export function RegisterForm() {
                     items={cities}
                     selectedValue={field.value}
                     onSelect={field.onChange}
+                    showSearch={false}
                   />
                 )}
               />
-              {errors.city && (
+              {errors.state && (
                 <p className="mt-1 text-xs text-red-500">
-                  {errors.city.message}
+                  {errors.state.message}
                 </p>
               )}
             </div>
@@ -221,6 +222,7 @@ export function RegisterForm() {
                     items={genders}
                     selectedValue={field.value}
                     onSelect={field.onChange}
+                    showSearch={false}
                   />
                 )}
               />

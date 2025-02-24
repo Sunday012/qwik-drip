@@ -17,7 +17,7 @@ type WelcomeFormStoreType = {
 
 const initialState = {
   data: {} as WelcomeFormSchema,
-  step: 0,
+  step: 1,
 };
 
 export const useWelcomeFormStore = create<WelcomeFormStoreType>()(

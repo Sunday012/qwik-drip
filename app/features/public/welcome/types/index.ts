@@ -90,3 +90,112 @@ export type EventResource = {
     uri: string;
   };
 };
+
+// export type Step = {
+//   id: number;
+//   title: string;
+// };
+
+// export interface InputField {
+//   field: string;
+//   name: string;
+//   label: string;
+//   placeholder?: string;
+//   type?: string;
+// }
+
+// export interface RadioField {
+//   field: string;
+//   name: string;
+//   inputVisible: boolean;
+//   label: string;
+// }
+
+// export interface CheckboxField {
+//   field: string;
+//   name: string;
+//   inputVisible: boolean;
+//   label: string;
+// }
+
+// export type StepsData = {
+//   id: number;
+//   title: string;
+//   heading: string;
+//   description: string;
+//   form?: (InputField | RadioField | CheckboxField)[];
+// };
+
+type Step = {
+  id: number;
+  title: string;
+};
+
+type PlanType = "monthly" | "yearly";
+
+type BaseLabel = {
+  type: string;
+};
+
+type RadioLabel = {
+  [K in PlanType]: BaseLabel;
+};
+type CheckboxLabel = {
+  [K in PlanType]: BaseLabel & {
+    description: string;
+  };
+};
+
+interface InputField {
+  field: string;
+  name: string;
+  label: string;
+  value: string;
+  placeholder?: string;
+  type?: string;
+}
+
+interface RadioField {
+  field: string;
+  name: string;
+  value: string;
+  inputVisible: boolean;
+  label: string;
+}
+
+interface CheckboxField {
+  field: string;
+  name: string;
+  inputVisible: boolean;
+  label: string;
+  value: string;
+}
+
+type StepsData = {
+  id: number;
+  title: string;
+  heading: string;
+  description: string;
+  form?: (InputField | RadioField | CheckboxField)[];
+};
+
+type WelcomeStepsData = {
+  id: number;
+  title: string;
+  heading: string;
+  description: string;
+  form?: (InputField | RadioField | CheckboxField)[];
+};
+
+export type {
+  Step,
+  PlanType,
+  BaseLabel,
+  RadioLabel,
+  CheckboxLabel,
+  InputField,
+  RadioField,
+  CheckboxField,
+  StepsData,
+  WelcomeStepsData
+};

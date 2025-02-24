@@ -28,7 +28,7 @@ export function LoginVerifyOTP() {
   }
 
   return (
-    <DialogContent className="max-w-sm rounded-[24px] px-4 pb-8 pt-6 sm:px-8 sm:pb-10 sm:pt-8 md:max-w-xl lg:px-[64px] lg:pb-[60px] lg:pt-[40px] xl:max-w-[700px]">
+    <DialogContent className="max-w-xs rounded-[24px] px-4 pb-8 pt-6 sm:max-w-sm sm:px-8 sm:pb-10 sm:pt-8 md:max-w-xl lg:px-[64px] lg:pb-[60px] lg:pt-[40px] xl:max-w-[700px]">
       <div className="flex flex-col items-center">
         <div
           className="flex shrink-0 items-center justify-center"

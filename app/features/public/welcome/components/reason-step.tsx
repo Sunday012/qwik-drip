@@ -1,38 +1,26 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { z } from "zod";
 
-import { welcomeFormSchema } from "../schema";
-import { FormContainer } from "./form-container";
+import { WelcomeFormSchema } from "../schema";
+import { RadioField } from "../types";
+import { FormContainer, WelcomeStepFormProps } from "./form/form-container";
 import { RadioOption } from "./radio-option";
 import { TextareaInput } from "./textarea-input";
 
-const reasonSchema = z.object({
-  reason: welcomeFormSchema.shape.reason,
-  otherReason: welcomeFormSchema.shape.otherReason,
-});
-
-type ReasonData = z.infer<typeof reasonSchema>;
-
-type UserFormProps = {
-  defaultValues?: ReasonData;
-  updateFields: (fields: Partial<ReasonData>) => void;
-};
-
-export function ReasonStep({ defaultValues, updateFields }: UserFormProps) {
-  const { watch, setValue } = useForm<ReasonData>({
-    resolver: zodResolver(reasonSchema),
-    defaultValues: defaultValues || {
-      reason: undefined,
-      otherReason: "",
-    },
-  });
+export function ReasonStep({ data, updateFields }: WelcomeStepFormProps) {
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext<WelcomeFormSchema>();
 
   const reasonValue = watch("reason");
 
   const handleChange = (value: string) => {
-    setValue("reason", value as ReasonData["reason"]);
-    updateFields({ reason: value as ReasonData["reason"] });
+    setValue("reason", value as WelcomeFormSchema["reason"]);
+    updateFields({ reason: value as WelcomeFormSchema["reason"] });
   };
 
   const handleOtherChange = (value: string) => {
@@ -41,58 +29,42 @@ export function ReasonStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormContainer title="What's your reason for losing weight?" subheading="">
-      <RadioOption
-        id="improve_health"
-        label="Improve overall health"
-        value="improve_health"
-        checked={reasonValue === "improve_health"}
-        onChange={handleChange}
-        name="reason"
-      />
+    <FormContainer heading={data.heading} description={data.description}>
+      {errors.reason && (
+        <p className="my-2 text-right text-sm font-medium text-destructive sm:text-base">
+          {errors.reason?.message}
+        </p>
+      )}
+      {data.form &&
+        (data.form as RadioField[]).map((form) => {
+          const name = form.name as keyof WelcomeFormSchema;
 
-      <RadioOption
-        id="boost_confidence"
-        label="Boost self-confidence and appearance"
-        value="boost_confidence"
-        checked={reasonValue === "boost_confidence"}
-        onChange={handleChange}
-        name="reason"
-      />
+          const { label, value, inputVisible } = form;
 
-      <RadioOption
-        id="manage_medical_condition"
-        label="Manage a medical condition"
-        value="manage_medical_condition"
-        checked={reasonValue === "manage_medical_condition"}
-        onChange={handleChange}
-        name="reason"
-      />
-
-      <RadioOption
-        id="prep_for_event"
-        label="Prepare for a specific event (e.g., wedding, surgery)"
-        value="prep_for_event"
-        checked={reasonValue === "prep_for_event"}
-        onChange={handleChange}
-        name="reason"
-      />
-
-      <RadioOption
-        id="other"
-        label="Other"
-        value="other"
-        checked={reasonValue === "other"}
-        onChange={handleChange}
-        name="reason"
-      />
-
-      {reasonValue === "other" && (
-        <TextareaInput
-          value={watch("otherReason") || ""}
-          onChange={handleOtherChange}
-          placeholder="Please specify"
-        />
+          return (
+            <RadioOption
+              key={label}
+              id={label}
+              label={label}
+              inputVisible={inputVisible}
+              value={value}
+              error={errors[name]}
+              {...register(name as keyof WelcomeFormSchema)}
+            />
+          );
+        })}
+      {reasonValue === "Other" && (
+        <>
+          <TextareaInput
+            value={watch("otherReason") || ""}
+            onChange={handleOtherChange}
+          />
+          {errors.otherReason && (
+            <span className="text-sm text-red-500">
+              {errors.otherReason?.message}
+            </span>
+          )}
+        </>
       )}
     </FormContainer>
   );

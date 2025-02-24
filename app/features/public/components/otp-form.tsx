@@ -175,7 +175,7 @@ function Slot(
   return (
     <div
       className={cn(
-        "flex h-[50px] w-[50px] items-center justify-center rounded-2xl border border-input bg-background font-medium text-foreground shadow-sm shadow-black/5 transition-shadow sm:h-[55px] sm:w-[80px]",
+        "flex h-[40px] w-[40px] items-center justify-center rounded-2xl border border-input bg-background font-medium text-foreground shadow-sm shadow-black/5 transition-shadow sm:h-[60px] sm:w-[80px]",
         { "z-10 border border-ring ring-[3px] ring-ring/20": props.isActive },
         {
           "z-10 border-[1.4px] border-[#E12121] bg-[#FEEBEB] ring-[1.4px] ring-[#E12121]":

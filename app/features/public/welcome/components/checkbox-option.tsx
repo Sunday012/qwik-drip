@@ -5,7 +5,7 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { cn } from "~/lib/utils";
 
-export interface RadioProps
+export interface CheckboxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
@@ -17,7 +17,7 @@ export interface RadioProps
   error?: FieldError;
 }
 
-const RadioOption = React.forwardRef<HTMLInputElement, RadioProps>(
+const CheckboxOption = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (
     { inputVisible, children, className, error, label, checked, ...props },
     ref,
@@ -34,11 +34,11 @@ const RadioOption = React.forwardRef<HTMLInputElement, RadioProps>(
             "md:h-[70px] md:gap-[16px] md:p-[20px]",
             "lg:h-[80px] lg:gap-[24px] lg:p-[24px]",
             checked ? "border-[#4272DD]" : "border-[rgba(0,0,0,0.1)]",
-            error?.message ? "border-destructive" : null,
+            error?.message ? "border-destructive" : "",
           )}
         >
           <Input
-            type="radio"
+            type="checkbox"
             ref={ref}
             {...props}
             id={id}
@@ -57,4 +57,4 @@ const RadioOption = React.forwardRef<HTMLInputElement, RadioProps>(
   },
 );
 
-export { RadioOption };
+export { CheckboxOption };

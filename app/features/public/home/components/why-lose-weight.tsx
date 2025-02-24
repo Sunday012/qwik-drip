@@ -10,29 +10,29 @@ export function WhyLoseWeight() {
         <h2 className="mb-[2%] text-[32px] font-bold leading-[1.2] text-[#363840] sm:text-[56px] sm:leading-[60px]">
           Why Lose Weight
         </h2>
-        <p className="lg:w-4/10 mb-[2.5%] w-10/12 my-6 text-base text-[#7F8493] sm:text-lg">
+        <p className="lg:w-4/10 my-6 mb-[2.5%] w-10/12 text-base text-[#7F8493] sm:text-lg">
           Evidence-based approach combining medical expertise with proven weight
           loss strategies
         </p>
         <Link
           to="/welcome"
-          className="inline-block mt-6 rounded-lg bg-[#4272DD] px-6 py-3 text-center text-base font-bold text-white sm:py-4 sm:text-lg"
+          className="mt-6 inline-block rounded-lg bg-[#4272DD] px-6 py-3 text-center text-base font-bold text-white sm:py-4 sm:text-lg"
         >
           GET STARTED
         </Link>
 
         {/* Mobile layout for benefit cards */}
-        <div className="mt-8 flex w-[90%] flex-col gap-4 sm:hidden">
-          <div className="border-l-solid w-full rounded-xl border-[1px] border-l-4 border-[#ECECED] border-l-[#4272DD] bg-white px-4 py-3 text-base font-medium text-[#363840] shadow-[0px_2px_4px_0px_#0000000D]">
+        <div className="mt-8 flex w-[90%] space-y-3 flex-col gap-4 sm:hidden">
+          <div className="border-l-solid h-[41px] w-[280px] rotate-[3.62deg] rounded-r-xl border-[1px] border-l-4 border-[#ECECED] border-l-[#4272DD] bg-white px-4 py-3 text-xs font-medium leading-[16.8px] text-[#363840] shadow-[0px_2px_4px_0px_#0000000D]">
             <p>Look and feel good in anything.</p>
           </div>
-          <div className="border-r-solid w-full rounded-xl border-[1px] border-r-4 border-[#ECECED] border-r-[#4272DD] bg-white px-4 py-3 text-base font-medium text-[#363840] shadow-[0px_2px_4px_0px_#0000000D]">
+          <div className="border-r-solid h-[41px] w-[280px] -rotate-[3.62deg] self-end rounded-l-xl border-[1px] border-r-4 border-[#ECECED] border-r-[#4272DD] bg-white px-4 py-3 text-xs font-medium leading-[16.8px] text-[#363840] shadow-[0px_2px_4px_0px_#0000000D]">
             <p>Be healthier and more productive</p>
           </div>
-          <div className="border-l-solid w-full rounded-xl border-[1px] border-l-4 border-[#ECECED] border-l-[#4272DD] bg-white px-4 py-3 text-base font-medium text-[#363840] shadow-[0px_2px_4px_0px_#0000000D]">
+          <div className="border-l-solid h-[41px] w-[280px] rotate-[3.62deg] rounded-r-xl border-[1px] border-l-4 border-[#ECECED] border-l-[#4272DD] bg-white px-4 py-3 text-xs font-medium leading-[16.8px] text-[#363840] shadow-[0px_2px_4px_0px_#0000000D]">
             <p>Boost self esteem and confidence</p>
           </div>
-          <div className="border-r-solid w-full rounded-xl border-[1px] border-r-4 border-[#ECECED] border-r-[#4272DD] bg-white px-4 py-3 text-base font-medium text-[#363840] shadow-[0px_2px_4px_0px_#0000000D]">
+          <div className="border-r-solid h-[41px] w-[280px] -rotate-[3.62deg] self-end rounded-l-xl border-[1px] border-r-4 border-[#ECECED] border-r-[#4272DD] bg-white px-4 py-3 text-xs font-medium leading-[16.8px] text-[#363840] shadow-[0px_2px_4px_0px_#0000000D]">
             <p>Sleep better and reduce stress</p>
           </div>
         </div>

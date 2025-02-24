@@ -19,11 +19,12 @@ import {
 } from "~/components/ui/popover";
 import { cn } from "~/lib/utils";
 
-export default function SelectWithSearch({
+export function FormSelect({
   label,
   items,
   selectedValue,
   onSelect,
+  showSearch = false,
 }: {
   label: string;
   items: {
@@ -32,10 +33,10 @@ export default function SelectWithSearch({
   }[];
   selectedValue: string;
   onSelect: (value: string) => void;
+  showSearch?: boolean;
 }) {
   const id = useId();
   const [open, setOpen] = useState<boolean>(false);
-  
 
   return (
     <div className="space-y-2">
@@ -48,7 +49,12 @@ export default function SelectWithSearch({
             aria-expanded={open}
             className="w-full justify-between bg-background px-3 font-normal outline-offset-0 hover:bg-background focus-visible:border-ring focus-visible:outline-[3px] focus-visible:outline-ring/20"
           >
-            <span className={cn("truncate", !selectedValue && "text-muted-foreground")}>
+            <span
+              className={cn(
+                "truncate",
+                !selectedValue && "text-muted-foreground",
+              )}
+            >
               {selectedValue
                 ? items.find((item) => item.value === selectedValue)?.label
                 : `Select ${label}`}
@@ -66,7 +72,7 @@ export default function SelectWithSearch({
           align="start"
         >
           <Command>
-            <CommandInput placeholder="Search" />
+            {showSearch && <CommandInput placeholder="Search" />}
             <CommandList>
               <CommandEmpty>{`No ${label} found.`}</CommandEmpty>
               <CommandGroup>
@@ -75,7 +81,9 @@ export default function SelectWithSearch({
                     key={item.value}
                     value={item.value}
                     onSelect={(currentValue) => {
-                      onSelect(currentValue === selectedValue ? "" : currentValue);
+                      onSelect(
+                        currentValue === selectedValue ? "" : currentValue,
+                      );
                       setOpen(false);
                     }}
                   >

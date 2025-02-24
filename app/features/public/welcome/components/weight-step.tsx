@@ -1,98 +1,97 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useFormContext } from "react-hook-form";
 
-import { welcomeFormSchema } from "../schema";
-import { FormContainer } from "./form-container";
+import { WelcomeFormSchema } from "../schema";
+import { RadioField } from "../types";
+import { FormContainer, WelcomeStepFormProps } from "./form/form-container";
 import { RadioOption } from "./radio-option";
 import { TextareaInput } from "./textarea-input";
 
-const weightStepSchema = z.object({
-  mostWeight: welcomeFormSchema.shape.mostWeight,
-  otherMostWeight: welcomeFormSchema.shape.otherMostWeight,
-});
+export function WeightStep({ data, updateFields }: WelcomeStepFormProps) {
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext<WelcomeFormSchema>();
 
-type WeightStepData = z.infer<typeof weightStepSchema>;
-
-type UserFormProps = {
-  defaultValues?: WeightStepData;
-  updateFields: (fields: Partial<WeightStepData>) => void;
-};
-
-export function WeightStep({ defaultValues, updateFields }: UserFormProps) {
-  const { setValue, watch } = useForm<WeightStepData>({
-    resolver: zodResolver(weightStepSchema),
-    defaultValues: defaultValues || {
-      mostWeight: undefined,
-      otherMostWeight: undefined,
-    },
-  });
-
-  const mostWeightValue = watch("mostWeight");
-
-  const handleChange = (value: string) => {
-    setValue("mostWeight", value as WeightStepData["mostWeight"]);
-    updateFields({ mostWeight: value as WeightStepData["mostWeight"] });
-  };
+  const selectedMostWeight = watch("mostWeight");
 
   const handleOtherChange = (value: string) => {
-    setValue("otherMostWeight", value);
+    setValue("otherMostWeight", value, {
+      shouldValidate: true,
+    });
     updateFields({ otherMostWeight: value });
   };
 
   return (
-    <FormContainer
-      title="What part of your body holds the most weight?"
-      subheading=""
-    >
-      <RadioOption
-        id="abdomen"
-        label="Abdomen"
-        name="mostWeight"
-        value="abdomen"
-        onChange={handleChange}
-        checked={mostWeightValue === "abdomen"}
-        autoFocus
-      />
-      <RadioOption
-        id="hips_thighs"
-        label="Hips and thighs"
-        name="mostWeight"
-        value="hips_thighs"
-        onChange={handleChange}
-        checked={mostWeightValue === "hips_thighs"}
-      />
-      <RadioOption
-        id="arms_shoulders"
-        label="Arms and shoulders"
-        name="mostWeight"
-        value="arms_shoulders"
-        onChange={handleChange}
-        checked={mostWeightValue === "arms_shoulders"}
-      />
-      <RadioOption
-        id="entire_body"
-        label="Entire body evenly distributed"
-        name="mostWeight"
-        value="entire_body"
-        onChange={handleChange}
-        checked={mostWeightValue === "entire_body"}
-      />
-      <RadioOption
-        id="other"
-        label="Other"
-        name="other"
-        value="other"
-        onChange={handleChange}
-        checked={mostWeightValue === "other"}
-      />
-      {mostWeightValue === "other" && (
-        <TextareaInput
-          value={watch("otherMostWeight") || ""}
-          onChange={handleOtherChange}
-          placeholder="Please specify"
-        />
+    <FormContainer heading={data.heading} description={data.description}>
+      {errors.mostWeight && (
+        <p className="my-2 text-right text-sm font-medium text-destructive sm:text-base">
+          {errors.mostWeight?.message}
+        </p>
       )}
+      {data.form &&
+        (data.form as RadioField[]).map((form) => {
+          const name = form.name as keyof WelcomeFormSchema;
+
+          const { label, value, inputVisible } = form;
+
+          return (
+            <RadioOption
+              key={label}
+              id={label}
+              label={label}
+              inputVisible={inputVisible}
+              value={value}
+              error={errors[name]}
+              {...register(name as keyof WelcomeFormSchema)}
+            />
+          );
+        })}
+      {selectedMostWeight === "Other" && (
+        <>
+          <TextareaInput
+            value={watch("otherMostWeight") || ""}
+            onChange={handleOtherChange}
+          />
+          {errors.otherMostWeight && (
+            <span className="text-sm text-red-500">
+              {errors.otherMostWeight?.message}
+            </span>
+          )}
+        </>
+      )}
+      {/* {data.form &&
+        (data.form as CheckboxField[]).map((form) => {
+          const name = form.name as keyof WelcomeFormSchema;
+
+          const { label, value, inputVisible } = form;
+
+          return (
+            <CheckboxOption
+              key={label}
+              id={label}
+              label={label}
+              inputVisible={inputVisible}
+              value={value}
+              error={errors[name]}
+              {...register(name as keyof WelcomeFormSchema)}
+            />
+          );
+        })} */}
+      {/* {mostWeightValue === "other" && (
+        <>
+          <TextareaInput
+            value={watch("otherMostWeight") || ""}
+            onChange={handleOtherChange}
+          />
+          {errors.gender && (
+            <span className="text-sm text-red-500">
+              {errors.otherGender?.message}
+            </span>
+          )}
+        </>
+      )} */}
     </FormContainer>
   );
 }

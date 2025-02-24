@@ -1,110 +1,53 @@
-import * as React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { z } from "zod";
 
-import { welcomeFormSchema } from "../schema";
-import { FormContainer } from "./form-container";
+import { WelcomeFormSchema, welcomeFormSchema } from "../schema";
+import { RadioField } from "../types";
+import { FormContainer, WelcomeStepFormProps } from "./form/form-container";
 import { RadioOption } from "./radio-option";
 
-const healthConditionSchema = z.object({
-  healthCondition: welcomeFormSchema.shape.healthCondition,
-});
-
-type HealthConditionForm = z.infer<typeof healthConditionSchema>;
-
-type UserFormProps = {
-  defaultValues?: HealthConditionForm;
-  updateFields: (fields: Partial<HealthConditionForm>) => void;
-};
-
-export function ConditionStep({ defaultValues, updateFields }: UserFormProps) {
-  const { setValue, watch } = useForm<HealthConditionForm>({
-    resolver: zodResolver(healthConditionSchema),
-    defaultValues: defaultValues || {
-      healthCondition: undefined,
-    },
-  });
+export function ConditionStep({ data, updateFields }: WelcomeStepFormProps) {
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext<WelcomeFormSchema>();
 
   const watchedHealthCondition = watch("healthCondition");
 
   const handleChange = (value: string) => {
-    setValue(
-      "healthCondition",
-      value as HealthConditionForm["healthCondition"],
-    );
+    setValue("healthCondition", value as WelcomeFormSchema["healthCondition"]);
     updateFields({
-      healthCondition: value as HealthConditionForm["healthCondition"],
+      healthCondition: value as WelcomeFormSchema["healthCondition"],
     });
   };
 
   return (
-    <FormContainer
-      title="Do you have any of these health conditions?"
-      subheading=""
-    >
-      <RadioOption
-        id="diabetes"
-        label="Diabetes (Type 1 or Type 2)"
-        name="healthCondition"
-        value="diabetes"
-        onChange={handleChange}
-        checked={watchedHealthCondition === "diabetes"}
-      />
+    <FormContainer heading={data.heading} description={data.description}>
+      {errors.gender && (
+        <p className="my-2 text-right text-sm font-medium text-destructive sm:text-base">
+          {errors.gender?.message}
+        </p>
+      )}
+      {data.form &&
+        (data.form as RadioField[]).map((form) => {
+          const name = form.name as keyof WelcomeFormSchema;
 
-      <RadioOption
-        id="thyroid"
-        label="Thyroid disorders (e.g., hypothyroidism)"
-        name="healthCondition"
-        value="thyroid"
-        onChange={handleChange}
-        checked={watchedHealthCondition === "thyroid"}
-      />
+          const { label, value, inputVisible } = form;
 
-      <RadioOption
-        id="hypertension"
-        label="Hypertension or cardiovascular conditions"
-        name="healthCondition"
-        value="hypertension"
-        onChange={handleChange}
-        checked={watchedHealthCondition === "hypertension"}
-      />
-
-      <RadioOption
-        id="pcos"
-        label="PCOS (Polycystic Ovary Syndrome)"
-        name="healthCondition"
-        value="pcos"
-        onChange={handleChange}
-        checked={watchedHealthCondition === "pcos"}
-      />
-
-      <RadioOption
-        id="sleep_apnea"
-        label="Sleep apnea"
-        name="healthCondition"
-        value="sleep_apnea"
-        onChange={handleChange}
-        checked={watchedHealthCondition === "sleep_apnea"}
-      />
-
-      <RadioOption
-        id="depression_anxiety"
-        label="Depression or anxiety"
-        name="healthCondition"
-        value="depression_anxiety"
-        onChange={handleChange}
-        checked={watchedHealthCondition === "depression_anxiety"}
-      />
-
-      <RadioOption
-        id="none"
-        label="None"
-        name="none"
-        value="none"
-        onChange={handleChange}
-        checked={watchedHealthCondition === "none"}
-      />
+          return (
+            <RadioOption
+              key={label}
+              id={label}
+              label={label}
+              inputVisible={inputVisible}
+              value={value}
+              error={errors[name]}
+              {...register(name as keyof WelcomeFormSchema)}
+            />
+          );
+        })}
     </FormContainer>
   );
 }

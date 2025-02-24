@@ -1,45 +1,31 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useFormContext } from "react-hook-form";
 
-import { welcomeFormSchema } from "../schema";
-import { FormContainer } from "./form-container";
+import { WelcomeFormSchema } from "../schema";
+import { RadioField, WelcomeStepsData } from "../types";
+import { FormContainer } from "./form/form-container";
 import { RadioOption } from "./radio-option";
 import { TextareaInput } from "./textarea-input";
 
-const genderSchema = z.object({
-  gender: welcomeFormSchema.shape.gender,
-  otherGender: welcomeFormSchema.shape.otherGender,
-});
-
-type GenderFormData = z.infer<typeof genderSchema>;
-
-type UserFormProps = {
-  defaultValues?: GenderFormData;
-  updateFields: (fields: Partial<GenderFormData>) => void;
+type WelcomeStepFormProps = {
+  data: WelcomeStepsData;
+  updateFields: (fields: Partial<WelcomeFormSchema>) => void;
 };
 
-export function GenderStep({ defaultValues, updateFields }: UserFormProps) {
+export function GenderStep({ data, updateFields }: WelcomeStepFormProps) {
   const {
+    register,
     setValue,
     watch,
     formState: { errors },
-    register,
-  } = useForm<GenderFormData>({
-    resolver: zodResolver(genderSchema),
-    defaultValues: defaultValues || {
-      gender: undefined,
-      otherGender: undefined,
-    },
-  });
+  } = useFormContext<WelcomeFormSchema>();
 
   const selectedGender = watch("gender");
 
   const handleChange = (value: string) => {
-    setValue("gender", value as GenderFormData["gender"], {
+    setValue("gender", value as WelcomeFormSchema["gender"], {
       shouldValidate: true,
     });
-    updateFields({ gender: value as GenderFormData["gender"] });
+    updateFields({ gender: value as WelcomeFormSchema["gender"] });
   };
 
   const handleOtherChange = (value: string) => {
@@ -50,46 +36,35 @@ export function GenderStep({ defaultValues, updateFields }: UserFormProps) {
   };
 
   return (
-    <FormContainer title="What's your gender?" subheading="">
-      <RadioOption
-        id="male"
-        label="Male"
-        value="male"
-        checked={selectedGender === "male"}
-        onChange={handleChange}
-        name="gender"
-      />
-      <RadioOption
-        id="female"
-        label="Female"
-        value="female"
-        checked={selectedGender === "female"}
-        onChange={handleChange}
-        name="gender"
-      />
-      <RadioOption
-        id="non_binary"
-        label="Non-Binary"
-        value="non_binary"
-        checked={selectedGender === "non_binary"}
-        onChange={handleChange}
-        name="gender"
-      />
-      <RadioOption
-        id="other"
-        label="Other"
-        value="other"
-        checked={selectedGender === "other"}
-        onChange={handleChange}
-        name="gender"
-      />
+    <FormContainer heading={data.heading} description={data.description}>
+      {errors.gender && (
+        <p className="my-2 text-right text-sm font-medium text-destructive sm:text-base">
+          {errors.gender?.message}
+        </p>
+      )}
+      {data.form &&
+        (data.form as RadioField[]).map((form) => {
+          const name = form.name as keyof WelcomeFormSchema;
 
-      {selectedGender === "other" && (
+          const { label, value, inputVisible } = form;
+
+          return (
+            <RadioOption
+              key={label}
+              id={label}
+              label={label}
+              inputVisible={inputVisible}
+              value={value}
+              error={errors[name]}
+              {...register(name as keyof WelcomeFormSchema)}
+            />
+          );
+        })}
+      {selectedGender === "Other" && (
         <>
           <TextareaInput
             value={watch("otherGender") || ""}
             onChange={handleOtherChange}
-            // error={errors.otherGender?.message}
           />
           {errors.gender && (
             <span className="text-sm text-red-500">

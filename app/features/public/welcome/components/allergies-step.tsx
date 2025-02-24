@@ -1,9 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { z } from "zod";
 
-import { welcomeFormSchema } from "../schema";
+import { WelcomeFormSchema, welcomeFormSchema } from "../schema";
+import { RadioField } from "../types";
 import { FormContainer } from "./form-container";
+import { WelcomeStepFormProps } from "./form/form-container";
 import { RadioOption } from "./radio-option";
 
 const allergiesSchema = z.object({
@@ -17,13 +18,13 @@ type UserFormProps = {
   updateFields: (fields: Partial<AllergiesFormData>) => void;
 };
 
-export function AllergiesStep({ defaultValues, updateFields }: UserFormProps) {
-  const { watch, setValue } = useForm<AllergiesFormData>({
-    resolver: zodResolver(allergiesSchema),
-    defaultValues: defaultValues || {
-      allergies: undefined,
-    },
-  });
+export function AllergiesStep({ data, updateFields }: WelcomeStepFormProps) {
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext<WelcomeFormSchema>();
 
   const watchedAllergies = watch("allergies");
 
@@ -34,41 +35,29 @@ export function AllergiesStep({ defaultValues, updateFields }: UserFormProps) {
 
   return (
     <FormContainer title="Do you have any allergies?" subheading="">
-      <RadioOption
-        id="yes_medications"
-        label="Yes, to specific medications"
-        value="yes_medications"
-        checked={watchedAllergies === "yes_medications"}
-        onChange={handleChange}
-        name="allergies"
-      />
+      {errors.reason && (
+        <p className="my-2 text-right text-sm font-medium text-destructive sm:text-base">
+          {errors.reason?.message}
+        </p>
+      )}
+      {data.form &&
+        (data.form as RadioField[]).map((form) => {
+          const name = form.name as keyof WelcomeFormSchema;
 
-      <RadioOption
-        id="yes_food"
-        label="Yes, to specific foods"
-        value="yes_food"
-        checked={watchedAllergies === "yes_food"}
-        onChange={handleChange}
-        name="allergies"
-      />
+          const { label, value, inputVisible } = form;
 
-      <RadioOption
-        id="yes_environment"
-        label="Yes, to environmental factors (e.g., pollen, dust)"
-        value="yes_environment"
-        checked={watchedAllergies === "yes_environment"}
-        onChange={handleChange}
-        name="allergies"
-      />
-
-      <RadioOption
-        id="no_allergies"
-        label="No known allergies"
-        value="no_allergies"
-        checked={watchedAllergies === "no_allergies"}
-        onChange={handleChange}
-        name="allergies"
-      />
+          return (
+            <RadioOption
+              key={label}
+              id={label}
+              label={label}
+              inputVisible={inputVisible}
+              value={value}
+              error={errors[name]}
+              {...register(name as keyof WelcomeFormSchema)}
+            />
+          );
+        })}
     </FormContainer>
   );
 }

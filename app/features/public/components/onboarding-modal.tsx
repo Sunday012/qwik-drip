@@ -1,4 +1,3 @@
-import { useId, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import LogoWL from "~/assets/logo_wl.svg";
@@ -10,13 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
-import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
 
-import { useSendLoginOTPMutation } from "../api/mutations";
-import { useAuthFormStore } from "../welcome/store/use-auth-form-store";
 import { useAuthModal } from "../welcome/store/use-auth-modal";
-import { useOnboardingFormStore } from "../welcome/store/use-onboarding-form-store";
 import { useOnboardingModal } from "../welcome/store/use-onboarding-modal";
 import { useRegisterModal } from "../welcome/store/use-register-modal";
 
@@ -37,7 +31,7 @@ export function OnboardingModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent className="max-w-sm rounded-[24px] px-4 pb-8 pt-6 sm:px-8 sm:pb-10 sm:pt-8 md:max-w-xl lg:px-[64px] lg:pb-[60px] lg:pt-[40px] xl:max-w-[700px]">
+      <DialogContent className="max-w-xs rounded-[24px] px-4 pb-8 pt-6 sm:max-w-sm sm:px-8 sm:pb-10 sm:pt-8 md:max-w-xl lg:px-[64px] lg:pb-[60px] lg:pt-[40px] xl:max-w-[700px]">
         <div
           className="flex shrink-0 items-center justify-center"
           aria-hidden="true"
