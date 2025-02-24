@@ -56,7 +56,7 @@ export function WhyLoseWeight() {
       <div>
         <Marquee
           images={marqueeImages}
-          className="mt-[40px] h-[20px] sm:h-[232px] lg:z-[1] lg:h-[400px]"
+          className="my-[80px] h-[20px] sm:my-[120px] sm:h-[232px] lg:z-[1] lg:h-[400px]"
         />
       </div>
     </div>
