@@ -32,7 +32,7 @@ export function Hero() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
-              className="w-[472px] bg-clip-text text-center font-instrumentSans text-[40px] font-medium uppercase leading-[48px] md:text-[60px] md:leading-[72px]"
+              className=" w-[80%] md:w-[472px] bg-clip-text text-center font-instrumentSans text-[40px] font-medium uppercase leading-[48px] md:text-[60px] md:leading-[72px]"
             >
               Earn from your{" "}
               <span className="font-instrumentSerifItalic font-normal capitalize italic">

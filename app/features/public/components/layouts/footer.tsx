@@ -23,7 +23,7 @@ export function Footer() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="relative mx-4 mt-11 flex w-[90%] flex-col items-center justify-center gap-6 rounded-3xl border-x-[3px] border-t-[3px] border-[#FFFFFF21] bg-gradient-to-b from-[#2D2D45] to-[#00000000] px-5 py-5 sm:py-10 sm:w-[60%]">
+        <div className="relative mx-4 mt-11 flex w-[90%] flex-col items-center justify-center gap-6 rounded-3xl border-x-[3px] border-t-[3px] border-[#FFFFFF21] bg-gradient-to-b from-[#2D2D45] to-[#00000000] px-5 sm:py-10 sm:w-[60%]">
           <img
             src="/images/big-star.svg"
             alt=""
@@ -66,13 +66,17 @@ export function Footer() {
           <img
             src="/images/coin-left.png"
             alt=""
-            className="h-[108px] w-[83px]"
+            className="h-auto w-[20%] max-w-[83px]"
           />
-          <img src="/images/Art.png" alt="" className="h-[200px] w-[228px]" />
+          <img
+            src="/images/Art.png"
+            alt=""
+            className="h-auto w-[60%] max-w-[228px]"
+          />
           <img
             src="/images/coin-right.png"
             alt=""
-            className="h-[108px] w-[83px]"
+            className="h-auto w-[20%] max-w-[83px]"
           />
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#2D2D45] to-transparent"></div>

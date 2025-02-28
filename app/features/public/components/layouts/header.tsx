@@ -9,7 +9,7 @@ import { WaitlistButton } from "~/components/waitlist-modal/waitlist-button";
 export function Header() {
   return (
     <header className="fixed z-50 flex w-full items-center justify-center p-4">
-      <div className="flex w-[80%] items-center justify-between rounded-[38px] border border-[#FFFFFF36] bg-[#0D031D9C] p-4 shadow-lg backdrop-blur-2xl">
+      <div className="flex w-full md:w-[80%] items-center justify-between rounded-[38px] border border-[#FFFFFF36] bg-[#0D031D9C] p-4 shadow-lg backdrop-blur-2xl">
         <div className="flex items-center gap-2">
           <img src="/favicon-32x32.png" />
           <p className="hidden font-raleway text-[25px] font-semibold text-white sm:block">
