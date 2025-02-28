@@ -14,9 +14,14 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         mono: ["var(--font-mono)", ...fontFamily.mono],
-        inter: ["Inter", ...fontFamily.serif],
-        paragraph: ["var(--font-paragraph)", ...fontFamily.serif],
-        heading: ["var(--font-heading)", ...fontFamily.serif],
+        raleway: ["var(--font-raleway)", ...fontFamily.serif],
+        geist: ["var(--font-geist)", ...fontFamily.serif],
+        instrumentSans: ["var(--font-instrument-sans)", ...fontFamily.serif],
+        instrumentSerif: ["var(--font-instrument-serif-regular)", ...fontFamily.serif],
+        instrumentSerifItalic: [
+          "var(--font-instrument-serif-italic)",
+          ...fontFamily.serif,
+        ],
       },
       colors: {
         border: "hsl(var(--border))",

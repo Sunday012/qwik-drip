@@ -24,8 +24,8 @@ export const Route = createRootRouteWithContext<{
         content: "width=device-width, initial-scale=1",
       },
       ...seo({
-        title: "Proxymed App",
-        description: `Proxymed Weight Loss App`,
+        title: "Qwikdrip",
+        description: `Earn from your Style, Own your drip`,
       }),
     ],
     links: [
@@ -38,8 +38,8 @@ export const Route = createRootRouteWithContext<{
       {
         rel: "icon",
         type: "image/png",
-        sizes: "96x96",
-        href: "/favicon-96x96.png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
       },
       {
         rel: "icon",
@@ -79,8 +79,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <TailwindIndicator />
-        <ReactQueryDevtools buttonPosition="bottom-left" />
-        <TanStackRouterDevtools position="top-left" />
+        {/* <ReactQueryDevtools buttonPosition="bottom-left" /> */}
+        <TanStackRouterDevtools position="bottom-left" />
         <Scripts />
       </body>
     </html>

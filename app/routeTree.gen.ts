@@ -15,8 +15,6 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as publicPublicImport } from './routes/(public)/_public'
 import { Route as publicPublicIndexImport } from './routes/(public)/_public/index'
-import { Route as publicPublicWelcomeImport } from './routes/(public)/_public/welcome'
-import { Route as publicPublicAppointmentImport } from './routes/(public)/_public/appointment'
 
 // Create Virtual Routes
 
@@ -40,18 +38,6 @@ const publicPublicIndexRoute = publicPublicIndexImport.update({
   getParentRoute: () => publicPublicRoute,
 } as any)
 
-const publicPublicWelcomeRoute = publicPublicWelcomeImport.update({
-  id: '/welcome',
-  path: '/welcome',
-  getParentRoute: () => publicPublicRoute,
-} as any)
-
-const publicPublicAppointmentRoute = publicPublicAppointmentImport.update({
-  id: '/appointment',
-  path: '/appointment',
-  getParentRoute: () => publicPublicRoute,
-} as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -70,20 +56,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicPublicImport
       parentRoute: typeof publicRoute
     }
-    '/(public)/_public/appointment': {
-      id: '/(public)/_public/appointment'
-      path: '/appointment'
-      fullPath: '/appointment'
-      preLoaderRoute: typeof publicPublicAppointmentImport
-      parentRoute: typeof publicPublicImport
-    }
-    '/(public)/_public/welcome': {
-      id: '/(public)/_public/welcome'
-      path: '/welcome'
-      fullPath: '/welcome'
-      preLoaderRoute: typeof publicPublicWelcomeImport
-      parentRoute: typeof publicPublicImport
-    }
     '/(public)/_public/': {
       id: '/(public)/_public/'
       path: '/'
@@ -97,14 +69,10 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface publicPublicRouteChildren {
-  publicPublicAppointmentRoute: typeof publicPublicAppointmentRoute
-  publicPublicWelcomeRoute: typeof publicPublicWelcomeRoute
   publicPublicIndexRoute: typeof publicPublicIndexRoute
 }
 
 const publicPublicRouteChildren: publicPublicRouteChildren = {
-  publicPublicAppointmentRoute: publicPublicAppointmentRoute,
-  publicPublicWelcomeRoute: publicPublicWelcomeRoute,
   publicPublicIndexRoute: publicPublicIndexRoute,
 }
 
@@ -125,13 +93,9 @@ const publicRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '/': typeof publicPublicIndexRoute
-  '/appointment': typeof publicPublicAppointmentRoute
-  '/welcome': typeof publicPublicWelcomeRoute
 }
 
 export interface FileRoutesByTo {
-  '/appointment': typeof publicPublicAppointmentRoute
-  '/welcome': typeof publicPublicWelcomeRoute
   '/': typeof publicPublicIndexRoute
 }
 
@@ -139,23 +103,15 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/(public)': typeof publicRouteWithChildren
   '/(public)/_public': typeof publicPublicRouteWithChildren
-  '/(public)/_public/appointment': typeof publicPublicAppointmentRoute
-  '/(public)/_public/welcome': typeof publicPublicWelcomeRoute
   '/(public)/_public/': typeof publicPublicIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/appointment' | '/welcome'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/appointment' | '/welcome' | '/'
-  id:
-    | '__root__'
-    | '/(public)'
-    | '/(public)/_public'
-    | '/(public)/_public/appointment'
-    | '/(public)/_public/welcome'
-    | '/(public)/_public/'
+  to: '/'
+  id: '__root__' | '/(public)' | '/(public)/_public' | '/(public)/_public/'
   fileRoutesById: FileRoutesById
 }
 
@@ -190,18 +146,8 @@ export const routeTree = rootRoute
       "filePath": "(public)/_public.tsx",
       "parent": "/(public)",
       "children": [
-        "/(public)/_public/appointment",
-        "/(public)/_public/welcome",
         "/(public)/_public/"
       ]
-    },
-    "/(public)/_public/appointment": {
-      "filePath": "(public)/_public/appointment.tsx",
-      "parent": "/(public)/_public"
-    },
-    "/(public)/_public/welcome": {
-      "filePath": "(public)/_public/welcome.tsx",
-      "parent": "/(public)/_public"
     },
     "/(public)/_public/": {
       "filePath": "(public)/_public/index.tsx",

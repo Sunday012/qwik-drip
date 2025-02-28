@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 221 0% 100%;
+    --background: #0A0A0F;
     --foreground: 221 0% 10%;
     --card: 221 0% 100%;
     --card-foreground: 221 0% 15%;
@@ -40,16 +40,16 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --font-heading: "DM Serif Display", serif;
-    --font-paragraph: "Inter", serif;
+    --font-raleway: "Raleway", serif;
+    --font-instrument-sans:  "Instrument Sans", serif;
+    --font-geist:   "Geist", serif;
+    --font-instrument-serif-regular: "Instrument Serif", serif;
+    --font-instrument-serif-italic: "Instrument Serif", serif;
 
     --gap: 1rem;
-    --duration: 30s;
-    --grey: #efefef;
-    --marquee-start: 0;
-    --marquee-end: calc(-100% - var(--gap));
+
   }
-  /* .dark {
+  .dark {
     --background: 221 10% 10%;
     --foreground: 221 0% 100%;
     --card: 221 0% 10%;
@@ -83,12 +83,12 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-  } */
+  }
 }
 
 @layer base {
   html {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   * {
@@ -97,16 +97,14 @@
 
   html,
   body {
-    @apply bg-background text-foreground;
-    font-family: "Inter", serif;
+    background: #0A0A0F;
+    font-family: "Geist", serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
   }
 
-  .using-mouse * {
-    outline: none !important;
-  }
+
 
   /* Caslon */
   @font-face {
@@ -128,7 +126,6 @@
     src: url("/fonts/F37Caslon-BoldDisplay.otf") format("otf");
   }
 
-
   h1,
   h2,
   h3,
@@ -142,28 +139,15 @@
   a {
     font-family: "Inter", serif;
   }
+}
 
-  /* Marquee */
-  @keyframes marquee {
-    from {
-      transform: translateX(var(--marquee-start));
-    }
-    100% {
-      transform: translate(var(--marquee-end));
-    }
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-
-  .marquee-wrapper:hover .marquee-group {
-    animation-play-state: paused;
-  }
-
-  .marquee-group {
-    flex-shrink: 0;
-    gap: var(--gap);
-    animation: marquee var(--duration) linear infinite;
-  }
-
-  .marquee {
-    gap: var(--gap);
+  body {
+    @apply bg-background text-foreground;
   }
 }
