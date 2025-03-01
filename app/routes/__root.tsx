@@ -78,9 +78,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-        <TailwindIndicator />
+        {/* <TailwindIndicator /> */}
         {/* <ReactQueryDevtools buttonPosition="bottom-left" /> */}
-        <TanStackRouterDevtools position="bottom-left" />
+        {/* <TanStackRouterDevtools position="bottom-left" /> */}
         <Scripts />
       </body>
     </html>

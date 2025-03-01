@@ -90,10 +90,15 @@ const config = {
             height: "0",
           },
         },
+        "slow-bounce": {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        'slow-bounce': 'slow-bounce 3s ease-in-out infinite'
       },
       backgroundImage: {
         "grid-pattern": "",

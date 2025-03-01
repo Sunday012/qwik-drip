@@ -23,7 +23,7 @@ export function Footer() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="relative mx-4 mt-11 flex w-[90%] flex-col items-center justify-center gap-6 rounded-3xl border-x-[3px] border-t-[3px] border-[#FFFFFF21] bg-gradient-to-b from-[#2D2D45] to-[#00000000] px-5 sm:py-10 sm:w-[60%]">
+        <div className="relative mx-4 mt-24 flex w-[90%] flex-col items-center justify-center gap-6 rounded-3xl border-x-[3px] border-t-[3px] border-[#FFFFFF21] bg-gradient-to-b from-[#2D2D45] to-[#00000000] px-5 sm:py-10 sm:w-[60%]">
           <img
             src="/images/big-star.svg"
             alt=""
@@ -62,7 +62,7 @@ export function Footer() {
             Join our community today
           </p>
         </div>
-        <div className="-mt-10 flex items-end justify-between gap-4 md:justify-center">
+        <div className="mt-10 flex items-end justify-between gap-4 md:justify-center">
           <img
             src="/images/coin-left.png"
             alt=""

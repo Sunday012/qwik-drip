@@ -14,14 +14,14 @@ export function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="inset-0 z-0 flex px-4 md:hidden">
+      <div className="inset-0 z-0 flex px-4 md:hidden animate-slow-bounce">
         <img src="/images/gold-coins.png" alt="" />
       </div>
       <div className="relative flex w-full items-center mt-0 md:mt-20 justify-center">
-        <div className="absolute inset-0 px-4 z-0 hidden md:flex items-center justify-center w-full">
+        <div className="absolute inset-0 px-4 z-0 hidden md:flex items-center justify-center w-full animate-slow-bounce">
           <img src="/images/gold-coins.png" alt="" />
         </div>
-        <div className="z-10 flex w-[680px] flex-col gap-6 text-center">
+        <div className="z-10 flex flex-col gap-6 text-center">
           <div className="flex flex-col items-center justify-center text-center">
             <h1
               style={{
