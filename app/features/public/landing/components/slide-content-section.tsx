@@ -36,7 +36,7 @@ const SlideTextContent: React.FC<SlideTextContentProps> = ({
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}
-        className="font-geist bg-clip-text text-2xl font-bold"
+        className="font-geist bg-clip-text text-center md:text-left text-2xl font-bold"
       >
         {title}
       </h1>

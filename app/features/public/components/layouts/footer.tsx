@@ -1,13 +1,10 @@
-import { Link } from "@tanstack/react-router";
-
-import { Button } from "~/components/ui/button";
 import { WaitlistButton } from "~/components/waitlist-modal/waitlist-button";
 
 export function Footer() {
   return (
     <footer className="relative px-[5%] pt-[8%] sm:px-[6%] sm:pt-[5%] md:px-[10%] md:pt-[5%]">
       <div
-        className="relative flex flex-col items-center justify-center rounded-[64px] pt-[29px] md:p-[44px]"
+        className="relative flex flex-col items-center justify-center overflow-hidden rounded-[32px] md:rounded-[64px] pt-[29px] md:p-[44px]"
         style={{
           backgroundImage: `url("/images/flower.png")`,
           backgroundSize: "cover",
@@ -15,7 +12,7 @@ export function Footer() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="relative mx-auto flex w-[90%] flex-col items-center justify-center gap-8 rounded-[64px] bg-gradient-to-b from-[#2D2D45] to-[#00000000] px-5 py-12">
+        <div className="relative mx-auto flex w-[90%] flex-col items-center justify-center gap-8 rounded-[32px] md:rounded-[64px] bg-gradient-to-b from-[#2D2D45] to-[#00000000] px-5 py-12">
           <img
             src="/images/big-star.svg"
             alt=""
@@ -83,7 +80,7 @@ export function Footer() {
             className="h-auto w-[20%] max-w-[180px]"
           />
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-[100px] rounded-b-[64px] bg-gradient-to-t from-[#2D2D45] to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-[100px] rounded-[32px] md:rounded-b-[64px] bg-gradient-to-t from-[#2D2D45] to-transparent"></div>
       </div>
       <div className="mt-10 flex w-full items-center justify-center">
         <div
