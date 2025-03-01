@@ -17,13 +17,7 @@ export function Header() {
           </p>
         </div>
         <WaitlistButton
-          className="h-10 rounded-[22px] px-[14px] py-2 text-[#0A0A0F]"
-          style={{
-            backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url("/images/cloud.png")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
+          className="h-10 rounded-[22px] px-[14px] bg-white py-2 text-[#0A0A0F]"
         >
           Join the Waitlist
         </WaitlistButton>

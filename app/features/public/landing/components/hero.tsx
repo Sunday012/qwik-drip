@@ -14,11 +14,18 @@ export function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="animate-slow-bounce inset-0 z-0 flex px-4 md:hidden">
+      {/* <div className="animate-slow-bounce inset-0 z-0 flex px-4 md:hidden">
         <img src="/images/gold-coins.png" alt="" />
-      </div>
-      <div className="relative mt-0 flex w-full items-center justify-center md:mt-20">
-        <div className="animate-slow-bounce absolute inset-0 z-0 hidden w-full items-center justify-center px-4 md:flex">
+      </div> */}
+      <div 
+      // style={{
+      //   backgroundImage: `url("/images/gold-coins.png")`,
+      //   backgroundSize: "contain",
+      //   backgroundPosition: "top",
+      //   backgroundRepeat: "no-repeat",
+      // }}
+      className="relative mt-0 flex w-full items-center justify-center md:mt-20">
+        <div className="animate-slow-bounce absolute inset-0 z-0  w-full items-center justify-center px-4 ">
           <img src="/images/gold-coins.png" alt="" />
         </div>
         <div className="z-10 flex flex-col gap-6 text-center">
