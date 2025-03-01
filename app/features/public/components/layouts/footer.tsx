@@ -1,13 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import {
-  FaFacebook,
-  FaLinkedin,
-  FaSquareInstagram,
-  FaXTwitter,
-  FaYoutube,
-} from "react-icons/fa6";
 
-import Logo from "~/assets/logo.png";
 import { Button } from "~/components/ui/button";
 import { WaitlistButton } from "~/components/waitlist-modal/waitlist-button";
 
@@ -15,7 +7,7 @@ export function Footer() {
   return (
     <footer className="relative px-[5%] pt-[8%] sm:px-[6%] sm:pt-[5%] md:px-[10%] md:pt-[5%]">
       <div
-        className="relative flex h-[668px] flex-col items-center justify-center overflow-hidden rounded-[32px]"
+        className="relative flex flex-col items-center justify-center rounded-[64px] pt-[29px] md:p-[44px]"
         style={{
           backgroundImage: `url("/images/flower.png")`,
           backgroundSize: "cover",
@@ -23,31 +15,43 @@ export function Footer() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="relative mx-4 mt-24 flex w-[90%] flex-col items-center justify-center gap-6 rounded-3xl border-x-[3px] border-t-[3px] border-[#FFFFFF21] bg-gradient-to-b from-[#2D2D45] to-[#00000000] px-5 sm:py-10 sm:w-[60%]">
+        <div className="relative mx-auto flex w-[90%] flex-col items-center justify-center gap-8 rounded-[64px] bg-gradient-to-b from-[#2D2D45] to-[#00000000] px-5 py-12">
           <img
             src="/images/big-star.svg"
             alt=""
-            className="absolute left-0 top-0 z-10 -mt-10"
+            className="absolute left-0 top-0 z-10 -ml-3 -mt-10"
           />
-          <div className="flex w-[80%] flex-col items-center justify-center gap-4 text-center">
-            <h1 className="font-geist text-[28px] font-bold uppercase text-white">
-              Be Among the First to Experience{" "}
-              <span className="font-geist font-light">QwikDrip</span>
+          <div className="flex flex-col items-center justify-center gap-6 text-center">
+            <h1
+              style={{
+                backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url("/images/cloud.png")`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+              className="text-center font-geist text-[36px] font-bold uppercase leading-[48px] md:text-[60px] md:leading-[72px]"
+            >
+              JOIN THE{" "}
+              <span className="font-instrumentSerifItalic font-normal capitalize italic">
+                Style
+              </span>{" "}
+              REVOLUTION.
             </h1>
             <p className="font-geist text-sm text-white">
               Join our exclusive waitlist today and be notified when we launch.
-              Early members will receive special perks and features.
             </p>
           </div>
-          <WaitlistButton className="mt-6 h-[60px] rounded-3xl w-[80%] bg-white font-geist text-xl text-[#0A0A0F] hover:bg-white">
-            Join the Waitlist
+          <WaitlistButton className="mt-4 h-[60px] w-[240px] rounded-[1000px] bg-white font-geist text-xl text-[#0A0A0F] hover:bg-white">
+            Join the waitlist
           </WaitlistButton>
-          <div className="flex items-center justify-center">
+          <div className="my-6 flex items-center justify-center">
             <img src="/images/line1.svg" alt="" />
-            <img src="/images/circle.svg" alt="" />
+            <img src="/images/circle.svg" alt="" className="mx-2" />
             <img src="/images/line2.svg" alt="" />
           </div>
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-6">
             <div className="flex size-10 items-center justify-center rounded-full bg-[#0000002B]">
               <img src="/icons/instagram.svg" alt="" />
             </div>
@@ -58,28 +62,28 @@ export function Footer() {
               <img src="/icons/x-icon.svg" alt="" />
             </div>
           </div>
-          <p className="font-geist text-xs text-white">
+          <p className="mt-2 font-geist text-xs text-white">
             Join our community today
           </p>
         </div>
-        <div className="mt-10 flex items-end justify-between gap-4 md:justify-center">
+        <div className="mt-auto flex w-full items-end justify-between">
           <img
             src="/images/coin-left.png"
             alt=""
-            className="h-auto w-[20%] max-w-[83px]"
+            className="h-auto w-[20%] max-w-[180px]"
           />
           <img
             src="/images/Art.png"
             alt=""
-            className="h-auto w-[60%] max-w-[228px]"
+            className="-mb-1 h-auto w-[40%] max-w-[220px]"
           />
           <img
             src="/images/coin-right.png"
             alt=""
-            className="h-auto w-[20%] max-w-[83px]"
+            className="h-auto w-[20%] max-w-[180px]"
           />
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-[#2D2D45] to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-[100px] rounded-b-[64px] bg-gradient-to-t from-[#2D2D45] to-transparent"></div>
       </div>
       <div className="mt-10 flex w-full items-center justify-center">
         <div
