@@ -10,6 +10,7 @@ import { NotFound } from "~/components/not-found";
 import { TailwindIndicator } from "~/components/tailwind-indicator";
 import appCss from "~/styles/app.css?url";
 import { seo } from "~/utils/seo";
+import { WaitlistModal } from "~/components/waitlist-modal/waitlist-modal";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -81,6 +82,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         {/* <TailwindIndicator /> */}
         {/* <ReactQueryDevtools buttonPosition="bottom-left" /> */}
         {/* <TanStackRouterDevtools position="bottom-left" /> */}
+        <WaitlistModal />
         <Scripts />
       </body>
     </html>

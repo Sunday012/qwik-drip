@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="relative px-[5%] pt-[8%] sm:px-[6%] sm:pt-[5%] md:px-[10%] md:pt-[5%]">
       <div
-        className="relative flex flex-col items-center justify-center overflow-hidden rounded-[32px] md:rounded-[64px] pt-[29px] md:p-[44px]"
+        className="relative flex flex-col items-center justify-center overflow-hidden rounded-[32px] md:rounded-[64px] pt-[29px] md:pt-[44px]"
         style={{
           backgroundImage: `url("/images/flower.png")`,
           backgroundSize: "cover",
@@ -40,7 +40,7 @@ export function Footer() {
               Join our exclusive waitlist today and be notified when we launch.
             </p>
           </div>
-          <WaitlistButton className="mt-4 h-[60px] w-[240px] rounded-[1000px] bg-white font-geist text-xl text-[#0A0A0F] hover:bg-white">
+          <WaitlistButton className="mt-4 h-[60px] w-[240px] rounded-[1000px] bg-white font-geist text-xl text-[#0A0A0F]">
             Join the waitlist
           </WaitlistButton>
           <div className="my-6 flex items-center justify-center">
@@ -63,7 +63,7 @@ export function Footer() {
             Join our community today
           </p>
         </div>
-        <div className="mt-auto flex w-full items-end justify-between">
+        <div className="md:mt-auto flex w-full items-end justify-between">
           <img
             src="/images/coin-left.png"
             alt=""
@@ -92,7 +92,7 @@ export function Footer() {
           }}
           className="flex h-[125px] w-full items-center justify-center"
         >
-          <p className="font-geist text-xl text-[#B6B6BF]">
+          <p className="font-geist text-sm md:text-xl text-[#B6B6BF]">
             © 2025 Demz Labs, Inc.
           </p>
         </div>
