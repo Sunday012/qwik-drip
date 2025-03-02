@@ -35,7 +35,7 @@ export function WaitlistModal() {
 
   return isMobile ? (
     // Full-screen div for mobile
-    <div className="fixed inset-0 bg-white h-screen z-50 w-full flex flex-col p-6">
+    <div className="fixed inset-0 bg-white h-screen z-[9999] w-full flex flex-col p-6">
       <button
         onClick={handleClose}
         className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#6600FF] focus:ring-offset-2"
