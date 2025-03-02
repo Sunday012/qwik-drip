@@ -3,7 +3,7 @@ import { WaitlistForm } from "./waitlist-form"
 import { SuccessModal } from "./success-modal"
 import { X } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog"
-import useWaitlistStore from "~/store/waitlist-store"
+import useWaitlistStore from "~/lib/store/waitlist-store"
 
 // interface WaitlistModalProps {
 //   open: boolean

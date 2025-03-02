@@ -3,7 +3,7 @@
 import { useState, ReactNode, ButtonHTMLAttributes } from "react"
 import { WaitlistModal } from "./waitlist-modal"
 import { cn } from "~/lib/utils"
-import useWaitlistStore from "~/store/waitlist-store"
+import useWaitlistStore from "~/lib/store/waitlist-store"
 
 interface WaitlistButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode
