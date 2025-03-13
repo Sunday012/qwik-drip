@@ -1,33 +1,27 @@
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { Info, Loader2 } from "lucide-react"
-import { Checkbox } from "../ui/checkbox"
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { Info, Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
 
-// Define the form schema with Zod
-const formSchema = z.object({
-  firstName: z.string().min(1, { message: "First name is required" }),
-  lastName: z.string().min(1, { message: "Last name is required" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  isBusinessOwner: z.boolean().optional(),
-  isCreator: z.boolean().optional(),
-  isConsumer: z.boolean().optional(),
-})
+import { useToast } from "~/hooks/use-toast";
+import { formSchema, FormValues } from "~/schema";
 
-type FormValues = z.infer<typeof formSchema>
+import { Checkbox } from "../ui/checkbox";
+import { joinUsFn } from "./actions/mutation";
 
 interface WaitlistFormProps {
-  onSuccess: () => void
+  onSuccess: () => void;
 }
 
 export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState("");
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
     watch,
     setValue,
   } = useForm<FormValues>({
@@ -40,53 +34,80 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
       isCreator: false,
       isConsumer: false,
     },
-  })
+  });
 
-  const onSubmit = async (data: FormValues) => {
-    setIsSubmitting(true)
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (variables: FormValues) => {
+      return joinUsFn({
+        data: {
+          firstName: variables.firstName,
+          lastName: variables.lastName,
+          email: variables.email,
+          isBusinessOwner: variables.isBusinessOwner || false,
+          isCreator: variables.isCreator || false,
+          isConsumer: variables.isConsumer || false,
+        },
+      });
+    },
+  });
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    // Handle form submission
-    console.log("Form submitted:", data)
-    setIsSubmitting(false)
-    onSuccess()
-  }
+  const onSubmit = (data: FormValues) => {
+    mutate(
+      {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        isBusinessOwner: data.isBusinessOwner,
+        isConsumer: data.isConsumer,
+        isCreator: data.isCreator,
+      },
+      {
+        onSuccess: () => {
+          reset();
+        },
+        onError: (error) => {
+          setError(error.message);
+        },
+      },
+    );
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4">
+      {error && <p className="text-sm text-[#EF4444]">{error}</p>}
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <div
-            className={`rounded-md border ${errors.firstName ? "border-[#EF4444] bg-[#FFF4F4]" : "border-gray-200"} focus-within:ring-1 focus-within:ring-[#6600FF] focus-within:border-[#6600FF] overflow-hidden`}
+            className={`rounded-md border ${errors.firstName ? "border-[#EF4444] bg-[#FFF4F4]" : "border-gray-200"} overflow-hidden focus-within:border-[#6600FF] focus-within:ring-1 focus-within:ring-[#6600FF]`}
           >
             <input
               {...register("firstName")}
               placeholder="First name"
-              className="w-full px-3 py-2 h-[55px] bg-transparent focus:outline-none"
+              className="h-[55px] w-full bg-transparent px-3 py-2 focus:outline-none"
             />
           </div>
           {errors.firstName && (
-            <p className="text-[#EF4444] text-xs flex font-geist items-center">
-             <Info className="text-[#EF4444] size-4 mr-1" /> {errors.firstName.message}
+            <p className="flex items-center font-geist text-xs text-[#EF4444]">
+              <Info className="mr-1 size-4 text-[#EF4444]" />{" "}
+              {errors.firstName.message}
             </p>
           )}
         </div>
 
         <div className="space-y-2">
           <div
-            className={`rounded-md border ${errors.lastName ? "border-[#EF4444] bg-[#FFF4F4]" : "border-gray-200"} focus-within:ring-1 focus-within:ring-[#6600FF] focus-within:border-[#6600FF] overflow-hidden`}
+            className={`rounded-md border ${errors.lastName ? "border-[#EF4444] bg-[#FFF4F4]" : "border-gray-200"} overflow-hidden focus-within:border-[#6600FF] focus-within:ring-1 focus-within:ring-[#6600FF]`}
           >
             <input
               {...register("lastName")}
               placeholder="Last name"
-              className="w-full px-3 py-2 h-[55px] bg-transparent focus:outline-none"
+              className="h-[55px] w-full bg-transparent px-3 py-2 focus:outline-none"
             />
           </div>
           {errors.lastName && (
-            <p className="text-[#EF4444] text-xs flex font-geist items-center">
-             <Info className="text-[#EF4444] size-4 mr-1" /> {errors.lastName.message}
+            <p className="flex items-center font-geist text-xs text-[#EF4444]">
+              <Info className="mr-1 size-4 text-[#EF4444]" />{" "}
+              {errors.lastName.message}
             </p>
           )}
         </div>
@@ -94,32 +115,35 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
 
       <div className="space-y-2">
         <div
-          className={`rounded-md border ${errors.email ? "border-[#EF4444] bg-[#FFF4F4]" : "border-gray-200"} focus-within:ring-1 focus-within:ring-[#6600FF] focus-within:border-[#6600FF] overflow-hidden`}
+          className={`rounded-md border ${errors.email ? "border-[#EF4444] bg-[#FFF4F4]" : "border-gray-200"} overflow-hidden focus-within:border-[#6600FF] focus-within:ring-1 focus-within:ring-[#6600FF]`}
         >
           <input
             {...register("email")}
             type="email"
             placeholder="Email address"
-            className="w-full px-3 py-2 h-[57px] bg-transparent focus:outline-none"
+            className="h-[57px] w-full bg-transparent px-3 py-2 focus:outline-none"
           />
         </div>
         {errors.email && (
-          <p className="text-[#EF4444] text-xs font-geist flex items-center">
-            <Info className="text-[#EF4444] size-4 mr-1" /> {errors.email.message}
+          <p className="flex items-center font-geist text-xs text-[#EF4444]">
+            <Info className="mr-1 size-4 text-[#EF4444]" />{" "}
+            {errors.email.message}
           </p>
         )}
       </div>
 
       <div className="space-y-2">
         <div className="flex items-center justify-between space-x-2">
-        <label htmlFor="business-owner" className="text-sm">
+          <label htmlFor="business-owner" className="text-sm">
             Join as a business owner
           </label>
           <Checkbox
             id="business-owner"
             checked={watch("isBusinessOwner")}
-            onCheckedChange={(checked) => setValue("isBusinessOwner", checked as boolean)}
-            className="data-[state=checked]:bg-[#6600FF] data-[state=checked]:border-[#6600FF]"
+            onCheckedChange={(checked) =>
+              setValue("isBusinessOwner", checked as boolean)
+            }
+            className="data-[state=checked]:border-[#6600FF] data-[state=checked]:bg-[#6600FF]"
           />
         </div>
 
@@ -130,8 +154,10 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
           <Checkbox
             id="creator"
             checked={watch("isCreator")}
-            onCheckedChange={(checked) => setValue("isCreator", checked as boolean)}
-            className="data-[state=checked]:bg-[#6600FF] data-[state=checked]:border-[#6600FF]"
+            onCheckedChange={(checked) =>
+              setValue("isCreator", checked as boolean)
+            }
+            className="data-[state=checked]:border-[#6600FF] data-[state=checked]:bg-[#6600FF]"
           />
         </div>
 
@@ -142,18 +168,20 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
           <Checkbox
             id="consumer"
             checked={watch("isConsumer")}
-            onCheckedChange={(checked) => setValue("isConsumer", checked as boolean)}
-            className="data-[state=checked]:bg-[#6600FF] data-[state=checked]:border-[#6600FF]"
+            onCheckedChange={(checked) =>
+              setValue("isConsumer", checked as boolean)
+            }
+            className="data-[state=checked]:border-[#6600FF] data-[state=checked]:bg-[#6600FF]"
           />
         </div>
       </div>
 
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="w-full bg-[#6600FF] text-white py-3 font-medium hover:bg-[#6600FF]/90 focus:outline-none focus:ring-2 focus:ring-[#6600FF]/50 transition-colors disabled:opacity-70 rounded-3xl"
+        disabled={isPending}
+        className="w-full rounded-3xl bg-[#6600FF] py-3 font-medium text-white transition-colors hover:bg-[#6600FF]/90 focus:outline-none focus:ring-2 focus:ring-[#6600FF]/50 disabled:opacity-70"
       >
-        {isSubmitting ? (
+        {isPending ? (
           <span className="flex items-center justify-center">
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           </span>
@@ -162,6 +190,5 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
         )}
       </button>
     </form>
-  )
+  );
 }
-
