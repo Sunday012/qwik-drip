@@ -64,6 +64,7 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
       {
         onSuccess: () => {
           reset();
+          onSuccess()
         },
         onError: (error) => {
           setError(error.message);
